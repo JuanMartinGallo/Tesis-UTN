@@ -1,7 +1,7 @@
 <?php
     namespace Models;
 
-    class Person
+    abstract class User
     {
         private $firstName;
         private $lastName;
