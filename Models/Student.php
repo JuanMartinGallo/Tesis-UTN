@@ -8,7 +8,7 @@
         private $studentId;
         private $careerId;
         
-        function __construct($firstName, $lastName, $dni, $gender, $birthDate, $email, $phoneNumber, $active, $studentId, $careerId)
+        function __construct($firstName = NULL, $lastName = NULL, $dni = NULL, $gender = NULL, $birthDate = NULL, $email = NULL, $phoneNumber = NULL, $active = NULL, $studentId = NULL, $careerId = NULL)
         {
             parent::__construct($firstName, $lastName, $dni, $gender, $birthDate, $email, $phoneNumber, $active);
             $this->studentId = $studentId;
