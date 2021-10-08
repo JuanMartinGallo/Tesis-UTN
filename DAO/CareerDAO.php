@@ -1,11 +1,11 @@
 <?php 
-    namespace Repositories;
+    namespace DAO;
 
-    use Repositories\ICareerRepository as ICareerRepository;
+    use DAO\ICareerDAO as ICareerDAO;
     use Models\Career as Career;
     
 
-class CareerRepository implements ICareerRepository
+class CareerDAO implements ICareerDAO
     {
         private $careerList = array();
         private $fileName;
