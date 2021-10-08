@@ -10,9 +10,8 @@
         private $birthDate;
         private $email;
         private $phoneNumber;
-        private $active;
-
-        function __construct($firstName = NULL, $lastName = NULL, $dni = NULL, $gender = NULL, $birthDate = NULL, $email = NULL, $phoneNumber = NULL, $active = NULL)
+        
+        function __construct($firstName = NULL, $lastName = NULL, $dni = NULL, $gender = NULL, $birthDate = NULL, $email = NULL, $phoneNumber = NULL)
         {
             $this->firstName = $firstName;
             $this->lastName = $lastName;
@@ -20,8 +19,7 @@
             $this->gender = $gender;
             $this->birthDate = $birthDate;
             $this->email = $email;
-            $this->phoneNumber = $phoneNumber;
-            $this->active = $active;   
+            $this->phoneNumber = $phoneNumber;  
         }
 
         public function getFirstName(){ return $this->firstName; }
@@ -44,8 +42,5 @@
 
         public function getPhoneNumber(){ return $this->phoneNumber; }
         public function setPhoneNumber($phoneNumber): self { $this->phoneNumber = $phoneNumber; return $this; }
-
-        public function getActive(){ return $this->active; }
-        public function setActive($active): self { $this->active = $active; return $this; }
     }
 ?>
