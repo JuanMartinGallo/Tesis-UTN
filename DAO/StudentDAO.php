@@ -21,12 +21,7 @@
             return $this->studentList;
         }
 
-        private function DestroyJSON()
-        {
-            file_put_contents('Data/Students.json', $jsonContent = array());
-        }
-
-        public function GetStudentsFromAPI2()
+        public function GetStudentsFromAPI()
         {
             $ch = curl_init();
 
@@ -40,16 +35,7 @@
 
             $response = curl_exec($ch);
 
-            $json = json_decode($response, true);
-        }
-
-        public function GetStudentsFromAPI()
-        {
-            $this->DestroyJSON();
-
-            $studentListJSON = file_get_contents('https://utn-students-api.herokuapp.com/api/Student');
-
-            $studentListAPI = ($studentListJSON) ? json_decode($studentListJSON, true) : array();
+            $studentListAPI = json_decode($response, true);
 
             foreach($studentListAPI as $student)
             {
@@ -65,6 +51,8 @@
                 $newStudent->setActive($student["active"]);
 
                 $this->Add($newStudent);
+
+                
             }
         }
 
