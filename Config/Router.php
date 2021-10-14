@@ -3,7 +3,7 @@
 
     use Config\Request as Request;
 
-    class Router
+       class Router
     {
         public static function Route(Request $request)
         {

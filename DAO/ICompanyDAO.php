@@ -7,6 +7,5 @@ interface ICompanyDAO
     {
         function add(Company $company);
         function getAll();
-        function delete($name);
     }
 ?>

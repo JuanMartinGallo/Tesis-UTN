@@ -6,14 +6,8 @@
         private $cuit;
         private $location;
         private $phoneNumber;
+        private $idCompany;
     
-        
-        function __construct($name= NULL, $cuit= NULL, $location= NULL, $phoneNumber= NULL){
-            $this->name= $name;
-            $this->cuit= $cuit;
-            $this->location= $location;
-            $this->phoneNumber= $phoneNumber;
-        }
 
         public function getName(){ return $this->name; }
         public function setName($name): self { $this->name = $name; return $this; }
@@ -26,5 +20,8 @@
 
         public function getPhoneNumber(){ return $this->phoneNumber; }
         public function setPhoneNumber($phoneNumber): self { $this->phoneNumber = $phoneNumber; return $this; }
+
+        public function getIdCompany(){ return $this->idCompany; }
+        public function setIdCompany($idCompany): self { $this->idCompany = $idCompany; return $this; }
     }
 ?>

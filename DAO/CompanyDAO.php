@@ -1,86 +1,107 @@
-<?php 
-    namespace DAO;
+<?php
 
-    use DAO\ICompanyDAO as ICompanyDAO;
-    use Models\Company as Company;
-    
+namespace DAO;
+
+use DAO\ICompanyDAO as ICompanyDAO;
+use Models\Company as Company;
 
 class CompanyDAO implements ICompanyDAO
+{
+
+    private $companyList = array();
+
+    public function add(Company $company)
     {
-        private $companyList = array();
-        private $fileName;
 
-        function __construct()
-        {
-            $this->fileName = dirname(__DIR__)."";
-        }
+        $this->retriveData();
 
-        public function add(Company $company)
-        {
-            $this->retrieveData();
-            array_push($this->companyList, $company);
-            $this->saveData();
-        }
+        array_push($this->companyList, $company);
 
-        public function delete($name){
-            $this->retrieveData();
-            $newList = array();
-            foreach ($this->companyList as $company) {
-                if($company->getName() != $name){
-                    array_push($newList, $company);
-                }
+        $this->saveData();
+    }
+
+    public function getAll()
+    {
+
+        $this->retriveData();
+
+        return $this->companyList;
+    }
+
+    public function remove($idCompany)
+    {
+        $this->retriveData();
+
+        foreach ($this->companyList as $key => $value) {
+            if ($value->getIdCompany() == $idCompany) {
+                $this->companyList[$key]->setState(false);
             }
-    
-            $this->companyList = $newList;
-            $this->saveData();
         }
+        $this->saveData();
+    }
 
-        public function getAll()
-        {
-            $this->retrieveData();
-            return $this->companyList;
-        }
+    public function edit($idCompany)
+    {
+        $editedCompany = $this->searchId($idCompany);
+        return $editedCompany;
+    }
 
-        private function saveData()
-        {
-            $arrayToEncode = array();
+    public function saveAll($newList)
+    {
+        $this->companyList = $newList;
+        $this->saveData();
+    }
 
-            foreach($this->companyList as $company)
-            {
-                $valuesArray["name"] = $company->getName();
-                $valuesArray["cuit"] = $company->getCuit();
-                $valuesArray["location"] = $company->getLocation();
-                $valuesArray["phoneNumber"] = $company->getPhoneNumber();
+    public function searchId($idCompany)
+    {
+        $this->retriveData();
 
-                array_push($arrayToEncode, $valuesArray);
+        $foundCompany = new Company();
+
+        foreach ($this->companyList as $company) {
+            if ($company->getIdCompany() == $idCompany) {
+                $foundCompany = $company;
             }
+        }
+        return $foundCompany;
+    }
 
-            $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
-            file_put_contents($this->fileName, $jsonContent);
+    private function saveData()
+    {
+        $arrayToEncode = array();
+        foreach ($this->companyList as $company) {
+            $valuesArray["name"] = $company->getName();
+            $valuesArray["cuit"] = $company->getCuit();
+            $valuesArray["location"] = $company->getLocation();
+            $valuesArray["phoneNumber"] = $company->getPhoneNumber();
+            $valuesArray["idCompany"] = $company->getIdCompany();
+
+            array_push($arrayToEncode, $valuesArray);
         }
 
-        private function retrieveData()
-        {
-            $this->companyList = array();
+        $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
+        file_put_contents('Data/companies.json', $jsonContent);
+    }
 
-            if(file_exists($this->fileName))
-            {
-                $jsonContent = file_get_contents($this->fileName);
+    private function retriveData()
+    {
+        $this->companyList = array();
+        if (file_exists('Data/companies.json')) {
+            $jsonContent = file_get_contents('Data/companies.json');
+            $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
 
-                $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
-
-                foreach($arrayToDecode as $valuesArray)
-                {
+            foreach ($arrayToDecode as $valuesArray) {
+                if ($valuesArray["state"]) {
                     $company = new Company();
-                    $company->setName($valuesArray["name"]);
+                    $company->setName(($valuesArray["name"]));
                     $company->setCuit($valuesArray["cuit"]);
                     $company->setLocation($valuesArray["location"]);
                     $company->setPhoneNumber($valuesArray["phoneNumber"]);
+                    $company->setIdCompany($valuesArray["idCompany"]);
 
                     array_push($this->companyList, $company);
                 }
             }
         }
     }
-
-?>
+}
