@@ -34,7 +34,7 @@
         {
             $student = new Student();
             $student->setStudentId($studentId);
-            $student->setfirstName($firstName);
+            $student->setFirstName($firstName);
             $student->setLastName($lastName);
             $student->setDni($dni);
             $student->setGender($gender);
@@ -48,7 +48,7 @@
             $this->ShowAddView();
         }
 
-        private function logIn($email){
+        public function logIn($email){
             $user = $this->studentDAO->getByEmail($email);
 
             if($user != null){
@@ -59,6 +59,11 @@
             $_SESSION["loggedUser"] = $loggedUser;
 
             $this->ShowProfileView();
+            }
+            else{
+            echo "<script> if(confirm('Verifique que el email sea de un alumno registrado'));";
+            echo "window.location = '../login.php';
+		    </script>";
             }
         }
     }
