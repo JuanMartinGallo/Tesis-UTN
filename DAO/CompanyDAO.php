@@ -12,19 +12,14 @@ class CompanyDAO implements ICompanyDAO
 
     public function add(Company $company)
     {
-
         $this->retriveData();
-
         array_push($this->companyList, $company);
-
         $this->saveData();
     }
 
     public function getAll()
     {
-
         $this->retriveData();
-
         return $this->companyList;
     }
 

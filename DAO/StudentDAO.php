@@ -10,27 +10,26 @@
 
         // Funcion para agregar estudiantes
 
-        public function Add(Student $student)
+        public function add(Student $student)
         {
-            $this->RetrieveData();
-            $student->setStudentId($this->GetNextId());
+            $this->retrieveData();
             array_push($this->studentList, $student);
-            $this->SaveData();
+            $this->saveData();
         }
 
         // Funcion para listar estudiantes
 
-        public function GetAll()
+        public function getAll()
         {
-            $this->RetrieveData();
+            $this->retrieveData();
             return $this->studentList;
         }
 
         // Funcion para actualizar un registro de estudiante
 
-        public function Update(Student $newStudent)
+        public function update(Student $newStudent)
         {
-            $this->RetrieveData();
+            $this->retrieveData();
             $flag = 0;
 
             foreach($this->studentList as $key => $student)
@@ -42,14 +41,14 @@
                 }
             }
 
-            $this->SaveData();
+            $this->saveData();
             return $flag;
 
         }
 
-        public function Remove($studentId)
+        public function remove($studentId)
         {
-            $this->RetrieveData();
+            $this->retrieveData();
 
             foreach($this->studentList as $key => $student)
             {
@@ -59,10 +58,10 @@
                 }
             }
 
-            $this->SaveData();
+            $this->saveData();
         }
 
-        public function GetStudentsFromAPI()
+        public function getStudentsFromAPI()
         {
             $ch = curl_init();
 
@@ -93,11 +92,11 @@
                 $newStudent->setPhoneNumber($valuesArray["phoneNumber"]);
                 $newStudent->setActive($valuesArray["active"]);
 
-                $this->Add($newStudent);
+                $this->add($newStudent);
             }            
         }
 
-        private function SaveData()
+        private function saveData()
         {
             $arrayToEncode = array();
 
@@ -123,7 +122,7 @@
             file_put_contents('Data/Students.json', $jsonContent);
         }
 
-        private function RetrieveData()
+        private function retrieveData()
         {
             $this->studentList = array();
 
@@ -153,9 +152,9 @@
             }
         }
 
-        public function GetByEmail($email)
+        public function getByEmail($email)
         {
-            $this->GetStudentsFromAPI();
+            $this->getStudentsFromAPI();
 
             foreach ($this->studentList as $student) {
                 if ($student->getEmail() == $email) {
@@ -163,18 +162,6 @@
                 }
             }
             return NULL;
-        }
-
-        private function GetNextId()
-        {
-            $id = 0;
-
-            foreach($this->studentList as $student)
-            {
-                $id = ($student->getStudentId() > $id) ? $student->getStudentId() : $id;
-            }
-
-            return $id + 1;
         }
     }
 ?>

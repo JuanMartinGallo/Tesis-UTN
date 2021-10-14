@@ -5,7 +5,7 @@
 
     interface IStudentDAO
     {
-        function Add(Student $student);
-        function GetAll();
+        function add(Student $student);
+        function getAll();
     }
 ?>

@@ -1,7 +1,8 @@
 <?php 
     namespace Models;
 
-    class Company{
+    class Company
+    {
         private $name;
         private $cuit;
         private $location;

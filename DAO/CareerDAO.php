@@ -11,26 +11,26 @@
 
         // Funcion para agregar estudiantes
 
-        public function Add(Career $career)
+        public function add(Career $career)
         {
-            $this->RetrieveData();
+            $this->retrieveData();
             array_push($this->careerList, $career);
-            $this->SaveData();
+            $this->saveData();
         }
 
         // Funcion para listar estudiantes
 
-        public function GetAll()
+        public function getAll()
         {
-            $this->RetrieveData();
+            $this->retrieveData();
             return $this->careerList;
         }
 
         // Funcion para actualizar un registro de estudiante
 
-        public function Update(Career $newCareer)
+        public function update(Career $newCareer)
         {
-            $this->RetrieveData();
+            $this->retrieveData();
             $flag = 0;
 
             foreach($this->careerList as $key => $career)
@@ -42,14 +42,14 @@
                 }
             }
 
-            $this->SaveData();
+            $this->saveData();
             return $flag;
 
         }
 
-        public function Remove($careerId)
+        public function remove($careerId)
         {
-            $this->RetrieveData();
+            $this->retrieveData();
 
             foreach($this->careerList as $key => $career)
             {
@@ -59,10 +59,10 @@
                 }
             }
 
-            $this->SaveData();
+            $this->saveData();
         }
 
-        public function GetCareerFromAPI()
+        public function getCareerFromAPI()
         {
             $ch = curl_init();
 
@@ -85,11 +85,11 @@
                 $newCareer->setDescription($valuesArray["description"]);
                 $newCareer->setActive($valuesArray["active"]);
                 
-                $this->Add($newCareer);
+                $this->add($newCareer);
             }            
         }
 
-        private function SaveData()
+        private function saveData()
         {
             $arrayToEncode = array();
 
@@ -107,7 +107,7 @@
             file_put_contents('Data/Career.json', $jsonContent);
         }
 
-        private function RetrieveData()
+        private function retrieveData()
         {
             $this->careerList = array();
 
@@ -129,9 +129,9 @@
             }
         }
 
-        public function GetById($careerID)
+        public function getById($careerID)
         {
-            $this->GetCareerFromAPI();
+            $this->getCareerFromAPI();
 
             foreach ($this->careerList as $career) {
                 if ($career->getCareerId() == $careerID) {

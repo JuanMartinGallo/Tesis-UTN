@@ -3,7 +3,6 @@
 
     class Career
     {   
-        
         private $careerId;
         private $description;
         private $active;
@@ -15,7 +14,6 @@
             $this->active = $active;
         }
 
-        
         public function getCareerId(){ return $this->careerId; }
         public function setCareerId($careerId): self { $this->careerId = $careerId; return $this; }
 
