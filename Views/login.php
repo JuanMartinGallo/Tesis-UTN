@@ -5,7 +5,7 @@
           <header class="text-center text-white">
                <h2>Bienvenido al sistema!</h2>
           </header>
-          <form action="<?php echo FRONT_ROOT ?>Student/GetStudentsFromAPI" method="POST" class="login-form bg-light-alpha p-5 text-dark font-weight-bold">
+          <form action="<?php echo FRONT_ROOT ?>Student/Login" method="POST" class="login-form bg-light-alpha p-5 text-dark font-weight-bold">
                <div class="form-group">
                <?php if(isset($message)){ ?>
                     <label for=""> <strong> <?php echo $message ?></strong> </label>

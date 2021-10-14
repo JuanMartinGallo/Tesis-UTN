@@ -1,46 +1,26 @@
 <?php
     namespace Models;
 
-    abstract class User
+    class User
     {
-        private $firstName;
-        private $lastName;
-        private $dni;
-        private $gender;
-        private $birthDate;
-        private $email;
-        private $phoneNumber;
-        
-        function __construct($firstName = NULL, $lastName = NULL, $dni = NULL, $gender = NULL, $birthDate = NULL, $email = NULL, $phoneNumber = NULL)
+        private $username;
+        private $password;
+        private $role;
+
+        function __construct($username = NULL, $password = NULL, $role = NULL)
         {
-            $this->firstName = $firstName;
-            $this->lastName = $lastName;
-            $this->dni = $dni;
-            $this->gender = $gender;
-            $this->birthDate = $birthDate;
-            $this->email = $email;
-            $this->phoneNumber = $phoneNumber;  
+            $this->username = $username;
+            $this->password = $password;
+            $this->role = $role;
         }
 
-        public function getFirstName(){ return $this->firstName; }
-        public function setFirstName($firstName): self { $this->firstName = $firstName; return $this; }
+        public function getUsername(){ return $this->username; }
+        public function setUsername($username): self { $this->username = $username; return $this; }
 
-        public function getLastName(){ return $this->lastName; }
-        public function setLastName($lastName): self { $this->lastName = $lastName; return $this; }
+        public function getPassword(){ return $this->password; }
+        public function setPassword($password): self { $this->password = $password; return $this; }
 
-        public function getDni(){ return $this->dni; }
-        public function setDni($dni): self { $this->dni = $dni; return $this; }
-
-        public function getGender(){ return $this->gender; }
-        public function setGender($gender): self { $this->gender = $gender; return $this; }
-
-        public function getBirthDate(){ return $this->birthDate; }
-        public function setBirthDate($birthDate): self { $this->birthDate = $birthDate; return $this; }
-
-        public function getEmail(){ return $this->email; }
-        public function setEmail($email): self { $this->email = $email; return $this; }
-
-        public function getPhoneNumber(){ return $this->phoneNumber; }
-        public function setPhoneNumber($phoneNumber): self { $this->phoneNumber = $phoneNumber; return $this; }
+        public function getRole(){ return $this->role; }
+        public function setRole($role): self { $this->role = $role; return $this; }
     }
 ?>

@@ -8,17 +8,58 @@
     {
         private $studentList = array();
 
+        // Funcion para agregar estudiantes
+
         public function Add(Student $student)
         {
             $this->RetrieveData();
+            $student->setStudentId($this->GetNextId());
             array_push($this->studentList, $student);
             $this->SaveData();
         }
+
+        // Funcion para listar estudiantes
 
         public function GetAll()
         {
             $this->RetrieveData();
             return $this->studentList;
+        }
+
+        // Funcion para actualizar un registro de estudiante
+
+        public function Update(Student $newStudent)
+        {
+            $this->RetrieveData();
+            $flag = 0;
+
+            foreach($this->studentList as $key => $student)
+            {
+                if($student->getStudenId() == $newStudent->getStudentId())
+                {
+                    $this->studentList[$key] = $newStudent;
+                    $flag = 1;
+                }
+            }
+
+            $this->SaveData();
+            return $flag;
+
+        }
+
+        public function Remove($studentId)
+        {
+            $this->RetrieveData();
+
+            foreach($this->studentList as $key => $student)
+            {
+                if($student->getStudentId() == $studentId)
+                {
+                    unset($this->studentList[$key]);
+                }
+            }
+
+            $this->SaveData();
         }
 
         public function GetStudentsFromAPI()
@@ -35,25 +76,25 @@
 
             $response = curl_exec($ch);
 
-            $studentListAPI = json_decode($response, true);
+            $arrayToDecode = ($response) ? json_decode($response, true) : array();
 
-            foreach($studentListAPI as $student)
+            foreach($arrayToDecode as $valuesArray)
             {
                 $newStudent = new Student();
-                $newStudent->setStudentId($student["studentId"]);
-                $newStudent->setFirstName($student["firstName"]);
-                $newStudent->setLastName($student["lastName"]);
-                $newStudent->setDni($student["dni"]);
-                $newStudent->setGender($student["gender"]);
-                $newStudent->setBirthDate($student["birthDate"]);
-                $newStudent->setEmail($student["email"]);
-                $newStudent->setPhoneNumber($student["phoneNumber"]);
-                $newStudent->setActive($student["active"]);
+                $newStudent->setStudentId($valuesArray["studentId"]);
+                $newStudent->setFirstName($valuesArray["firstName"]);
+                $newStudent->setLastName($valuesArray["lastName"]);
+                $newStudent->setDni($valuesArray["dni"]);
+                $newStudent->setGender($valuesArray["gender"]);
+                $newStudent->setBirthDate($valuesArray["birthDate"]);
+                $newStudent->setEmail($valuesArray["email"]);
+                $newStudent->setPhoneNumber($valuesArray["phoneNumber"]);
+                $newStudent->setActive($valuesArray["active"]);
 
                 $this->Add($newStudent);
-
-                
             }
+
+            
         }
 
         private function SaveData()
@@ -106,6 +147,30 @@
                     array_push($this->studentList, $student);
                 }
             }
+        }
+
+        public function GetByEmail($email)
+        {
+            $this->RetrieveData();
+
+            foreach ($this->studentList as $student) {
+                if ($student->getEmail() == $email) {
+                    return $student;
+                }
+            }
+            return NULL;
+        }
+
+        private function GetNextId()
+        {
+            $id = 0;
+
+            foreach($this->studentList as $student)
+            {
+                $id = ($student->getStudentId() > $id) ? $student->getStudentId() : $id;
+            }
+
+            return $id + 1;
         }
     }
 ?>
