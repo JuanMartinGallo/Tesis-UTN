@@ -9,7 +9,7 @@
     {
         private $careerList = array();
 
-        // Funcion para agregar estudiantes
+        // Funcion para agregar carreras
 
         public function add(Career $career)
         {
@@ -18,7 +18,7 @@
             $this->saveData();
         }
 
-        // Funcion para listar estudiantes
+        // Funcion para listar carreras
 
         public function getAll()
         {
@@ -26,7 +26,7 @@
             return $this->careerList;
         }
 
-        // Funcion para actualizar un registro de estudiante
+        // Funcion para actualizar un registro de carrera
 
         public function update(Career $newCareer)
         {
