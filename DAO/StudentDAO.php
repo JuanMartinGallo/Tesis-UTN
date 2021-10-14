@@ -35,7 +35,7 @@
 
             foreach($this->studentList as $key => $student)
             {
-                if($student->getStudenId() == $newStudent->getStudentId())
+                if($student->getStudentId() == $newStudent->getStudentId())
                 {
                     $this->studentList[$key] = $newStudent;
                     $flag = 1;
@@ -82,9 +82,11 @@
             {
                 $newStudent = new Student();
                 $newStudent->setStudentId($valuesArray["studentId"]);
+                $newStudent->setCareerId($valuesArray["careerId"]);
                 $newStudent->setFirstName($valuesArray["firstName"]);
                 $newStudent->setLastName($valuesArray["lastName"]);
                 $newStudent->setDni($valuesArray["dni"]);
+                $newStudent->setFileNumber($valuesArray["fileNumber"]);
                 $newStudent->setGender($valuesArray["gender"]);
                 $newStudent->setBirthDate($valuesArray["birthDate"]);
                 $newStudent->setEmail($valuesArray["email"]);
@@ -92,9 +94,7 @@
                 $newStudent->setActive($valuesArray["active"]);
 
                 $this->Add($newStudent);
-            }
-
-            
+            }            
         }
 
         private function SaveData()
@@ -104,9 +104,11 @@
             foreach($this->studentList as $student)
             {
                 $valuesArray["studentId"] = $student->getStudentId();
+                $valuesArray["careerId"] = $student->getCareerId();
                 $valuesArray["firstName"] = $student->getFirstName();
                 $valuesArray["lastName"] = $student->getLastName();
                 $valuesArray["dni"] = $student->getDni();
+                $valuesArray["fileNumber"] = $student->getFileNumber();
                 $valuesArray["gender"] = $student->getGender();
                 $valuesArray["birthDate"] = $student->getBirthDate();
                 $valuesArray["email"] = $student->getEmail();
@@ -135,9 +137,11 @@
                 {
                     $student = new Student();
                     $student->setStudentId($valuesArray["studentId"]);
+                    $student->setCareerId($valuesArray["careerId"]);
                     $student->setFirstName($valuesArray["firstName"]);
                     $student->setLastName($valuesArray["lastName"]);
                     $student->setDni($valuesArray["dni"]);
+                    $student->setFileNumber($valuesArray["fileNumber"]);
                     $student->setGender($valuesArray["gender"]);
                     $student->setBirthDate($valuesArray["birthDate"]);
                     $student->setEmail($valuesArray["email"]);
@@ -151,7 +155,7 @@
 
         public function GetByEmail($email)
         {
-            $this->RetrieveData();
+            $this->GetStudentsFromAPI();
 
             foreach ($this->studentList as $student) {
                 if ($student->getEmail() == $email) {
