@@ -1,7 +1,7 @@
 <?php
     namespace Models;
 
-    class Student
+    class Student extends User
     {
         private $studentId;
         private $careerId;

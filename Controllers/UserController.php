@@ -42,5 +42,18 @@
 
             $this->ShowAddView();
         }
+
+        public function Login($email)
+        {
+            $user = $this->UserDAO->GetByEmail($email);
+
+            if (($user != null)) {
+
+                $userLogged = $user;
+
+                $_SESSION["userLogged"] = $userLogged;
+
+                $this->ShowListView();
+            }
+        }
     }
-?>
