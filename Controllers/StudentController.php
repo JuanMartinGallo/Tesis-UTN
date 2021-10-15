@@ -25,6 +25,13 @@
             require_once(VIEWS_PATH."student-list.php");
         }
 
+        public function showLoggedStudentView()
+        {
+            $studentList = $this->studentDAO->getAll();
+
+            require_once(VIEWS_PATH."student-logged.php");
+        }
+
         public function add($studentId, $firstName, $lastName, $dni, $gender, $birthDate, $email, $phoneNumber, $active)
         {
             $student = new Student();
@@ -53,7 +60,7 @@
 
                 $_SESSION["userLogged"] = $userLogged;
 
-                $this->showListView();
+                $this->showLoggedStudentView();
             }
         }
     }

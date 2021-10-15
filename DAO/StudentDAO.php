@@ -154,7 +154,9 @@
 
         public function getByEmail($email)
         {
-            $this->getStudentsFromAPI();
+            //$this->getStudentsFromAPI();
+
+            $this->retrieveData();
 
             foreach ($this->studentList as $student) {
                 if ($student->getEmail() == $email) {
