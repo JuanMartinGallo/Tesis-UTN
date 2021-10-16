@@ -122,7 +122,7 @@
             file_put_contents('Data/Students.json', $jsonContent);
         }
 
-        private function retrieveData()
+        public function retrieveData()
         {
             $this->studentList = array();
 
@@ -150,6 +150,11 @@
                     array_push($this->studentList, $student);
                 }
             }
+        }
+
+        public function getStudentList(){ 
+            $this->retrieveData();
+            return $this->studentList; 
         }
     }
 ?>

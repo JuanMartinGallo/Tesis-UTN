@@ -1,51 +1,20 @@
 <?php
     namespace Controllers;
 
-    use DAO\StudentDAO as StudentDAO;
-    use Models\Student as Student;
+    use DAO\UserDAO as UserDAO;
 
-    class StudentController
+    class UserController
     {
-        private $studentDAO;
+        private $userDAO;
 
         public function __construct()
         {
-            $this->studentDAO = new StudentDAO();
-        }
-
-        public function ShowAddView()
-        {
-            require_once(VIEWS_PATH."student-add.php");
-        }
-
-        public function ShowListView()
-        {
-            $studentList = $this->studentDAO->GetAll();
-
-            require_once(VIEWS_PATH."student-list.php");
-        }
-
-        public function Add($studentId, $firstName, $lastName, $dni, $gender, $birthDate, $email, $phoneNumber, $active)
-        {
-            $student = new Student();
-            $student->setStudentId($studentId);
-            $student->setfirstName($firstName);
-            $student->setLastName($lastName);
-            $student->setDni($dni);
-            $student->setGender($gender);
-            $student->setBirthDate($birthDate);
-            $student->setEmail($email);
-            $student->setPhoneNumber($phoneNumber);
-            $student->setActive($active);
-
-            $this->studentDAO->Add($student);
-
-            $this->ShowAddView();
+            $this->userDAO = new UserDAO();
         }
 
         public function Login($email)
         {
-            $user = $this->UserDAO->GetByEmail($email);
+            $user = $this->userDAO->GetByEmail($email);
 
             if (($user != null)) {
 
@@ -53,7 +22,11 @@
 
                 $_SESSION["userLogged"] = $userLogged;
 
-                $this->ShowListView();
+                require_once(VIEWS_PATH . "home.php");
+            }
+
+            else{
+            require_once(VIEWS_PATH . "login.php");//deberia saltarle un mensaje al usuario erroneo sobre su cuenta que no esta registrada
             }
         }
     }

@@ -1,18 +1,21 @@
 <?php
-use Models\User as User;
-// session_start();
-$loggedUser = $_SESSION['loggedUser'];
+     require_once('header.php');
+
+     if(isset($userLogged) != NULL)
+     {
+      $userLogged = $_SESSION['userLogged'];
+     }
 ?>
 
 <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
      <span class="navbar-text">
-          <strong>Framework</strong>
+          <strong>UTN LinkedIn</strong>
      </span>
      <ul class="navbar-nav ml-auto">
           <li class="nav-item">
                <a class="nav-link" href="<?php echo FRONT_ROOT ?>Company/ShowListView">Ver Empresas</a>
           </li>
-          <?php if($loggedUser->getRole() == "Admin"){?>
+          <?php if($userLogged->getRole() == "Admin"){?>
           <li class="nav-item">
                <a class="nav-link" href="<?php echo FRONT_ROOT ?>Company/ShowAddView">Agregar Empresa</a>
           </li>
