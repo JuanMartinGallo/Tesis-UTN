@@ -24,19 +24,5 @@
 
             require_once(VIEWS_PATH."company-list.php");
         }
-
-        public function Add($name, $cuit, $location, $phoneNumber, $idCompany)
-        {
-            $company = new company();
-            $company->setName($name);
-            $company->setCuit($cuit);
-            $company->setLocation($location);
-            $company->setPhoneNumber($phoneNumber);
-            $company->setIdCompany($idCompany);
-
-            $this->companyDAO->Add($company);
-
-            $this->ShowAddView();
-        }
     }
 ?>

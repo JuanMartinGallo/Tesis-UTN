@@ -1,7 +1,7 @@
 <?php
      require_once('header.php');
 
-     if(isset($userLogged) != NULL)
+     if(isset($_SESSION['userLogged']))
      {
       $userLogged = $_SESSION['userLogged'];
      }
@@ -26,7 +26,7 @@
           <li class="nav-item">
                <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowDataView">Ver mis datos</a>
           </li>
-          <?php }?>          
+          <?php }?>        
           <li class="nav-item">
                <a class="nav-link" href="<?php echo FRONT_ROOT ?>Home/logOut">Log Out</a>
           </li>          

@@ -75,18 +75,18 @@ class CompanyDAO implements ICompanyDAO
         }
 
         $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
-        file_put_contents('Data/companies.json', $jsonContent);
+        file_put_contents('Data/Companies.json', $jsonContent);
     }
 
     private function retriveData()
     {
         $this->companyList = array();
-        if (file_exists('Data/companies.json')) {
-            $jsonContent = file_get_contents('Data/companies.json');
+        if (file_exists('Data/Companies.json')) {
+            $jsonContent = file_get_contents('Data/Companies.json');
             $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
 
             foreach ($arrayToDecode as $valuesArray) {
-                if ($valuesArray["state"]) {
+                //if ($valuesArray["state"]) {
                     $company = new Company();
                     $company->setName(($valuesArray["name"]));
                     $company->setCuit($valuesArray["cuit"]);
@@ -95,7 +95,7 @@ class CompanyDAO implements ICompanyDAO
                     $company->setIdCompany($valuesArray["idCompany"]);
 
                     array_push($this->companyList, $company);
-                }
+                //}
             }
         }
     }
