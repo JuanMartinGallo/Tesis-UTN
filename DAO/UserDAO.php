@@ -4,7 +4,6 @@
    
     use DAO\StudentDAO as StudentDAO;
     use DAO\AdminDAO as AdminDAO;
-    use Models\Student as Student;
 
     class userDAO 
     {
@@ -25,14 +24,14 @@
 
             foreach ($studentList as $student) {
                 if ($student->getEmail() == $email) {
-                    $student->setRole() = "Student";/// falta resolver este error de seteo
+                    $student->setRole("Student");
                     return $student;
                 }
             }
 
             foreach ($adminList as $admin) {
                 if ($admin->getEmail() == $email) {
-                    $admin->setRole() = "Admin";
+                    $admin->setRole("Admin");
                     return $admin;
                 }
             }
