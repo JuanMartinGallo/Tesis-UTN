@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Globant",
+        "cuit": "30-125478-9",
+        "location": "Mar del Plata",
+        "phoneNumber": "2231457854",
+        "idCompany": 1
+    },
+    {
+        "name": "Infosys",
+        "cuit": "30-4567894-1",
+        "location": "Buenos Aires",
+        "phoneNumber": "123165465",
+        "idCompany": 2
+    },
+    {
+        "name": "Nintendo",
+        "cuit": "30-1254782-8",
+        "location": "Redmond",
+        "phoneNumber": "2234578457",
+        "idCompany": 3
+    }
+]

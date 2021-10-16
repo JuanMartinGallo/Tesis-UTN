@@ -10,6 +10,6 @@
      <link rel="stylesheet" type="text/css" href="<?php echo CSS_PATH ?>bootstrap.min.css">
      <link rel="stylesheet" type="text/css" href="<?php echo CSS_PATH ?>estilos.css">
 
-     <title>Login</title>
+     <title>Trabajo Practico Final Laboratorio 4</title>
 </head>
 <body>
