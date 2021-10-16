@@ -11,7 +11,7 @@ $companyList = $companyDAO->getAll();
 <main class="py-5">
      <section id="listado" class="mb-5">
           <div class="container">
-               <h2 class="mb-4">Datos de la compañia</h2>
+               <h2 class="mb-4">Datos de las compañias</h2>
                <table class="table bg-light-alpha">
                     <thead>
                          <th>Nombre</th>

@@ -1,28 +1,28 @@
 <?php
     namespace Controllers;
 
-    use DAO\companyDAO as CompanyDAO;
-    use Models\Company as Company;
+    use DAO\AdminDAO as AdminDAO;
+    use Models\Admin as Admin;
 
-    class companyController
+    class AdminController
     {
-        private $companyDAO;
+        private $adminDAO;
 
         public function __construct()
         {
-            $this->companyDAO = new CompanyDAO();
+            $this->adminDAO = new AdminDAO();
         }
 
         public function ShowAddView()
         {
-            require_once(VIEWS_PATH."company-add.php");
+            require_once(VIEWS_PATH."admin-add.php");
         }
 
         public function ShowListView()
         {
-            $companyList = $this->companyDAO->GetAll();
+            $adminList = $this->adminDAO->getAll();
 
-            require_once(VIEWS_PATH."company-list.php");
+            require_once(VIEWS_PATH."admin-list.php");
         }
     }
 ?>

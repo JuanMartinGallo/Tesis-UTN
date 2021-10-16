@@ -47,7 +47,7 @@
 
             $this->studentDAO->add($student);
 
-            $this->showAddView();
+            $this->showListView();
         }
     }
 ?>

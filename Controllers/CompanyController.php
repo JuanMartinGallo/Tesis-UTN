@@ -34,13 +34,13 @@ class CompanyController
 
     public function ShowListView($name = null, $cuit = null, $location = null)
     {
-        session_start();
-        $companyList = $this->companyDAO->getAll();
+        //session_start();
+        //$companyList = $this->companyDAO->getAll();
 
-        if($name || $cuit || $location)
+       /* if($name || $cuit || $location)
         {
             $companyList = $this->filterList($companyList, $name, $cuit, $location);
-        }
+        }*/
 
         require_once (VIEWS_PATH."company-list.php");
     }
@@ -63,7 +63,7 @@ class CompanyController
 
         $this->companyDAO->add($company);
 
-        $this->ShowAddView();
+        $this->ShowListView();
     }
 
     public function Edit ($idCompany, $name, $cuit, $location, $phoneNumber)
