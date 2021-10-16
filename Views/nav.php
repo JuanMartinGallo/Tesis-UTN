@@ -3,7 +3,7 @@
 
      if(isset($_SESSION['userLogged']))
      {
-      $userLogged = $_SESSION['userLogged'];
+          $userLogged = $_SESSION['userLogged'];
      }
 ?>
 
