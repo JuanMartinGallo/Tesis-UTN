@@ -13,22 +13,27 @@
      </span>
      <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Company/ShowListView">Ver Empresas</a>
+               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Career/getCareersFromAPI">Listar Carreras</a>
+          </li>
+          <li class="nav-item">
+               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Company/ShowListView">Listar Empresas</a>
           </li>
           <?php if($userLogged->getRole() == "Admin"){?>
           <li class="nav-item">
                <a class="nav-link" href="<?php echo FRONT_ROOT ?>Company/ShowAddView">Agregar Empresa</a>
           </li>
           <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowAddView">Agregar Alumno</a>
+               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowListView">Listar alumnos</a>
           </li>
-          <?php } else { ?>
           <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowDataView">Ver mis datos</a>
+               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowAddView">Agregar Alumno</a>
           </li>
           <?php }?>        
           <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Home/logOut">Log Out</a>
+               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowLoggedStudentView">Ver datos alumno loggeado</a>
+          </li>      
+          <li class="nav-item">
+               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Home/logout">Cerrar sesion</a>
           </li>          
      </ul>
 </nav>

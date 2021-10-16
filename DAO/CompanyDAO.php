@@ -13,6 +13,7 @@ class CompanyDAO implements ICompanyDAO
     public function add(Company $company)
     {
         $this->retriveData();
+        $company->setIdCompany($this->getNextId());
         array_push($this->companyList, $company);
         $this->saveData();
     }
@@ -81,22 +82,36 @@ class CompanyDAO implements ICompanyDAO
     private function retriveData()
     {
         $this->companyList = array();
-        if (file_exists('Data/Companies.json')) {
+        
+        if (file_exists('Data/Companies.json'))
+        {
             $jsonContent = file_get_contents('Data/Companies.json');
+
             $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
 
-            foreach ($arrayToDecode as $valuesArray) {
-                //if ($valuesArray["state"]) {
-                    $company = new Company();
-                    $company->setName(($valuesArray["name"]));
-                    $company->setCuit($valuesArray["cuit"]);
-                    $company->setLocation($valuesArray["location"]);
-                    $company->setPhoneNumber($valuesArray["phoneNumber"]);
-                    $company->setIdCompany($valuesArray["idCompany"]);
+            foreach ($arrayToDecode as $valuesArray)
+            {
+                $company = new Company();
+                $company->setName(($valuesArray["name"]));
+                $company->setCuit($valuesArray["cuit"]);
+                $company->setLocation($valuesArray["location"]);
+                $company->setPhoneNumber($valuesArray["phoneNumber"]);
+                $company->setIdCompany($valuesArray["idCompany"]);
 
-                    array_push($this->companyList, $company);
-                //}
+                array_push($this->companyList, $company);
             }
         }
+    }
+
+    private function getNextId()
+    {
+        $id = 0;
+
+        foreach($this->companyList as $company)
+        {
+            $id = ($company->getIdCompany() > $id) ? $company->getIdCompany() : $id;
+        }
+
+        return $id + 1;
     }
 }

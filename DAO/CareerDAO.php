@@ -4,7 +4,6 @@
     use DAO\ICareerDAO as ICareerDAO;
     use Models\Career as Career;
     
-
     class CareerDAO implements ICareerDAO
     {
         private $careerList = array();
@@ -133,6 +132,8 @@
         {
             $this->getCareerFromAPI();
 
+            //$this->retrieveData();
+
             foreach ($this->careerList as $career) {
                 if ($career->getCareerId() == $careerID) {
                     return $career;
@@ -140,6 +141,5 @@
             }
             return NULL;
         }
-
     }
 ?>
