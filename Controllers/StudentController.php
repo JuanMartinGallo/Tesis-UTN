@@ -13,19 +13,26 @@
             $this->studentDAO = new StudentDAO();
         }
 
-        public function ShowAddView()
+        public function showAddView()
         {
             require_once(VIEWS_PATH."student-add.php");
         }
 
-        public function ShowListView()
+        public function showListView()
         {
-            $studentList = $this->studentDAO->GetAll();
+            $studentList = $this->studentDAO->getAll();
 
             require_once(VIEWS_PATH."student-list.php");
         }
 
-        public function Add($studentId, $firstName, $lastName, $dni, $gender, $birthDate, $email, $phoneNumber, $active)
+        public function showLoggedStudentView()
+        {
+            $studentList = $this->studentDAO->getAll();
+
+            require_once(VIEWS_PATH."student-logged.php");
+        }
+
+        public function add($studentId, $firstName, $lastName, $dni, $gender, $birthDate, $email, $phoneNumber, $active)
         {
             $student = new Student();
             $student->setStudentId($studentId);
@@ -38,23 +45,9 @@
             $student->setPhoneNumber($phoneNumber);
             $student->setActive($active);
 
-            $this->studentDAO->Add($student);
+            $this->studentDAO->add($student);
 
-            $this->ShowAddView();
-        }
-
-        public function Login($email)
-        {
-            $user = $this->studentDAO->GetByEmail($email);
-
-            if (($user != null)) {
-
-                $userLogged = $user;
-
-                $_SESSION["userLogged"] = $userLogged;
-
-                $this->ShowListView();
-            }
+            $this->showListView();
         }
     }
 ?>

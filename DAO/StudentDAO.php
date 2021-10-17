@@ -91,6 +91,7 @@
                 $newStudent->setEmail($valuesArray["email"]);
                 $newStudent->setPhoneNumber($valuesArray["phoneNumber"]);
                 $newStudent->setActive($valuesArray["active"]);
+                $newStudent->setRole('Student');
 
                 $this->add($newStudent);
             }            
@@ -113,6 +114,7 @@
                 $valuesArray["email"] = $student->getEmail();
                 $valuesArray["phoneNumber"] = $student->getPhoneNumber();
                 $valuesArray["active"] = $student->getActive();
+                $valuesArray["role"] = $student->getRole();
 
                 array_push($arrayToEncode, $valuesArray);
             }
@@ -122,7 +124,7 @@
             file_put_contents('Data/Students.json', $jsonContent);
         }
 
-        private function retrieveData()
+        public function retrieveData()
         {
             $this->studentList = array();
 
@@ -146,22 +148,17 @@
                     $student->setEmail($valuesArray["email"]);
                     $student->setPhoneNumber($valuesArray["phoneNumber"]);
                     $student->setActive($valuesArray["active"]);
+                    $student->setRole('Student');
+
 
                     array_push($this->studentList, $student);
                 }
             }
         }
 
-        public function getByEmail($email)
-        {
-            $this->getStudentsFromAPI();
-
-            foreach ($this->studentList as $student) {
-                if ($student->getEmail() == $email) {
-                    return $student;
-                }
-            }
-            return NULL;
+        public function getStudentList(){ 
+            $this->retrieveData();
+            return $this->studentList; 
         }
     }
 ?>

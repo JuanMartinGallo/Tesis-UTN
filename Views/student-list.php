@@ -1,6 +1,9 @@
 <?php require_once('header.php');
 
-$userLogged = $_SESSION['userLogged']
+use DAO\StudentDAO as StudentDAO;
+
+$studentDAO = new StudentDAO();
+$studentList = $studentDAO->getAll();
 
 ?>
 
@@ -21,17 +24,19 @@ $userLogged = $_SESSION['userLogged']
                          <th>Telefono</th>
                     </thead>
                     <tbody>
+                    <?php foreach($studentList as $student) { ?>
                          <tr>
-                              <td><?php echo $userLogged->getFirstName() ?></td>
-                              <td><?php echo $userLogged->getLastName() ?></td>
-                              <td><?php echo $userLogged->getDni() ?></td>
-                              <td><?php echo $userLogged->getFileNumber() ?></td>
-                              <td><?php echo $userLogged->getGender() ?></td>
-                              <td><?php echo $userLogged->getCareerId() ?></td>
-                              <td><?php echo $userLogged->getBirthDate() ?></td>
-                              <td><?php echo $userLogged->getEmail() ?></td>
-                              <td><?php echo $userLogged->getPhoneNumber() ?></td>
+                              <td><?php echo $student->getFirstName() ?></td>
+                              <td><?php echo $student->getLastName() ?></td>
+                              <td><?php echo $student->getDni() ?></td>
+                              <td><?php echo $student->getFileNumber() ?></td>
+                              <td><?php echo $student->getGender() ?></td>
+                              <td><?php echo $student->getCareerId() ?></td>
+                              <td><?php echo $student->getBirthDate() ?></td>
+                              <td><?php echo $student->getEmail() ?></td>
+                              <td><?php echo $student->getPhoneNumber() ?></td>
                          </tr>
+                         <?php } ?>
                     </tbody>
                </table>
           </div>
