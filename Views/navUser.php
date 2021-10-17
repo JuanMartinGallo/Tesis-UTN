@@ -11,7 +11,7 @@
                <a class="nav-link" href="<?php echo FRONT_ROOT ?>Career/getCareersFromAPI">Listar Carreras</a>
           </li>
           <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Company/ShowListView">Listar Empresas</a>
+               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Company/ShowDataView">Listar Empresas</a>
           </li>  
           <li class="nav-item">
                <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowLoggedStudentView">Ver tus datos </a>

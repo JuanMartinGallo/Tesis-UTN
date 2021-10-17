@@ -1,32 +1,32 @@
-<?php
-require_once('header.php');
+<?php require_once('header.php');
+
+use DAO\CompanyDAO as CompanyDAO;
+
+$companyDAO = new CompanyDAO();
+$companyList = $companyDAO->getAll();
+
 ?>
+
 <main class="py-5">
      <section id="listado" class="mb-5">
           <div class="container">
-               <h2 class="mb-4">Datos de la empresa</h2>
+               <h2 class="mb-4">Datos de las compañias</h2>
                <table class="table bg-light-alpha">
+                    <thead>
+                         <th>Nombre</th>
+                         <th>CUIT</th>
+                         <th>Ubicacion</th>
+                         <th>Numero telefonico</th>
+                    </thead>
                     <tbody>
+                    <?php foreach($companyList as $company) { ?>
                          <tr>
-                              <th>ID</th>
-                              <td><?php echo $company->getIdCompany() ?></td>
+                         <td><?php echo $company->getName() ?></td>
+                         <td><?php echo $company->getCuit() ?></td>
+                         <td><?php echo $company->getLocation() ?></td>
+                         <td><?php echo $company->getPhoneNumber() ?></td>
                          </tr>
-                         <tr>
-                              <th>Nombre</th>
-                              <td><?php echo $company->getName() ?></td>
-                         </tr>
-                         <tr>
-                              <th>CUIT</th>
-                              <td><?php echo $company->getCuit() ?></td>
-                         </tr>
-                         <tr>
-                              <th>Locacion</th>
-                              <td><?php echo $company->getLocation() ?></td>
-                         </tr>
-                         <tr>
-                              <th>Numero de Telefono</th>
-                              <td><?php echo $company->getPhoneNumber() ?></td>
-                         </tr>
+                         <?php } ?>
                     </tbody>
                </table>
           </div>

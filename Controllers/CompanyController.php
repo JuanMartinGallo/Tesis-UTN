@@ -25,10 +25,8 @@ class CompanyController
         require_once (VIEWS_PATH."company-edit.php");
     }
 
-    public function ShowDataView($idCompany)
+    public function ShowDataView()
     {
-        $company = $this->companyDAO->searchId($idCompany);
-
         require_once (VIEWS_PATH."company-data.php");
     }
 
@@ -131,5 +129,18 @@ class CompanyController
             $companyList = $filteredList;
         }
         return $companyList;
+    }
+
+
+    public function Delete($idCompany){//EXPLICAR FUNCION
+        $newList = $this->companyDAO->GetAll();
+
+        foreach($newList as $company) {
+            if($company->getIdCompany() == $idCompany){
+                $company->setName(null);
+            }
+        }
+        $this->companyDAO->saveAll($newList);
+        $this->ShowListView();
     }
 }
