@@ -3,7 +3,6 @@
 
     use DAO\StudentDAO as StudentDAO;
     use Models\Student as Student;
-
     class StudentController
     {
         private $studentDAO;
@@ -13,19 +12,24 @@
             $this->studentDAO = new StudentDAO();
         }
 
-        public function ShowAddView()
+        public function showAddView()
         {
             require_once(VIEWS_PATH."student-add.php");
         }
 
-        public function ShowListView()
+        public function showListView()
         {
-            $studentList = $this->studentDAO->GetAll();
+            $studentList = $this->studentDAO->getAll();
 
             require_once(VIEWS_PATH."student-list.php");
         }
 
-        public function Add($studentId, $firstName, $lastName, $dni, $gender, $birthDate, $email, $phoneNumber, $active)
+        public function showProfileView()
+        {
+            require_once(VIEWS_PATH."student-profile.php");
+        }
+
+        public function add($studentId, $firstName, $lastName, $dni, $gender, $birthDate, $email, $phoneNumber, $active) ///sin uso por el momento
         {
             $student = new Student();
             $student->setStudentId($studentId);
@@ -38,23 +42,9 @@
             $student->setPhoneNumber($phoneNumber);
             $student->setActive($active);
 
-            $this->studentDAO->Add($student);
+            $this->studentDAO->add($student);
 
-            $this->ShowAddView();
-        }
-
-        public function Login($email)
-        {
-            $user = $this->studentDAO->GetByEmail($email);
-
-            if (($user != null)) {
-
-                $userLogged = $user;
-
-                $_SESSION["userLogged"] = $userLogged;
-
-                $this->ShowListView();
-            }
+            $this->showListView();
         }
     }
 ?>

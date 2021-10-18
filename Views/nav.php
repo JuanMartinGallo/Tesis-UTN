@@ -1,31 +1,41 @@
 <?php
-use Models\User as User;
-// session_start();
-$loggedUser = $_SESSION['loggedUser'];
+require_once('header.php');
+
+session_start();
+
+if (isset($_SESSION['userLogged'])) {
+     $userLogged = $_SESSION['userLogged'];
+}
 ?>
 
 <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
      <span class="navbar-text">
-          <strong>Framework</strong>
+          <strong>UTN LinkedIn</strong>
      </span>
      <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Company/ShowListView">Ver Empresas</a>
+               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Career/getCareersFromAPI">Listar Carreras</a>
           </li>
-          <?php if($loggedUser->getRole() == "Admin"){?>
+          
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT ?>Company/ShowListView">Listar Empresas</a>
+               </li>
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT ?>Company/ShowAddView">Agregar Empresa</a>
+               </li>
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowListView">Listar alumnos</a>
+               </li>
+          
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowAddView">Agregar Alumno</a>
+               </li>
+         
           <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Company/ShowAddView">Agregar Empresa</a>
+               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowProfileView">Ver tus datos</a>
           </li>
           <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowAddView">Agregar Alumno</a>
+               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Home/logout">Cerrar sesion</a>
           </li>
-          <?php } else { ?>
-          <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowDataView">Ver mis datos</a>
-          </li>
-          <?php }?>          
-          <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Home/logOut">Log Out</a>
-          </li>          
      </ul>
 </nav>

@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Pepsico",
+        "cuit": "4058963214",
+        "location": "Mar del plata",
+        "phoneNumber": "2235896624",
+        "idCompany": "1"
+    },
+    {
+        "name": "Google",
+        "cuit": "4058547198",
+        "location": "EEUU",
+        "phoneNumber": "2596321482",
+        "idCompany": "2"
+    },
+    {
+        "name": "Coca Cola",
+        "cuit": "4055821147",
+        "location": "Canada",
+        "phoneNumber": "2235174496",
+        "idCompany": "3"
+    }
+]
