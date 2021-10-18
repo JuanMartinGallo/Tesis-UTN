@@ -12,25 +12,25 @@ require_once('header.php');
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="">Nombre de la empresa</label>
-                            <input type="text" name="name" value="" class="form-control">
+                            <input type="text" name="name" value="" class="form-control" required>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="">Ciudad</label>
-                            <input type="text" name="cuit" value="" class="form-control">
+                            <label for="">CUIT</label>
+                            <input type="text" name="cuit" value="" class="form-control" required>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="">Locacion</label>
-                            <input type="text" name="location" value="" class="form-control"></input>
+                            <label for="">Ubicacion</label>
+                            <input type="text" name="location" value="" class="form-control" required></input>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="">Numero de Telefono</label>
-                            <input type="text" name="phoneNumber" value="" class="form-control">
+                            <input type="text" name="phoneNumber" value="" class="form-control" required>
                         </div>
                     </div>
                 </div>

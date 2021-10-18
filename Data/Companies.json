@@ -1,1 +1,9 @@
-[]
+[
+    {
+        "name": "Globant",
+        "cuit": "40-35789123-9",
+        "location": "Mar del Plata",
+        "phoneNumber": "2236346543",
+        "idCompany": 1
+    }
+]
