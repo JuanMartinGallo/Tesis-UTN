@@ -66,13 +66,14 @@ class CompanyDAO implements ICompanyDAO
     {
         $arrayToEncode = array();
         foreach ($this->companyList as $company) {
+            if($company->getName() != null){//EXPLICAR ESTO A LOS CHICOS A VER SI LES GUSTA
             $valuesArray["name"] = $company->getName();
             $valuesArray["cuit"] = $company->getCuit();
             $valuesArray["location"] = $company->getLocation();
             $valuesArray["phoneNumber"] = $company->getPhoneNumber();
             $valuesArray["idCompany"] = $company->getIdCompany();
 
-            array_push($arrayToEncode, $valuesArray);
+            array_push($arrayToEncode, $valuesArray);}
         }
 
         $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);

@@ -1,4 +1,14 @@
-<?php require_once('header.php') ?>
+<?php 
+
+require_once('header.php');
+
+if(isset($_SESSION['userLogged']))
+{
+ $userLogged = $_SESSION['userLogged'];
+}
+
+
+?>
 
 <main class="d-flex align-items-center justify-content-center height-50">
      <div class="content">

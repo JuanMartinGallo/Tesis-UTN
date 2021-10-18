@@ -19,16 +19,14 @@ class CompanyController
         require_once (VIEWS_PATH."company-add.php");
     }
 
-    public function ShowEditView($Edit)
+    public function ShowEditView()
     {
-        $company = $this->companyDAO->Edit($Edit);
+        //$company = $this->companyDAO->Edit($Edit);
         require_once (VIEWS_PATH."company-edit.php");
     }
 
-    public function ShowDataView($idCompany)
+    public function ShowDataView()
     {
-        $company = $this->companyDAO->searchId($idCompany);
-
         require_once (VIEWS_PATH."company-data.php");
     }
 
@@ -45,13 +43,6 @@ class CompanyController
         require_once (VIEWS_PATH."company-list.php");
     }
 
-    public function ShowAdminView($name = null, $cuit = null, $location = null)
-    {
-        $companyList = $this->companyDAO->getAll();
-
-        require_once (VIEWS_PATH."admin-home.php");
-    }
-
     public function Add($name, $cuit, $location, $phoneNumber)
     {
         $company = new Company();
@@ -66,18 +57,15 @@ class CompanyController
         $this->ShowListView();
     }
 
-    public function Edit ($idCompany, $name, $cuit, $location, $phoneNumber)
+    public function Edit ($name, $cuit, $location, $phoneNumber)
     {
         $newList = $this->companyDAO->GetAll();
 
-        foreach($newList as $company) {
-            if($company->getIdCompany() == $idCompany){
+        foreach($newList as $company) {//aca saque el if, no hacia falta porque el id viene por otro lado
                 $company->setName($name);
                 $company->setCuit($cuit);
                 $company->setLocation($location);
                 $company->setPhoneNumber($phoneNumber);
-
-            }
         }
 
         $this->companyDAO->saveAll($newList);
@@ -138,5 +126,18 @@ class CompanyController
             $companyList = $filteredList;
         }
         return $companyList;
+    }
+
+
+    public function Delete($idCompany){//EXPLICAR FUNCION
+        $newList = $this->companyDAO->GetAll();
+
+        foreach($newList as $company) {
+            if($company->getIdCompany() == $idCompany){
+                $company->setName(null);
+            }
+        }
+        $this->companyDAO->saveAll($newList);
+        $this->ShowListView();
     }
 }

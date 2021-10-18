@@ -26,6 +26,14 @@ $companyList = $companyDAO->getAll();
                          <td><?php echo $company->getCuit() ?></td>
                          <td><?php echo $company->getLocation() ?></td>
                          <td><?php echo $company->getPhoneNumber() ?></td>
+                         <td><form action="<?php echo FRONT_ROOT ?>Company/ShowEditView" method="post" >
+                              <button type="submit" name=<?php echo $company->getIdCompany() ?> value = <?php echo $company->getIdCompany() ?> class="btn btn-dark ml-auto d-block">Editar</button>
+                              </form>
+                         </td>
+                         <td><form action="<?php echo FRONT_ROOT ?>Company/Delete" method="post" >
+                              <button type="submit" name=<?php echo $company->getIdCompany() ?> value = <?php echo $company->getIdCompany() ?> class="btn btn-dark ml-auto d-block">Eliminar</button>
+                              </form>
+                         </td>
                          </tr>
                          <?php } ?>
                     </tbody>

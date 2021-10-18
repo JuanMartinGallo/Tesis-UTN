@@ -24,5 +24,18 @@
 
             require_once(VIEWS_PATH."admin-list.php");
         }
+
+        public function add($firstName, $lastName, $dni, $email) ///sin uso por el momento 
+        {
+            $admin = new Admin();
+            $admin->setfirstName($firstName);
+            $admin->setLastName($lastName);
+            $admin->setDni($dni);
+            $admin->setEmail($email);
+
+            $this->adminDAO->add($admin);
+
+            $this->showListView();
+        }
     }
 ?>
