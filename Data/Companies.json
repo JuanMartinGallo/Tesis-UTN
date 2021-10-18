@@ -5,5 +5,19 @@
         "location": "Mar del Plata",
         "phoneNumber": "2236346543",
         "idCompany": 1
+    },
+    {
+        "name": "Coca Cola",
+        "cuit": "3054645654",
+        "location": "USA",
+        "phoneNumber": "2236346543",
+        "idCompany": 2
+    },
+    {
+        "name": "Avon",
+        "cuit": "3054645654",
+        "location": "Bolivia",
+        "phoneNumber": "33464356745",
+        "idCompany": 3
     }
 ]

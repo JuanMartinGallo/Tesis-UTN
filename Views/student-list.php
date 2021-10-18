@@ -1,4 +1,5 @@
 <?php require_once('header.php');
+require_once('navAdmin.php');
 
 use DAO\StudentDAO as StudentDAO;
 

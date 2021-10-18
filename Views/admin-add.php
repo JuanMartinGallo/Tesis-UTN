@@ -1,5 +1,6 @@
 <?php 
      require_once('header.php');
+     require_once('navAdmin.php');
 ?>
 
 <main class="py-5">
