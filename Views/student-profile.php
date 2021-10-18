@@ -1,11 +1,5 @@
-<?php require_once('header.php');
+<?php
 require_once('nav.php');
-
-if(isset($userLogged) == NULL)
-{
-     $userLogged = $_SESSION['userLogged'];
-}
-
 ?>
 
 <main class="py-5">

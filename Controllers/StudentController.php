@@ -3,7 +3,6 @@
 
     use DAO\StudentDAO as StudentDAO;
     use Models\Student as Student;
-
     class StudentController
     {
         private $studentDAO;
@@ -25,11 +24,9 @@
             require_once(VIEWS_PATH."student-list.php");
         }
 
-        public function showLoggedStudentView()
+        public function showProfileView()
         {
-            $studentList = $this->studentDAO->getAll();
-
-            require_once(VIEWS_PATH."student-logged.php");
+            require_once(VIEWS_PATH."student-profile.php");
         }
 
         public function add($studentId, $firstName, $lastName, $dni, $gender, $birthDate, $email, $phoneNumber, $active) ///sin uso por el momento

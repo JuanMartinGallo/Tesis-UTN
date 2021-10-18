@@ -1,6 +1,9 @@
 <?php
-require_once('header.php');
+require_once('nav.php');
 
+if (isset($_SESSION['userLogged'])) {
+     $userLogged = $_SESSION['userLogged'];
+}
 ?>
 
 <main class="py-5">

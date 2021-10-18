@@ -1,4 +1,4 @@
-<?php require_once('header.php');
+<?php 
 require_once('nav.php');
 
 use DAO\CompanyDAO as CompanyDAO;
@@ -15,31 +15,27 @@ $companyList = $companyDAO->getAll();
                <table class="table bg-light-alpha">
                     <thead>
                          <th>Nombre</th>
-                         <th>CUIT</th>
-                         <th>Ubicacion</th>
-                         <th>Numero telefonico</th>
                     </thead>
                     <tbody>
-                    <?php foreach($companyList as $company) { ?>
-                         <tr>
-                         <td><?php echo $company->getName() ?></td>
-                         <td><?php echo $company->getCuit() ?></td>
-                         <td><?php echo $company->getLocation() ?></td>
-                         <td><?php echo $company->getPhoneNumber() ?></td>
-                         <td><form action="<?php echo FRONT_ROOT ?>Company/ShowEditView" method="post" >
-                              <button type="submit" name=<?php echo $company->getIdCompany() ?> value = <?php echo $company->getIdCompany() ?> class="btn btn-dark ml-auto d-block">Editar</button>
-                              </form>
-                         </td>
-                         <td><form action="<?php echo FRONT_ROOT ?>Company/Delete" method="post" >
-                              <button type="submit" name=<?php echo $company->getIdCompany() ?> value = <?php echo $company->getIdCompany() ?> class="btn btn-dark ml-auto d-block">Eliminar</button>
-                              </form>
-                         </td>
-                         </tr>
+                         <?php if ($userLogged->getRole() == "Admin") { ?>
+                              <?php foreach ($companyList as $company) { ?>
+                                   <tr>
+                                        <td><?php echo $company->getName() ?></td>
+                                        <td>
+                                             <form action="<?php echo FRONT_ROOT ?>Company/ShowEditView" method="post">
+                                                  <button type="submit" name=<?php echo $company->getIdCompany() ?> value=<?php echo $company->getIdCompany() ?> class="btn btn-dark ml-auto d-block">Editar</button>
+                                             </form>
+                                        </td>
+                                        <td>
+                                             <form action="<?php echo FRONT_ROOT ?>Company/Delete" method="post">
+                                                  <button type="submit" name=<?php echo $company->getIdCompany() ?> value=<?php echo $company->getIdCompany() ?> class="btn btn-dark ml-auto d-block">Eliminar</button>
+                                             </form>
+                                        </td>
+                                   </tr>
+                              <?php } ?>
                          <?php } ?>
                     </tbody>
                </table>
           </div>
      </section>
 </main>
-
-
