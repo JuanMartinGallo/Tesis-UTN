@@ -32,7 +32,7 @@
             require_once(VIEWS_PATH."student-logged.php");
         }
 
-        public function add($studentId, $firstName, $lastName, $dni, $gender, $birthDate, $email, $phoneNumber, $active)
+        public function add($studentId, $firstName, $lastName, $dni, $gender, $birthDate, $email, $phoneNumber, $active) ///sin uso por el momento
         {
             $student = new Student();
             $student->setStudentId($studentId);
