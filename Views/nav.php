@@ -3,8 +3,8 @@ require_once('header.php');
 
 session_start();
 
-if (isset($_SESSION['userLogged'])) {
-     $userLogged = $_SESSION['userLogged'];
+if (isset($_SESSION["userLogged"])) {
+     $userLogged = $_SESSION["userLogged"];
 }
 ?>
 
