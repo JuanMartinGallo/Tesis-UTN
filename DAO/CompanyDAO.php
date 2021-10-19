@@ -36,7 +36,7 @@ class CompanyDAO implements ICompanyDAO
         $this->saveData();
     }
 
-    public function edit($idCompany)
+    public function Search($idCompany)
     {
         $editedCompany = $this->searchId($idCompany);
         return $editedCompany;
@@ -56,6 +56,20 @@ class CompanyDAO implements ICompanyDAO
 
         foreach ($this->companyList as $company) {
             if ($company->getIdCompany() == $idCompany) {
+                $foundCompany = $company;
+            }
+        }
+        return $foundCompany;
+    }
+
+    public function searchName($name)
+    {
+        $this->retriveData();
+
+        $foundCompany = new Company();
+
+        foreach ($this->companyList as $company) {
+            if ($company->getName() == $name) {
                 $foundCompany = $company;
             }
         }

@@ -26,6 +26,10 @@
 
         public function showProfileView()
         {
+            if (isset($_SESSION['userLogged']))
+            {
+                $userLogged = $_SESSION['userLogged'];
+            }
             require_once(VIEWS_PATH."student-profile.php");
         }
 
@@ -47,4 +51,3 @@
             $this->showListView();
         }
     }
-?>

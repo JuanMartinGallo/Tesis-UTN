@@ -1,11 +1,5 @@
 <?php require_once('header.php');
 require_once('nav.php');
-
-use DAO\StudentDAO as StudentDAO;
-
-$studentDAO = new StudentDAO();
-$studentList = $studentDAO->getAll();
-
 ?>
 
 <main class="py-5">

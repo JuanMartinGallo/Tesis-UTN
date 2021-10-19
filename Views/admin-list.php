@@ -1,5 +1,5 @@
 <?php require_once('header.php');
-require_once('navAdmin.php');
+require_once('nav.php');
 use DAO\AdminDAO as AdminDAO;
 
 $adminDAO = new AdminDAO();

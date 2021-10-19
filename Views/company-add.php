@@ -23,7 +23,7 @@ require_once('nav.php');
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="">Locacion</label>
+                            <label for="">Ubicacion</label>
                             <input type="text" name="location" value="" class="form-control">
                         </div>
                     </div>

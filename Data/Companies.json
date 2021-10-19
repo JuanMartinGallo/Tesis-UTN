@@ -1,23 +1,30 @@
 [
     {
-        "name": "lalala",
-        "cuit": "20400939269",
-        "location": "dsdfsdfsd",
-        "phoneNumber": "22358749611",
-        "idCompany": "1"
-    },
-    {
-        "name": "Google",
-        "cuit": "4058547198",
-        "location": "EEUU",
-        "phoneNumber": "2596321482",
-        "idCompany": "2"
+        "name": "Globant",
+        "cuit": "3054645654",
+        "location": "Mar del Plata",
+        "phoneNumber": "2236346543",
+        "idCompany": 1
     },
     {
         "name": "Coca Cola",
-        "cuit": "4055821147",
-        "location": "Canada",
-        "phoneNumber": "2235174496",
-        "idCompany": "3"
+        "cuit": "1234135",
+        "location": "Mar del Plata",
+        "phoneNumber": "2236346543",
+        "idCompany": 8
+    },
+    {
+        "name": "Avon",
+        "cuit": "32412352",
+        "location": "USA",
+        "phoneNumber": "12435678",
+        "idCompany": 9
+    },
+    {
+        "name": "Sorny",
+        "cuit": "3054645654",
+        "location": "Uruguay",
+        "phoneNumber": "2236346543",
+        "idCompany": 10
     }
 ]
