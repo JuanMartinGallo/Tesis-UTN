@@ -1,5 +1,5 @@
 <?php require_once('header.php');
-require_once('navUser.php');
+require_once('nav.php');
 
 use DAO\CompanyDAO as CompanyDAO;
 

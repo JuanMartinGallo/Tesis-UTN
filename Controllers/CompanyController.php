@@ -87,7 +87,7 @@ class CompanyController
         }
     }
 
-    private function filterList($companyList, $name, $cuit, $location)
+    public function filterList($companyList, $name, $cuit, $location)
     { 
         if($name)
         {
@@ -139,5 +139,9 @@ class CompanyController
         }
         $this->companyDAO->saveAll($newList);
         $this->ShowListView();
+    }
+
+    public function Filter($name){
+        
     }
 }
