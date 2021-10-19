@@ -1,4 +1,5 @@
-<?php require_once('header.php') ?>
+<?php require_once('header.php');
+require_once('navAdmin.php'); ?>
 
 <main class="py-5">
      <section id="listado" class="mb-5">
@@ -9,7 +10,7 @@
                          <div class="col-lg-4">
                               <div class="form-group">
                                    <label for="">Legajo</label>
-                                   <input type="text" name="recordId" value="" class="form-control">
+                                   <input type="text" name="studentId" value="" class="form-control">
                               </div>
                          </div>
                          <div class="col-lg-4">
@@ -25,7 +26,7 @@
                               </div>
                          </div>
                     </div>
-                    <button type="submit" name="button" class="btn btn-dark ml-auto d-block">Agregar</button>
+                    <button type="submit" class="btn btn-dark ml-auto d-block">Agregar</button>
                </form>
           </div>
      </section>

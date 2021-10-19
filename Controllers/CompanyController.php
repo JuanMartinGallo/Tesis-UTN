@@ -19,16 +19,15 @@ class CompanyController
         require_once (VIEWS_PATH."company-add.php");
     }
 
-    public function ShowEditView($Edit)
+    public function ShowEditView($idCompany)
     {
-        $company = $this->companyDAO->Edit($Edit);
+        $company = $this->companyDAO->searchId($idCompany);
         require_once (VIEWS_PATH."company-edit.php");
     }
 
     public function ShowDataView($idCompany)
     {
         $company = $this->companyDAO->searchId($idCompany);
-
         require_once (VIEWS_PATH."company-data.php");
     }
 
@@ -45,13 +44,6 @@ class CompanyController
         require_once (VIEWS_PATH."company-list.php");
     }
 
-    public function ShowAdminView($name = null, $cuit = null, $location = null)
-    {
-        $companyList = $this->companyDAO->getAll();
-
-        require_once (VIEWS_PATH."admin-home.php");
-    }
-
     public function Add($name, $cuit, $location, $phoneNumber)
     {
         $company = new Company();
@@ -66,7 +58,7 @@ class CompanyController
         $this->ShowListView();
     }
 
-    public function Edit ($idCompany, $name, $cuit, $location, $phoneNumber)
+    public function Edit ($name, $cuit, $location, $phoneNumber, $idCompany)
     {
         $newList = $this->companyDAO->GetAll();
 
@@ -76,10 +68,9 @@ class CompanyController
                 $company->setCuit($cuit);
                 $company->setLocation($location);
                 $company->setPhoneNumber($phoneNumber);
-
             }
         }
-
+        
         $this->companyDAO->saveAll($newList);
         $this->ShowListView();
     }
@@ -138,5 +129,18 @@ class CompanyController
             $companyList = $filteredList;
         }
         return $companyList;
+    }
+
+
+    public function Delete($idCompany){//EXPLICAR FUNCION
+        $newList = $this->companyDAO->GetAll();
+
+        foreach($newList as $company) {
+            if($company->getIdCompany() == $idCompany){
+                $company->setName(null);
+            }
+        }
+        $this->companyDAO->saveAll($newList);
+        $this->ShowListView();
     }
 }

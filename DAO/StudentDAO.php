@@ -91,6 +91,7 @@
                 $newStudent->setEmail($valuesArray["email"]);
                 $newStudent->setPhoneNumber($valuesArray["phoneNumber"]);
                 $newStudent->setActive($valuesArray["active"]);
+                $newStudent->setRole('Student');
 
                 $this->add($newStudent);
             }            
@@ -113,6 +114,7 @@
                 $valuesArray["email"] = $student->getEmail();
                 $valuesArray["phoneNumber"] = $student->getPhoneNumber();
                 $valuesArray["active"] = $student->getActive();
+                $valuesArray["role"] = $student->getRole();
 
                 array_push($arrayToEncode, $valuesArray);
             }
@@ -146,6 +148,8 @@
                     $student->setEmail($valuesArray["email"]);
                     $student->setPhoneNumber($valuesArray["phoneNumber"]);
                     $student->setActive($valuesArray["active"]);
+                    $student->setRole('Student');
+
 
                     array_push($this->studentList, $student);
                 }
