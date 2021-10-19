@@ -12,5 +12,12 @@
         "location": "Mar del Plata",
         "phoneNumber": "2236346543",
         "idCompany": 8
+    },
+    {
+        "name": "Avon",
+        "cuit": "32412352",
+        "location": "USA",
+        "phoneNumber": "12435678",
+        "idCompany": 9
     }
 ]

@@ -32,8 +32,8 @@ class CompanyController
 
     public function ShowListView($name = null, $cuit = null, $location = null)
     {
-        //session_start();
-        //$companyList = $this->companyDAO->getAll();
+        session_start();
+        $companyList = $this->companyDAO->getAll();
 
        /* if($name || $cuit || $location)
         {
@@ -142,6 +142,14 @@ class CompanyController
     }
 
     public function Filter($name){
-        
+        $newList = $this->companyDAO->GetAll();
+
+        foreach($newList as $company) {
+            if($company->getName() == $name){
+                var_dump($company);
+            }
+        }
+
+        $this->ShowListView();
     }
 }
