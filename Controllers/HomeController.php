@@ -1,19 +1,23 @@
 <?php
-    namespace Controllers;
 
-    class HomeController
+namespace Controllers;
+
+class HomeController
+{
+    public function Index($message = "")
     {
-        public function Index($message = "")
-        {
-            require_once(VIEWS_PATH."login.php");
+        require_once(VIEWS_PATH . "login.php");
+    }
+
+    public function logout($message = "")
+    {
+        if (!empty($_SESSION["userLogged"])) {
+
+            unset($_SESSION["userLogged"]);
         }
 
-        public function logout($message = "")
-        {
-            session_start();
-            session_destroy();
-        
-            header("location:../index.php");
-        }
+        session_destroy();
+
+        header("location:../index.php");
     }
-?>
+}
