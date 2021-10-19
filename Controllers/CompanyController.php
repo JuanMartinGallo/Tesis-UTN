@@ -19,14 +19,15 @@ class CompanyController
         require_once (VIEWS_PATH."company-add.php");
     }
 
-    public function ShowEditView()
+    public function ShowEditView($idCompany)
     {
-        //$company = $this->companyDAO->Edit($Edit);
+        $company = $this->companyDAO->searchId($idCompany);
         require_once (VIEWS_PATH."company-edit.php");
     }
 
-    public function ShowDataView()
+    public function ShowDataView($idCompany)
     {
+        $company = $this->companyDAO->searchId($idCompany);
         require_once (VIEWS_PATH."company-data.php");
     }
 
@@ -57,17 +58,19 @@ class CompanyController
         $this->ShowListView();
     }
 
-    public function Edit ($name, $cuit, $location, $phoneNumber)
+    public function Edit ($name, $cuit, $location, $phoneNumber, $idCompany)
     {
         $newList = $this->companyDAO->GetAll();
 
-        foreach($newList as $company) {//aca saque el if, no hacia falta porque el id viene por otro lado
+        foreach($newList as $company) {
+            if($company->getIdCompany() == $idCompany){
                 $company->setName($name);
                 $company->setCuit($cuit);
                 $company->setLocation($location);
                 $company->setPhoneNumber($phoneNumber);
+            }
         }
-
+        
         $this->companyDAO->saveAll($newList);
         $this->ShowListView();
     }

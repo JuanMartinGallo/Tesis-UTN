@@ -34,7 +34,7 @@ require_once('header.php');
                         </div>
                     </div>
                 </div>
-                <button type="submit" name="" value="" class="btn btn-dark ml-auto d-block">Editar</button>
+                <button type="submit" name="idCompany" " value=" value=<?php echo $company->getIdCompany() ?>" class="btn btn-dark ml-auto d-block">Editar</button>
             </form>
         </div>
     </section>
