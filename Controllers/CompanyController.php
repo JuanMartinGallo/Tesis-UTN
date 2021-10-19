@@ -33,13 +33,13 @@ class CompanyController
 
     public function ShowListView($name = null, $cuit = null, $location = null)
     {
-        session_start();
+
         $companyList = $this->companyDAO->getAll();
 
-       /* if($name || $cuit || $location)
+       if($name || $cuit || $location)
         {
             $companyList = $this->filterList($companyList, $name, $cuit, $location);
-        }*/
+        }
 
         require_once (VIEWS_PATH."company-list.php");
     }
@@ -149,10 +149,9 @@ class CompanyController
 
         foreach($newList as $company) {
             if($company->getName() == $name){
-                var_dump($company);
+                $this->ShowListView($name);
             }
         }
-
-        $this->ShowListView();
+        
     }
 }
