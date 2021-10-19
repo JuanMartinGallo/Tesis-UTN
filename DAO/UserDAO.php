@@ -20,7 +20,7 @@
         {
             $studentList = $this->studentDAO->getStudentList();
             $adminList = $this->adminDAO->getAdminList();
-            //$this->studentDAO->getStudentsFromAPI(); comento esto porque ya lo cargo una vez 
+            //$this->studentDAO->getStudentsFromAPI(); 
 
             foreach ($studentList as $student) {
                 if ($student->getEmail() == $email) {
