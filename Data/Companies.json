@@ -19,5 +19,12 @@
         "location": "USA",
         "phoneNumber": "12435678",
         "idCompany": 9
+    },
+    {
+        "name": "Sorny",
+        "cuit": "3054645654",
+        "location": "Uruguay",
+        "phoneNumber": "2236346543",
+        "idCompany": 10
     }
 ]
