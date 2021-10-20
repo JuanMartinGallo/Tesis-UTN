@@ -24,26 +24,25 @@
             {
                 $this->studentDAO->getStudentsFromAPI();
             }
-            else
+        
+            foreach($studentList as $student)
             {
-                foreach($studentList as $student)
+                if($student->getEmail() == $email)
                 {
-                    if($student->getEmail() == $email)
-                    {
-                        $student->setRole("Student");
-                        return $student;
-                    }
-                }
-    
-                foreach($adminList as $admin)
-                {
-                    if($admin->getEmail() == $email)
-                    {
-                        $admin->setRole("Admin");
-                        return $admin;
-                    }
+                    $student->setRole("Student");
+                    return $student;
                 }
             }
+
+            foreach($adminList as $admin)
+            {
+                if($admin->getEmail() == $email)
+                {
+                    $admin->setRole("Admin");
+                    return $admin;
+                }
+            }
+            
             return NULL;
         }
     }
