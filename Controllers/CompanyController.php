@@ -36,7 +36,7 @@ class CompanyController
 
         $companyList = $this->companyDAO->getAll();
 
-       if($name || $cuit || $location)
+        if($name || $cuit || $location)
         {
             $companyList = $this->filterList($companyList, $name, $cuit, $location);
         }
@@ -60,10 +60,12 @@ class CompanyController
 
     public function Edit ($name, $cuit, $location, $phoneNumber, $idCompany)
     {
-        $newList = $this->companyDAO->GetAll();
+        $newList = $this->companyDAO->getAll();
 
-        foreach($newList as $company) {
-            if($company->getIdCompany() == $idCompany){
+        foreach($newList as $company)
+        {
+            if($company->getIdCompany() == $idCompany)
+            {
                 $company->setName($name);
                 $company->setCuit($cuit);
                 $company->setLocation($location);
@@ -132,11 +134,14 @@ class CompanyController
     }
 
 
-    public function Delete($idCompany){//EXPLICAR FUNCION
-        $newList = $this->companyDAO->GetAll();
+    public function Delete($idCompany)
+    {
+        $newList = $this->companyDAO->getAll();
 
-        foreach($newList as $company) {
-            if($company->getIdCompany() == $idCompany){
+        foreach($newList as $company)
+        {
+            if($company->getIdCompany() == $idCompany)
+            {
                 $company->setName(null);
             }
         }
@@ -144,14 +149,16 @@ class CompanyController
         $this->ShowListView();
     }
 
-    public function Filter($name){
-        $newList = $this->companyDAO->GetAll();
+    public function Filter($name)
+    {
+        $newList = $this->companyDAO->getAll();
 
-        foreach($newList as $company) {
-            if($company->getName() == $name){
+        foreach($newList as $company)
+        {
+            if($company->getName() == $name)
+            {
                 $this->ShowListView($name);
             }
-        }
-        
+        }       
     }
 }
