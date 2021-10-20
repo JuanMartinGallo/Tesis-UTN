@@ -132,7 +132,7 @@ class CompanyController
     }
 
 
-    public function Delete($idCompany){//EXPLICAR FUNCION
+    public function Delete($idCompany){
         $newList = $this->companyDAO->GetAll();
 
         foreach($newList as $company) {
