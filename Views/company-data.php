@@ -1,10 +1,6 @@
+<?php
 
-<?php 
 require_once('nav.php');
-
-use DAO\CompanyDAO as CompanyDAO;
-
-$companyDAO = new CompanyDAO();
 
 ?>
 

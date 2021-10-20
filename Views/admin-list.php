@@ -1,9 +1,11 @@
-<?php require_once('header.php');
-require_once('nav.php');
-use DAO\AdminDAO as AdminDAO;
+<?php 
 
-$adminDAO = new AdminDAO();
-$adminList = $adminDAO->getAll();
+     require_once('nav.php');
+
+     use DAO\AdminDAO as AdminDAO;
+
+     $adminDAO = new AdminDAO();
+     $adminList = $adminDAO->getAll();
 
 ?>
 

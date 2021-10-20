@@ -12,7 +12,7 @@
             $this->userDAO = new UserDAO();
         }
 
-        public function Login($email)
+        public function login($email)
         {
             $user = $this->userDAO->GetByEmail($email);
 
