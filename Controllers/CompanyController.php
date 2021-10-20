@@ -134,9 +134,8 @@ class CompanyController
     }
 
 
-    public function Delete($idCompany)
-    {
-        $newList = $this->companyDAO->getAll();
+    public function Delete($idCompany){
+        $newList = $this->companyDAO->GetAll();
 
         foreach($newList as $company)
         {
