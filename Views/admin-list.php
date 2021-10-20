@@ -12,14 +12,13 @@
 <main class="py-5">
      <section id="listado" class="mb-5">
           <div class="container">
-               <h2 class="mb-4">Datos del Administrador</h2>
+               <h2 class="mb-4">Datos de administradores del sistema</h2>
                <table class="table bg-light-alpha">
                     <thead>
                          <th>Nombre</th>
                          <th>Apellido</th>
                          <th>DNI</th>
                          <th>Email</th>
-                         <th>Rol</th>
                     </thead>
                     <tbody>
                     <?php foreach($adminList as $admin) { ?>
@@ -28,7 +27,6 @@
                               <td><?php echo $admin->getLastName() ?></td>
                               <td><?php echo $admin->getDni() ?></td>
                               <td><?php echo $admin->getEmail() ?></td>
-                              <td><?php echo $admin->getRole() ?></td>
                          </tr>
                          <?php } ?>
                     </tbody>

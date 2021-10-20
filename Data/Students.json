@@ -2598,5 +2598,18 @@
         "email": "ecordelette5j@umich.edu",
         "phoneNumber": "411-950-1338",
         "active": true
+    },
+    {
+        "studentId": 201,
+        "careerId": "4",
+        "firstName": "Alumno",
+        "lastName": "201",
+        "dni": "30-457789",
+        "fileNumber": "43-341-6087",
+        "gender": "Male",
+        "birthDate": "2021-04-06T00:00:00",
+        "email": "alumno201@prueba.com",
+        "phoneNumber": "223-4325874",
+        "active": true
     }
 ]

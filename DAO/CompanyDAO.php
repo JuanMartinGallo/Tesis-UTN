@@ -28,15 +28,17 @@
         {
             $this->retriveData();
 
-            foreach ($this->companyList as $key => $value) {
-                if ($value->getIdCompany() == $idCompany) {
+            foreach ($this->companyList as $key => $value)
+            {
+                if ($value->getIdCompany() == $idCompany)
+                {
                     $this->companyList[$key]->setState(false);
                 }
             }
             $this->saveData();
         }
 
-        public function Search($idCompany)
+        public function search($idCompany)
         {
             $editedCompany = $this->searchId($idCompany);
             return $editedCompany;
@@ -54,8 +56,10 @@
 
             $foundCompany = new Company();
 
-            foreach ($this->companyList as $company) {
-                if ($company->getIdCompany() == $idCompany) {
+            foreach ($this->companyList as $company)
+            {
+                if ($company->getIdCompany() == $idCompany)
+                {
                     $foundCompany = $company;
                 }
             }
@@ -68,8 +72,10 @@
 
             $foundCompany = new Company();
 
-            foreach ($this->companyList as $company) {
-                if ($company->getName() == $name) {
+            foreach ($this->companyList as $company)
+            {
+                if ($company->getName() == $name)
+                {
                     $foundCompany = $company;
                 }
             }
@@ -79,18 +85,23 @@
         private function saveData()
         {
             $arrayToEncode = array();
-            foreach ($this->companyList as $company) {
-                if($company->getName() != null){//EXPLICAR ESTO A LOS CHICOS A VER SI LES GUSTA
-                $valuesArray["name"] = $company->getName();
-                $valuesArray["cuit"] = $company->getCuit();
-                $valuesArray["location"] = $company->getLocation();
-                $valuesArray["phoneNumber"] = $company->getPhoneNumber();
-                $valuesArray["idCompany"] = $company->getIdCompany();
 
-                array_push($arrayToEncode, $valuesArray);}
+            foreach ($this->companyList as $company)
+            {
+                if($company->getName() != null) //EXPLICAR ESTO A LOS CHICOS A VER SI LES GUSTA
+                {
+                    $valuesArray["name"] = $company->getName();
+                    $valuesArray["cuit"] = $company->getCuit();
+                    $valuesArray["location"] = $company->getLocation();
+                    $valuesArray["phoneNumber"] = $company->getPhoneNumber();
+                    $valuesArray["idCompany"] = $company->getIdCompany();
+
+                    array_push($arrayToEncode, $valuesArray);
+                }
             }
 
             $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
+            
             file_put_contents('Data/Companies.json', $jsonContent);
         }
 

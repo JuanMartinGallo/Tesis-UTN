@@ -1,10 +1,10 @@
-<?php require_once('header.php');
-require_once('nav.php');
+<?php
+     require_once('nav.php');
 
-use DAO\CareerDAO as CareerDAO;
+     use DAO\CareerDAO as CareerDAO;
 
-$careerDAO = new CareerDAO();
-$careerList = $careerDAO->getAll();
+     $careerDAO = new CareerDAO();
+     $careerList = $careerDAO->getAll();
 
 ?>
 

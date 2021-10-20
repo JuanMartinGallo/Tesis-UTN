@@ -16,5 +16,17 @@
         "lastName": "Arzondo",
         "dni": "12-148-4757",
         "email": "eldiegote2021@gmail.com"
+    },
+    {
+        "firstName": "Clark",
+        "lastName": "Kent",
+        "dni": "123456789",
+        "email": "superamigos@dc.com"
+    },
+    {
+        "firstName": "Clark",
+        "lastName": "Kent",
+        "dni": "123456789",
+        "email": "superamigos@dc.com"
     }
 ]

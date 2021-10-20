@@ -11,6 +11,7 @@
         public function add(Student $student)
         {
             $this->retrieveData();
+            $student->setStudentId($this->getNextId());
             array_push($this->studentList, $student);
             $this->saveData();
         }
@@ -149,6 +150,18 @@
         public function getStudentList(){ 
             $this->retrieveData();
             return $this->studentList; 
+        }
+
+        private function getNextId()
+        {
+            $id = 0;
+
+            foreach($this->studentList as $student)
+            {
+                $id = ($student->getStudentId() > $id) ? $student->getStudentId() : $id;
+            }
+
+            return $id + 1;
         }
     }
 ?>

@@ -37,14 +37,14 @@
             $this->showAddView();
         }
 
-        /*public function getCareersFromAPI($id)
-        //{
+        public function getCareersFromAPI($id)
+        {
             $match = $this->careerDAO->getById($id);
 
             if (($match != null)) {
 
                 $this->showListView();
             }
-        }*/
+        }
     }
 ?>

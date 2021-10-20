@@ -24,9 +24,10 @@
 
                 require_once(VIEWS_PATH . "home.php");
             }
-
-            else{
-            require_once(VIEWS_PATH . "login.php");//deberia saltarle un mensaje al usuario erroneo sobre su cuenta que no esta registrada
+            else
+            {
+                require_once(VIEWS_PATH . "login.php");//deberia saltarle un mensaje al usuario erroneo sobre su cuenta que no esta registrada
             }
         }
     }
+?>
