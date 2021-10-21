@@ -1,11 +1,6 @@
-
 <?php 
+session_start();
 require_once('nav.php');
-
-use DAO\CompanyDAO as CompanyDAO;
-
-$companyDAO = new CompanyDAO();
-
 ?>
 
 <main class="py-5">

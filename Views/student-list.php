@@ -1,4 +1,5 @@
-<?php require_once('header.php');
+<?php
+session_start();
 require_once('nav.php');
 ?>
 

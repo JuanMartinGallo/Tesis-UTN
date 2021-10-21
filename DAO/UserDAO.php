@@ -16,26 +16,35 @@
             $this->adminDAO = new AdminDAO();
         }
         
-         public function getByEmail($email)
+        public function getByEmail($email)
         {
             $studentList = $this->studentDAO->getStudentList();
             $adminList = $this->adminDAO->getAdminList();
-            //$this->studentDAO->getStudentsFromAPI(); 
 
-            foreach ($studentList as $student) {
-                if ($student->getEmail() == $email) {
-                    $student->setRole("Student");
-                    return $student;
+            if(empty($studentList))
+            {
+                $this->studentDAO->getStudentsFromAPI();
+            }
+            else
+            {
+                foreach($studentList as $student)
+                {
+                    if($student->getEmail() == $email)
+                    {
+                        $student->setRole("Student");
+                        return $student;
+                    }
+                }
+
+                foreach($adminList as $admin)
+                {
+                    if($admin->getEmail() == $email)
+                    {
+                        $admin->setRole("Admin");
+                        return $admin;
+                    }
                 }
             }
-
-            foreach ($adminList as $admin) {
-                if ($admin->getEmail() == $email) {
-                    $admin->setRole("Admin");
-                    return $admin;
-                }
-            }
-
             return NULL;
         }
     }
