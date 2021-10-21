@@ -1,4 +1,5 @@
 <?php
+     session_start();
      require_once('nav.php');
 ?>
 
@@ -20,15 +21,15 @@
                     </thead>
                     <tbody>
                          <tr>
-                              <td><?php echo $userLogged->getFirstName() ?></td>
-                              <td><?php echo $userLogged->getLastName() ?></td>
-                              <td><?php echo $userLogged->getDni() ?></td>
-                              <td><?php echo $userLogged->getFileNumber() ?></td>
-                              <td><?php echo $userLogged->getGender() ?></td>
-                              <td><?php echo $userLogged->getCareerId() ?></td>
-                              <td><?php echo $userLogged->getBirthDate() ?></td>
-                              <td><?php echo $userLogged->getEmail() ?></td>
-                              <td><?php echo $userLogged->getPhoneNumber() ?></td>
+                              <td><?php echo $_SESSION['userLogged']->getFirstName() ?></td>
+                              <td><?php echo $_SESSION['userLogged']->getLastName() ?></td>
+                              <td><?php echo $_SESSION['userLogged']->getDni() ?></td>
+                              <td><?php echo $_SESSION['userLogged']->getFileNumber() ?></td>
+                              <td><?php echo $_SESSION['userLogged']->getGender() ?></td>
+                              <td><?php echo $_SESSION['userLogged']->getCareerId() ?></td>
+                              <td><?php echo $_SESSION['userLogged']->getBirthDate() ?></td>
+                              <td><?php echo $_SESSION['userLogged']->getEmail() ?></td>
+                              <td><?php echo $_SESSION['userLogged']->getPhoneNumber() ?></td>
                          </tr>
                     </tbody>
                </table>
