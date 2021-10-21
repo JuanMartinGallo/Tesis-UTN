@@ -163,5 +163,35 @@
 
             return $id + 1;
         }
+
+        public function enableStudent($studentId)
+        {
+            $this->retrieveData();
+
+            foreach($this->studentList as $key => $student)
+            {
+                if($student->getStudentId() == $studentId)
+                {
+                    $this->studentList[$key]->setActive(true);
+                }
+            }
+
+            $this->saveData();                        
+        }
+
+        public function disableStudent($studentId)
+        {
+            $this->retrieveData();
+
+            foreach($this->studentList as $key => $student)
+            {
+                if($student->getStudentId() == $studentId)
+                {
+                    $this->studentList[$key]->setActive(false);
+                }
+            }
+
+            $this->saveData();                        
+        }
     }
 ?>
