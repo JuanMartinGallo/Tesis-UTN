@@ -13,12 +13,12 @@
             $this->adminDAO = new AdminDAO();
         }
 
-        public function ShowAddView()
+        public function showAddView()
         {
             require_once(VIEWS_PATH."admin-add.php");
         }
 
-        public function ShowListView()
+        public function showListView()
         {
             $adminList = $this->adminDAO->getAll();
 

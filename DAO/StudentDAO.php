@@ -8,24 +8,19 @@
     {
         private $studentList = array();
 
-        // Funcion para agregar estudiantes
-
         public function add(Student $student)
         {
             $this->retrieveData();
+            $student->setStudentId($this->getNextId());
             array_push($this->studentList, $student);
             $this->saveData();
         }
-
-        // Funcion para listar estudiantes
 
         public function getAll()
         {
             $this->retrieveData();
             return $this->studentList;
         }
-
-        // Funcion para actualizar un registro de estudiante
 
         public function update(Student $newStudent)
         {
@@ -155,6 +150,18 @@
         public function getStudentList(){ 
             $this->retrieveData();
             return $this->studentList; 
+        }
+
+        private function getNextId()
+        {
+            $id = 0;
+
+            foreach($this->studentList as $student)
+            {
+                $id = ($student->getStudentId() > $id) ? $student->getStudentId() : $id;
+            }
+
+            return $id + 1;
         }
     }
 ?>

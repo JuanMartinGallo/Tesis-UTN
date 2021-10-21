@@ -3,7 +3,7 @@
 
     use Models\Career as Career;
 
-interface ICareerDAO
+    interface ICareerDAO
     {
         function add(Career $career);
         function getAll();

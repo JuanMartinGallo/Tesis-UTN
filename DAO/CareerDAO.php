@@ -8,8 +8,6 @@
     {
         private $careerList = array();
 
-        // Funcion para agregar carreras
-
         public function add(Career $career)
         {
             $this->retrieveData();
@@ -17,15 +15,11 @@
             $this->saveData();
         }
 
-        // Funcion para listar carreras
-
         public function getAll()
         {
             $this->retrieveData();
             return $this->careerList;
         }
-
-        // Funcion para actualizar un registro de carrera
 
         public function update(Career $newCareer)
         {
@@ -43,7 +37,6 @@
 
             $this->saveData();
             return $flag;
-
         }
 
         public function remove($careerId)
@@ -61,7 +54,7 @@
             $this->saveData();
         }
 
-        public function getCareerFromAPI()
+        public function getCareersFromAPI()
         {
             $ch = curl_init();
 
@@ -103,16 +96,16 @@
 
             $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
             
-            file_put_contents('Data/Career.json', $jsonContent);
+            file_put_contents('Data/Careers.json', $jsonContent);
         }
 
         private function retrieveData()
         {
             $this->careerList = array();
 
-            if(file_exists('Data/Career.json'))
+            if(file_exists('Data/Careers.json'))
             {
-                $jsonContent = file_get_contents('Data/Carrer.json');
+                $jsonContent = file_get_contents('Data/Carrers.json');
 
                 $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
 
@@ -128,14 +121,24 @@
             }
         }
 
+        public function getCareerList()
+        { 
+            $this->retrieveData();
+            return $this->careerList;
+        }
+
         public function getById($careerID)
         {
-            $this->getCareerFromAPI();
+            $careerList = $this->getCareerList();
+
+            $this->getCareersFromAPI();
 
             //$this->retrieveData();
 
-            foreach ($this->careerList as $career) {
-                if ($career->getCareerId() == $careerID) {
+            foreach ($careerList as $career)
+            {
+                if ($career->getCareerId() == $careerID)
+                {
                     return $career;
                 }
             }
