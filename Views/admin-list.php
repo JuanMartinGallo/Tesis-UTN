@@ -1,12 +1,6 @@
 <?php 
-
+     session_start();
      require_once('nav.php');
-
-     use DAO\AdminDAO as AdminDAO;
-
-     $adminDAO = new AdminDAO();
-     $adminList = $adminDAO->getAll();
-
 ?>
 
 <main class="py-5">

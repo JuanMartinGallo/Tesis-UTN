@@ -1,7 +1,6 @@
-<?php
-
+<?php 
+     session_start();
      require_once('nav.php');
-
 ?>
 
 <main class="py-5">

@@ -17,10 +17,9 @@
             $user = $this->userDAO->GetByEmail($email);
 
             if (($user != null)) {
+                session_start();
 
-                $userLogged = $user;
-
-                $_SESSION["userLogged"] = $userLogged;
+                $_SESSION["userLogged"] = $user;
 
                 require_once(VIEWS_PATH . "home.php");
             }

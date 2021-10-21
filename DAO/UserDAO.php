@@ -33,7 +33,7 @@
                     return $student;
                 }
             }
-
+            
             foreach($adminList as $admin)
             {
                 if($admin->getEmail() == $email)
