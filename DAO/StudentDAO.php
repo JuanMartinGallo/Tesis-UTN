@@ -147,7 +147,8 @@
             }
         }
 
-        public function getStudentList(){ 
+        public function getStudentList()
+        { 
             $this->retrieveData();
             return $this->studentList; 
         }

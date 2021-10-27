@@ -33,7 +33,7 @@
             require_once(VIEWS_PATH."student-profile.php");
         }
 
-        public function add($firstName, $lastName, $dni, $fileNumber, $gender, $careerId, $birthDate, $email, $phoneNumber, $active = true) ///sin uso por el momento
+        public function add($firstName, $lastName, $dni, $fileNumber, $gender, $careerId, $birthDate, $email, $phoneNumber, $active = true)
         {
             $student = new Student();
             $student->setStudentId(count($this->studentDAO->getAll())+1);

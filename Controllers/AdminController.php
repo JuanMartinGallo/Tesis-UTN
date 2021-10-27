@@ -25,7 +25,7 @@
             require_once(VIEWS_PATH."admin-list.php");
         }
 
-        public function add($firstName, $lastName, $dni, $email) ///sin uso por el momento 
+        public function add($firstName, $lastName, $dni, $email)
         {
             $admin = new Admin();
             $admin->setfirstName($firstName);

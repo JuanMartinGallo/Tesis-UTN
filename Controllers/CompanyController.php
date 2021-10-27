@@ -87,7 +87,7 @@ class CompanyController
             $this->companyDAO->remove($remove);
             $this->showListView();
         }
-        else if($getData!="")
+        else if($getData != "")
         {
             $this->showDataView($getData);
         }

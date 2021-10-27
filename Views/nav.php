@@ -8,7 +8,7 @@
      </span>
      <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Career/getCareersFromAPI">Listar carreras</a>
+               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Career/ShowListView">Listar carreras</a>
           </li>
           <?php if($_SESSION['userLogged']->getRole() == "Admin")
                { ?>

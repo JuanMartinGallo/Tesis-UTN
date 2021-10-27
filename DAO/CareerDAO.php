@@ -73,7 +73,7 @@
             foreach($arrayToDecode as $valuesArray)
             {
                 $newCareer = new Career();
-                $newCareer->setCareerId($valuesArray["careerID"]);
+                $newCareer->setCareerId($valuesArray["careerId"]);
                 $newCareer->setDescription($valuesArray["description"]);
                 $newCareer->setActive($valuesArray["active"]);
                 
@@ -105,7 +105,7 @@
 
             if(file_exists('Data/Careers.json'))
             {
-                $jsonContent = file_get_contents('Data/Carrers.json');
+                $jsonContent = file_get_contents('Data/Careers.json');
 
                 $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
 
@@ -127,13 +127,27 @@
             return $this->careerList;
         }
 
-        public function getById($careerID)
+        private function getNextId()
         {
+            $id = 0;
+
+            foreach($this->studentList as $student)
+            {
+                $id = ($student->getStudentId() > $id) ? $student->getStudentId() : $id;
+            }
+
+            return $id + 1;
+        }
+
+        public function getById()
+        {
+            $careerID = $this->getNextId();
+
             $careerList = $this->getCareerList();
 
-            $this->getCareersFromAPI();
+            //$this->getCareersFromAPI();
 
-            //$this->retrieveData();
+            $this->retrieveData();
 
             foreach ($careerList as $career)
             {

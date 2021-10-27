@@ -7,7 +7,6 @@
 
     class CompanyDAO implements ICompanyDAO
     {
-
         private $companyList = array();
 
         public function add(Company $company)
