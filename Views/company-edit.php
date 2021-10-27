@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once('nav.php');
 ?>
 
@@ -11,25 +12,25 @@
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="">Nombre de la empresa</label>
-                            <input type="text" name="name" value="" class="form-control" required>
+                            <input type="text" name="name" value="<?php echo $company->getName() ?>" class="form-control" required>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="">CUIT</label>
-                            <input type="text" name="cuit" value="" class="form-control" required>
+                            <input type="text" name="cuit" value="<?php echo $company->getCuit() ?>" class="form-control" required>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="">Ubicacion</label>
-                            <input type="text" name="location" value="" class="form-control" required></input>
+                            <input type="text" name="location" value="<?php echo $company->getLocation() ?>" class="form-control" required></input>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="">Numero de Telefono</label>
-                            <input type="text" name="phoneNumber" value="" class="form-control" required>
+                            <input type="text" name="phoneNumber" value="<?php echo $company->getPhoneNumber() ?>" class="form-control" required>
                         </div>
                     </div>
                 </div>

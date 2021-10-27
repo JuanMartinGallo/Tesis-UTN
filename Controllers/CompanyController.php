@@ -21,13 +21,13 @@ class CompanyController
 
     public function showEditView($idCompany)
     {
-        $company = $this->companyDAO->searchId($idCompany);
+        $company = $this->companyDAO->search($idCompany);
         require_once (VIEWS_PATH."company-edit.php");
     }
 
     public function showDataView($idCompany)
     {
-        $company = $this->companyDAO->searchId($idCompany);
+        $company = $this->companyDAO->search($idCompany);
         require_once (VIEWS_PATH."company-data.php");
     }
 
@@ -59,20 +59,7 @@ class CompanyController
 
     public function edit ($name, $cuit, $location, $phoneNumber, $idCompany)
     {
-        $newList = $this->companyDAO->getAll();
-
-        foreach($newList as $company)
-        {
-            if($company->getIdCompany() == $idCompany)
-            {
-                $company->setName($name);
-                $company->setCuit($cuit);
-                $company->setLocation($location);
-                $company->setPhoneNumber($phoneNumber);
-            }
-        }
-        
-        $this->companyDAO->saveAll($newList);
+        $this->companyDAO->update($name, $cuit, $location, $phoneNumber, $idCompany);
         $this->showListView();
     }
 
@@ -136,16 +123,7 @@ class CompanyController
 
     public function delete($idCompany)
     {
-        $newList = $this->companyDAO->getAll();
-
-        foreach($newList as $company)
-        {
-            if($company->getIdCompany() == $idCompany)
-            {
-                $company->setName(null);
-            }
-        }
-        $this->companyDAO->saveAll($newList);
+        $this->companyDAO->remove($idCompany);
         $this->showListView();
     }
 
@@ -155,7 +133,7 @@ class CompanyController
 
         foreach($newList as $company)
         {
-            if($company->getName() == $name)
+            if(strncasecmp ($company->getName(), $name,10))
             {
                 $this->showListView($name);
             }
