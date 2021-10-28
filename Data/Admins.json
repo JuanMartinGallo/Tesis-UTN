@@ -22,11 +22,5 @@
         "lastName": "Kent",
         "dni": "123456789",
         "email": "superamigos@dc.com"
-    },
-    {
-        "firstName": "Clark",
-        "lastName": "Kent",
-        "dni": "123456789",
-        "email": "superamigos@dc.com"
     }
 ]

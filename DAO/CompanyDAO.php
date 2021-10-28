@@ -17,13 +17,13 @@
         {
             try
             {
-                $query = "INSERT INTO ".$this->tableName." (name, cuit, location, phoneNumber, idCompany) VALUES (:name, :cuit, :location, :phoneNumber, :idCompany);";
+                $query = "INSERT INTO ".$this->tableName." (name, cuit, location, phoneNumber, companyId) VALUES (:name, :cuit, :location, :phoneNumber, :companyId);";
                 
                 $parameters["name"] = $company->getName();
                 $parameters["cuit"] = $company->getCuit();
                 $parameters["location"] = $company->getLocation();
                 $parameters["phoneNumber"] = $company->getPhoneNumber();
-                $parameters["idCompany"] = $company->getIdCompany()+1;
+                $parameters["companyId"] = $company->getcompanyId()+1;
 
                 $this->connection = Connection::GetInstance();
 
@@ -54,7 +54,7 @@
                     $company->setCuit($row["cuit"]);
                     $company->setLocation($row["location"]);
                     $company->setPhoneNumber($row["phoneNumber"]);
-                    $company->setIdCompany($row["idCompany"]);
+                    $company->setcompanyId($row["companyId"]);
 
 
 
@@ -69,11 +69,11 @@
             }
         }
 
-        public function remove($idCompany)
+        public function remove($companyId)
         {
             try
             {
-            $remove = "DELETE FROM $this->tableName WHERE idCompany = '$idCompany'"; 
+            $remove = "DELETE FROM $this->tableName WHERE companyId = '$companyId'"; 
             $this->connection = Connection::GetInstance();
             $resultSet = $this->connection->ExecuteNonQuery($remove);
 
@@ -85,11 +85,11 @@
             }
         }
 
-        public function search($idCompany)
+        public function search($companyId)
         {
             try{
 
-            $search = "SELECT * FROM $this->tableName WHERE idCompany = '$idCompany'";
+            $search = "SELECT * FROM $this->tableName WHERE companyId = '$companyId'";
 
             $this->connection = Connection::GetInstance();
             
@@ -102,7 +102,7 @@
                 $company->setCuit($row["cuit"]);
                 $company->setLocation($row["location"]);
                 $company->setPhoneNumber($row["phoneNumber"]);
-                $company->setIdCompany($row["idCompany"]);
+                $company->setcompanyId($row["companyId"]);
             }
 
             return $company;
@@ -113,11 +113,11 @@
             }
         }
 
-        public function update($name, $cuit, $location, $phoneNumber, $idCompany)
+        public function update($name, $cuit, $location, $phoneNumber, $companyId)
         {
             $update = "UPDATE  $this->tableName 
             SET name='$name', cuit='$cuit', location='$location', phoneNumber='$phoneNumber'
-            WHERE idCompany = '$idCompany'";
+            WHERE companyId = '$companyId'";
 
             $this->connection = Connection::GetInstance();
 
