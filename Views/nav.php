@@ -13,9 +13,6 @@
           <?php if($_SESSION['userLogged']->getRole() == "Admin")
                { ?>
           <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowAddView">Agregar alumno</a>
-          </li>
-          <li class="nav-item">
                <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowListView">Listar alumnos</a>
           </li>
           <li class="nav-item">

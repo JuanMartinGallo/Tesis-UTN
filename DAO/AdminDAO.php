@@ -61,12 +61,6 @@
                     array_push($this->adminList, $admin);
                 }
             }
-        }
-
-        public function getAdminList()
-        {
-            $this->retrieveData();
-            return $this->adminList;
-        }   
+        }  
     }
 ?>

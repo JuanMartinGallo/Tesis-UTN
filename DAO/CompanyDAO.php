@@ -23,7 +23,7 @@
                 $parameters["cuit"] = $company->getCuit();
                 $parameters["location"] = $company->getLocation();
                 $parameters["phoneNumber"] = $company->getPhoneNumber();
-                $parameters["idCompany"] = $company->getIdCompany()+1;
+                $parameters["idCompany"] = $company->getIdCompany();
 
                 $this->connection = Connection::GetInstance();
 
@@ -73,9 +73,9 @@
         {
             try
             {
-            $remove = "DELETE FROM $this->tableName WHERE idCompany = '$idCompany'"; 
-            $this->connection = Connection::GetInstance();
-            $resultSet = $this->connection->ExecuteNonQuery($remove);
+                $remove = "DELETE FROM $this->tableName WHERE idCompany = '$idCompany'"; 
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->ExecuteNonQuery($remove);
 
             //return $resultSet; PARA PREGUNTAR
             }
@@ -87,25 +87,24 @@
 
         public function search($idCompany)
         {
-            try{
+            try
+            {
 
-            $search = "SELECT * FROM $this->tableName WHERE idCompany = '$idCompany'";
+                $search = "SELECT * FROM $this->tableName WHERE idCompany = '$idCompany'";
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($search);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $company = new Company();
+                    $company->setName($row["name"]);
+                    $company->setCuit($row["cuit"]);
+                    $company->setLocation($row["location"]);
+                    $company->setPhoneNumber($row["phoneNumber"]);
+                    $company->setIdCompany($row["idCompany"]);
+                }
 
-            $this->connection = Connection::GetInstance();
-            
-            $resultSet = $this->connection->Execute($search);
-            
-            foreach ($resultSet as $row)
-            {                
-                $company = new Company();
-                $company->setName($row["name"]);
-                $company->setCuit($row["cuit"]);
-                $company->setLocation($row["location"]);
-                $company->setPhoneNumber($row["phoneNumber"]);
-                $company->setIdCompany($row["idCompany"]);
-            }
-
-            return $company;
+                return $company;
             }
             catch(Exception $ex)
             {

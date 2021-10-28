@@ -121,12 +121,6 @@
             }
         }
 
-        public function getCareerList()
-        { 
-            $this->retrieveData();
-            return $this->careerList;
-        }
-
         private function getNextId()
         {
             $id = 0;
@@ -143,7 +137,7 @@
         {
             $careerID = $this->getNextId();
 
-            $careerList = $this->getCareerList();
+            $careerList = $this->getAll();
 
             //$this->getCareersFromAPI();
 

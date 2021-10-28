@@ -5,13 +5,15 @@ USE TPFinalLab4;
 CREATE TABLE companies
 (
     idCompany INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(100) NOT NULL,
-    cuit VARCHAR(100) NOT NULL,
-    location VARCHAR(100) NOT NULL,
-    phoneNumber int(100) NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    cuit VARCHAR(20) NOT NULL,
+    location VARCHAR(50) NOT NULL,
+    phoneNumber VARCHAR(20) NOT NULL,
 
     CONSTRAINT pk_id_company PRIMARY KEY (idCompany)
 );
+
+INSERT INTO companies (name, cuit, location, phoneNumber) VALUES ('Globant', '30-458778-9', 'Mar del Plata', '223-636-2356'), ('Infosys', '30-666128-9', 'Mar del Plata', '223-636-9999'), ('Toledo', '32-258778-9', 'Mar del Plata', '223-625-2756');
 
 CREATE TABLE students
 (

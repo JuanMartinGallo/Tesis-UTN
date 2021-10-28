@@ -23,10 +23,10 @@
         
         public function getByEmail($email)
         {
-            $studentList = $this->studentDAO->getStudentList();
-            $adminList = $this->adminDAO->getAdminList();
-            $careerList = $this->careerDAO->getCareerList();
-            $jobPositionList = $this->jobPositionDAO->getJobPositionList();
+            $studentList = $this->studentDAO->getAll();
+            $adminList = $this->adminDAO->getAll();
+            $careerList = $this->careerDAO->getAll();
+            $jobPositionList = $this->jobPositionDAO->getAll();
 
             if(empty($studentList))
             {
@@ -38,10 +38,10 @@
                 $this->careerDAO->getCareersFromAPI();
             }
 
-            if(empty($jobPositionList))
-            {
+            /*if(empty($jobPositionList))
+            //{
                 $this->jobPositionDAO->getJobPositionsFromAPI();
-            }
+            }*/
         
             foreach($studentList as $student)
             {

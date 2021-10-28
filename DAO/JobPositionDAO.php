@@ -86,11 +86,5 @@
                 }
             }
         }
-
-        public function getJobPositionList()
-        { 
-            $this->retrieveData();
-            return $this->jobPositionList; 
-        }
     }
 ?>

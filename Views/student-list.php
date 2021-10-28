@@ -6,7 +6,7 @@
 <main class="py-5">
      <section id="listado" class="mb-5">
           <div class="container">
-               <h2 class="mb-4">Datos del alumno</h2>
+               <h2 class="mb-4">Listado de alumnos</h2>
                <table class="table bg-light-alpha">
                     <thead>
                          <th>Nombre</th>
@@ -31,6 +31,16 @@
                               <td><?php echo $student->getBirthDate() ?></td>
                               <td><?php echo $student->getEmail() ?></td>
                               <td><?php echo $student->getPhoneNumber() ?></td>
+                              <td>
+                                   <form action="<?php echo FRONT_ROOT ?>Student/ShowEditView" method="POST">
+                                        <button type="submit" name='studentId' value=<?php echo $student->getStudentId() ?> class="btn btn-dark ml-auto d-block">Editar</button>
+                                   </form>
+                              </td>
+                              <td>
+                                   <form action="<?php echo FRONT_ROOT ?>Student/Delete" method="POST">
+                                        <button type="submit" name='studentId' value=<?php echo $student->getStudentId() ?>  class="btn btn-dark ml-auto d-block">Eliminar</button>
+                                   </form>
+                              </td>
                          </tr>
                          <?php } ?>
                     </tbody>
