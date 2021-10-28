@@ -24,7 +24,7 @@
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="">Ubicacion</label>
-                            <input type="text" name="location" value="<?php echo $company->getLocation() ?>" class="form-control" required></input>
+                            <input type="text" name="location" value="<?php echo $company->getLocation() ?>" class="form-control" required>
                         </div>
                     </div>
                     <div class="col-lg-4">
