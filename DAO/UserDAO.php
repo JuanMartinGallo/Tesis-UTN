@@ -18,7 +18,7 @@
         public function getByEmail($email)
         {
             $studentList = $this->studentDAO->getStudentList();
-            $adminList = $this->adminDAO->getAdminList();
+            $adminList = $this->adminDAO->getAll();
 
             if(empty($studentList))
             {

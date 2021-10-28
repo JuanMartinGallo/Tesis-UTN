@@ -21,6 +21,11 @@
                               <td><?php echo $admin->getLastName() ?></td>
                               <td><?php echo $admin->getDni() ?></td>
                               <td><?php echo $admin->getEmail() ?></td>
+                              <td>
+                                        <form action="<?php echo FRONT_ROOT ?>Admin/ShowEditView" method="POST">
+                                             <button type="submit" name='adminId' value=<?php echo $admin->getAdminId() ?> class="btn btn-dark ml-auto d-block">Editar</button>
+                                        </form>
+                                   </td>
                          </tr>
                          <?php } ?>
                     </tbody>

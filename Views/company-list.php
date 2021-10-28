@@ -26,19 +26,19 @@
                                    <td><?php echo $company->getName() ?></td>
                                    <td>
                                         <form action="<?php echo FRONT_ROOT ?>Company/ShowDataView" method="POST">
-                                             <button type="submit" name='idCompany' value=<?php echo $company->getIdCompany() ?> class="btn btn-dark ml-auto d-block">Ver Perfil</button>
+                                             <button type="submit" name='companyId' value=<?php echo $company->getCompanyId() ?> class="btn btn-dark ml-auto d-block">Ver Perfil</button>
                                         </form>
                                    </td>
                                    <?php if ($_SESSION['userLogged']->getRole() == "Admin")
                                         { ?>
                                    <td>
                                         <form action="<?php echo FRONT_ROOT ?>Company/ShowEditView" method="POST">
-                                             <button type="submit" name='idCompany' value=<?php echo $company->getIdCompany() ?> class="btn btn-dark ml-auto d-block">Editar</button>
+                                             <button type="submit" name='companyId' value=<?php echo $company->getCompanyId() ?> class="btn btn-dark ml-auto d-block">Editar</button>
                                         </form>
                                    </td>
                                    <td>
                                         <form action="<?php echo FRONT_ROOT ?>Company/Delete" method="POST">
-                                             <button type="submit" name='idCompany' value=<?php echo $company->getIdCompany() ?>  class="btn btn-dark ml-auto d-block">Eliminar</button>
+                                             <button type="submit" name='companyId' value=<?php echo $company->getCompanyId() ?>  class="btn btn-dark ml-auto d-block">Eliminar</button>
                                         </form>
                                    </td>
                               </tr>

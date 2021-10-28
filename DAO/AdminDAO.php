@@ -1,72 +1,130 @@
 <?php
     namespace DAO;
 
+    use \Exception as Exception;
     use DAO\IAdminDAO as IAdminDAO;
     use Models\Admin as Admin;
+    use DAO\Connection as Connection;
 
     class AdminDAO implements IAdminDAO
     {
-        private $adminList = array();
+        private $connection;
+        private $tableName = "admins";
 
         public function add(Admin $admin)
         {
-            $this->retrieveData();
-            array_push($this->adminList, $admin);
-            $this->saveData();
+            try
+            {
+                $query = "INSERT INTO ".$this->tableName." (firstName, lastName, dni, email, adminId) VALUES (:firstName, :lastName, :dni, :email, :adminId);";
+                
+                $parameters["firstName"] = $admin->getFirstName();
+                $parameters["lastName"] = $admin->getLastName();
+                $parameters["dni"] = $admin->getDni();
+                $parameters["email"] = $admin->getEmail();
+                $parameters["adminId"] = $admin->getAdminId();
+
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
         }
 
         public function getAll()
         {
-            $this->retrieveData();
-            return $this->adminList;
-        }
-
-        private function saveData()
-        {
-            $arrayToEncode = array();
-
-            foreach($this->adminList as $admin)
+            try
             {
-                $valuesArray["firstName"] = $admin->getFirstName();
-                $valuesArray["lastName"] = $admin->getLastName();
-                $valuesArray["dni"] = $admin->getDni();
-                $valuesArray["email"] = $admin->getEmail();
+                $adminList = array();
 
-                array_push($arrayToEncode, $valuesArray);
-            }
+                $query = "SELECT * FROM ".$this->tableName;
 
-            $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
-            
-            file_put_contents('Data/Admins.json', $jsonContent);
-        }
+                $this->connection = Connection::GetInstance();
 
-        private function retrieveData()
-        {
-            $this->adminList = array();
+                $resultSet = $this->connection->Execute($query);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $admin = new Admin();
+                    $admin->setFirstName($row["firstName"]);
+                    $admin->setLastName($row["lastName"]);
+                    $admin->setDni($row["dni"]);
+                    $admin->setEmail($row["email"]);
+                    $admin->setAdminId($row["adminId"]);
 
-            if(file_exists('Data/Admins.json'))
-            {
-                $jsonContent = file_get_contents('Data/Admins.json');
 
-                $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
 
-                foreach($arrayToDecode as $valuesArray)
-                {
-                    $admin = new admin();
-                    $admin->setFirstName($valuesArray["firstName"]);
-                    $admin->setLastName($valuesArray["lastName"]);
-                    $admin->setDni($valuesArray["dni"]);
-                    $admin->setEmail($valuesArray["email"]);
-
-                    array_push($this->adminList, $admin);
+                    array_push($adminList, $admin);
                 }
+
+                return $adminList;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
             }
         }
 
-        public function getAdminList()
+        public function remove($adminId)
         {
-            $this->retrieveData();
-            return $this->adminList;
-        }   
+            try
+            {
+            $remove = "DELETE FROM $this->tableName WHERE adminId = '$adminId'"; 
+            $this->connection = Connection::GetInstance();
+            $this->connection->ExecuteNonQuery($remove);
+
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
+        public function search($adminId)
+        {
+            try{
+
+            $search = "SELECT * FROM $this->tableName WHERE adminId = '$adminId'";
+
+            $this->connection = Connection::GetInstance();
+            
+            $resultSet = $this->connection->Execute($search);
+            
+            foreach ($resultSet as $row)
+            {                
+                $admin = new Admin();
+                $admin->setFirstName($row["firstName"]);
+                $admin->setLastName($row["lastName"]);
+                $admin->setDni($row["dni"]);
+                $admin->setEmail($row["email"]);
+                $admin->setAdminId($row["adminId"]);
+            }
+
+            return $admin;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
+        public function update($firstName, $lastName, $dni, $eMail, $adminId)
+        {
+            $update = "UPDATE  $this->tableName 
+            SET firstName='$firstName', lastName='$lastName', dni='$dni', email='$eMail'
+            WHERE adminId = '$adminId'";
+
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->ExecuteNonQuery($update);
+        }
+
+        public function live_search()
+        {
+                
+        }
+        
     }
 ?>
