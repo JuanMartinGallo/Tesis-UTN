@@ -25,6 +25,18 @@
             require_once(VIEWS_PATH."admin-list.php");
         }
 
+        public function ShowEditView($adminId)
+        {
+            $admin = $this->adminDAO->search($adminId);
+            require_once (VIEWS_PATH."admin-edit.php");
+        }
+
+        public function edit ($firstName, $lastName, $dni, $email, $adminId)
+    {
+        $this->adminDAO->update($firstName, $lastName, $dni, $email, $adminId);
+        $this->showListView();
+    }
+
         public function add($firstName, $lastName, $dni, $email)
         {
             $admin = new Admin();
@@ -32,6 +44,7 @@
             $admin->setLastName($lastName);
             $admin->setDni($dni);
             $admin->setEmail($email);
+            $admin->setAdminId(count($this->adminDAO->getAll())+1);;
 
             $this->adminDAO->add($admin);
 

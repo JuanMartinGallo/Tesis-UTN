@@ -1,6 +1,6 @@
 <?php
-    session_start();
-    require_once('nav.php');
+session_start();
+require_once('nav.php');
 ?>
 
 <main class="py-5">
@@ -12,25 +12,25 @@
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="">Nombre de la empresa</label>
-                            <input type="text" name="name" value="" class="form-control">
+                            <input type="text" name="name" value="" class="form-control" required>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="">CUIT</label>
-                            <input type="text" name="cuit" value="" class="form-control"></input>
+                            <input type="text" name="cuit" value="" class="form-control" required>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="">Ubicacion</label>
-                            <input type="text" name="location" value="" class="form-control">
+                            <input type="text" name="location" value="" class="form-control" required>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="">Numero de Telefono</label>
-                            <input type="text" name="phoneNumber" value="" class="form-control">
+                            <input type="text" name="phoneNumber" value="" class="form-control" required>
                         </div>
                     </div>
                 </div>
