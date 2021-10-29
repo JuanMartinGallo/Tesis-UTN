@@ -19,7 +19,7 @@
                 
                 $parameters["careerId"] = $career->getCareerId();
                 $parameters["description"] = $career->getDescription();
-                $parameters["lastName"] = $career->getActive();
+                $parameters["active"] = $career->getActive();
 
                 $this->connection = Connection::GetInstance();
                 $this->connection->ExecuteNonQuery($query, $parameters);
