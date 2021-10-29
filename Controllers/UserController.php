@@ -12,6 +12,11 @@
             $this->userDAO = new UserDAO();
         }
 
+        public function showRegisterView()
+        {
+            require_once(VIEWS_PATH . "register.php");
+        }
+
         public function login($email)
         {
             $user = $this->userDAO->GetByEmail($email);
