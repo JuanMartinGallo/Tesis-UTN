@@ -1,5 +1,5 @@
-<?php 
-     require_once('header.php');
+<?php
+require_once('header.php');
 ?>
 
 <main class="d-flex align-items-center justify-content-center height-50">
@@ -9,15 +9,13 @@
           </header>
           <form action="<?php echo FRONT_ROOT ?>User/Login" method="POST" class="login-form bg-light-alpha p-5 text-dark font-weight-bold">
                <div class="form-group">
-               <?php if(isset($message)){ ?>
-                    <label for=""> <strong> <?php echo $message ?></strong> </label>
-               <?php } ?>
-               </br>
                     <label for="">EMAIL</label>
                     <input type="email" name="email" class="form-control form-control-lg" placeholder="Ingrese su correo electronico">
                </div>
-
                <button class="btn btn-primary btn-block btn-lg mt-4" type="submit">Iniciar sesión</button>
+               <a class="btn btn-primary btn-block btn-lg mt-4" style="text-decoration:none; color:white; background-color:gray;" href="<?php echo FRONT_ROOT ?>User/showRegisterView">
+                    Registrarse
+               </a>
           </form>
      </div>
 </main>
