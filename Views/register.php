@@ -10,56 +10,14 @@ require_once('header.php');
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="">Nombre</label>
-                            <input type="text" name="firstName" value="" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label for="">Apellido</label>
-                            <input type="text" name="lastName" value="" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label for="">DNI</label>
-                            <input type="text" name="dni" value="" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label for="">Legajo</label>
-                            <input type="text" name="fileNumber" value="" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label for="">Genero</label>
-                            <input type="text" name="gender" value="" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label for="">Carrera</label>
-                            <input type="text" name="careerId" value="" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label for="">Fecha de nacimiento</label>
-                            <input type="text" name="birthDate" value="" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="form-group">
                             <label for="">Email</label>
                             <input type="text" name="email" value="" class="form-control" required>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="">Telefono</label>
-                            <input type="text" name="phoneNumber" value="" class="form-control">
+                            <label for="">Contraseña</label>
+                            <input type="text" name="password" value="" class="form-control" required>
                         </div>
                     </div>
                 </div>

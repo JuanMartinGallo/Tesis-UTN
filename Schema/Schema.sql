@@ -48,8 +48,17 @@ INSERT INTO admins (firstName, lastName, dni, email) VALUES ('Martin', 'Gallo', 
 CREATE TABLE careers
 (
     careerId INT NOT NULL AUTO_INCREMENT,
-    description VARCHAR(20) NOT NULL,
+    description VARCHAR(100) NOT NULL,
     active boolean,
 
     CONSTRAINT pk_career_id PRIMARY KEY (careerId)
+);
+
+CREATE TABLE users
+(
+    userId INT NOT NULL AUTO_INCREMENT,
+    role VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+
+    CONSTRAINT pk_user_id PRIMARY KEY (userId)
 );

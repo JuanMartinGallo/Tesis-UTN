@@ -7,7 +7,7 @@
      <section id="listado" class="mb-5">
           <div class="container">
                <h2 class="mb-4">Listado de alumnos</h2>
-               <table class="table bg-light-alpha">
+               <table class="table bg-light-alpha">       
                     <thead>
                          <th>Nombre</th>
                          <th>Apellido</th>
@@ -27,7 +27,12 @@
                               <td><?php echo $student->getDni() ?></td>
                               <td><?php echo $student->getFileNumber() ?></td>
                               <td><?php echo $student->getGender() ?></td>
-                              <td><?php echo $student->getCareerId() ?></td>
+                              <td><?php foreach($careerList as $career){
+                                   if($career->getCareerId() == $student->getCareerId()){
+                                        echo $career->getDescription();
+                                   }
+                              }?></td>
+                              </td>
                               <td><?php echo $student->getBirthDate() ?></td>
                               <td><?php echo $student->getEmail() ?></td>
                               <td><?php echo $student->getPhoneNumber() ?></td>
