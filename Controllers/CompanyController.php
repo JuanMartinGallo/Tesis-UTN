@@ -19,15 +19,15 @@ class CompanyController
         require_once (VIEWS_PATH."company-add.php");
     }
 
-    public function showEditView($idCompany)
+    public function showEditView($companyId)
     {
-        $company = $this->companyDAO->search($idCompany);
+        $company = $this->companyDAO->search($companyId);
         require_once (VIEWS_PATH."company-edit.php");
     }
 
-    public function showDataView($idCompany)
+    public function showDataView($companyId)
     {
-        $company = $this->companyDAO->search($idCompany);
+        $company = $this->companyDAO->search($companyId);
         require_once (VIEWS_PATH."company-data.php");
     }
 
@@ -46,7 +46,7 @@ class CompanyController
     public function add($name, $cuit, $location, $phoneNumber)
     {
         $company = new Company();
-        $company->setIdCompany(count($this->companyDAO->getAll())+1);
+        $company->setCompanyId(count($this->companyDAO->getAll())+1);
         $company->setName($name);
         $company->setCuit($cuit);
         $company->setLocation($location);
@@ -57,9 +57,9 @@ class CompanyController
         $this->showListView();
     }
 
-    public function edit ($name, $cuit, $location, $phoneNumber, $idCompany)
+    public function edit ($name, $cuit, $location, $phoneNumber, $companyId)
     {
-        $this->companyDAO->update($name, $cuit, $location, $phoneNumber, $idCompany);
+        $this->companyDAO->update($name, $cuit, $location, $phoneNumber, $companyId);
         $this->showListView();
     }
 
@@ -74,7 +74,7 @@ class CompanyController
             $this->companyDAO->remove($remove);
             $this->showListView();
         }
-        else if($getData!="")
+        else if($getData != "")
         {
             $this->showDataView($getData);
         }
@@ -121,9 +121,9 @@ class CompanyController
         return $companyList;
     }
 
-    public function delete($idCompany)
+    public function delete($companyId)
     {
-        $this->companyDAO->remove($idCompany);
+        $this->companyDAO->remove($companyId);
         $this->showListView();
     }
 

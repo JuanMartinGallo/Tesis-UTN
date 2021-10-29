@@ -29,12 +29,12 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="">Numero de Telefono</label>
+                            <label for="">Numero telefonico</label>
                             <input type="text" name="phoneNumber" value="<?php echo $company->getPhoneNumber() ?>" class="form-control" required>
                         </div>
                     </div>
                 </div>
-                <button type="submit" name="idCompany" value="<?php echo $company->getIdCompany() ?>" class="btn btn-dark ml-auto d-block">Editar</button>
+                <button type="submit" name="companyId" value="<?php echo $company->getCompanyId() ?>" class="btn btn-dark ml-auto d-block">Editar</button>
             </form>
         </div>
     </section>

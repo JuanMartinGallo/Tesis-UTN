@@ -17,13 +17,13 @@
         {
             try
             {
-                $query = "INSERT INTO ".$this->tableName." (name, cuit, location, phoneNumber, idCompany) VALUES (:name, :cuit, :location, :phoneNumber, :idCompany);";
+                $query = "INSERT INTO ".$this->tableName." (name, cuit, location, phoneNumber, companyId) VALUES (:name, :cuit, :location, :phoneNumber, :companyId);";
                 
                 $parameters["name"] = $company->getName();
                 $parameters["cuit"] = $company->getCuit();
                 $parameters["location"] = $company->getLocation();
                 $parameters["phoneNumber"] = $company->getPhoneNumber();
-                $parameters["idCompany"] = $company->getIdCompany()+1;
+                $parameters["companyId"] = $company->getcompanyId()+1;
 
                 $this->connection = Connection::GetInstance();
 
@@ -40,11 +40,8 @@
             try
             {
                 $companyList = array();
-
                 $query = "SELECT * FROM ".$this->tableName;
-
                 $this->connection = Connection::GetInstance();
-
                 $resultSet = $this->connection->Execute($query);
                 
                 foreach ($resultSet as $row)
@@ -54,9 +51,7 @@
                     $company->setCuit($row["cuit"]);
                     $company->setLocation($row["location"]);
                     $company->setPhoneNumber($row["phoneNumber"]);
-                    $company->setIdCompany($row["idCompany"]);
-
-
+                    $company->setCompanyId($row["companyId"]);
 
                     array_push($companyList, $company);
                 }
@@ -69,15 +64,13 @@
             }
         }
 
-        public function remove($idCompany)
+        public function remove($companyId)
         {
             try
             {
-            $remove = "DELETE FROM $this->tableName WHERE idCompany = '$idCompany'"; 
-            $this->connection = Connection::GetInstance();
-            $resultSet = $this->connection->ExecuteNonQuery($remove);
-
-            //return $resultSet; PARA PREGUNTAR
+                $remove = "DELETE FROM $this->tableName WHERE companyId = '$companyId'"; 
+                $this->connection = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($remove);
             }
             catch(Exception $ex)
             {
@@ -85,27 +78,26 @@
             }
         }
 
-        public function search($idCompany)
+        public function search($companyId)
         {
-            try{
+            try
+            {
 
-            $search = "SELECT * FROM $this->tableName WHERE idCompany = '$idCompany'";
+                $search = "SELECT * FROM $this->tableName WHERE companyId = '$companyId'";
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($search);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $company = new Company();
+                    $company->setName($row["name"]);
+                    $company->setCuit($row["cuit"]);
+                    $company->setLocation($row["location"]);
+                    $company->setPhoneNumber($row["phoneNumber"]);
+                    $company->setcompanyId($row["companyId"]);
+                }
 
-            $this->connection = Connection::GetInstance();
-            
-            $resultSet = $this->connection->Execute($search);
-            
-            foreach ($resultSet as $row)
-            {                
-                $company = new Company();
-                $company->setName($row["name"]);
-                $company->setCuit($row["cuit"]);
-                $company->setLocation($row["location"]);
-                $company->setPhoneNumber($row["phoneNumber"]);
-                $company->setIdCompany($row["idCompany"]);
-            }
-
-            return $company;
+                return $company;
             }
             catch(Exception $ex)
             {
@@ -113,15 +105,14 @@
             }
         }
 
-        public function update($name, $cuit, $location, $phoneNumber, $idCompany)
+        public function update($name, $cuit, $location, $phoneNumber, $companyId)
         {
             $update = "UPDATE  $this->tableName 
             SET name='$name', cuit='$cuit', location='$location', phoneNumber='$phoneNumber'
-            WHERE idCompany = '$idCompany'";
+            WHERE companyId = '$companyId'";
 
             $this->connection = Connection::GetInstance();
-
-            $resultSet = $this->connection->ExecuteNonQuery($update);
+            $this->connection->ExecuteNonQuery($update);
         }
 
         public function live_search()

@@ -1,59 +1,135 @@
 <?php
     namespace DAO;
 
+    use \Exception as Exception;
     use DAO\IStudentDAO as IStudentDAO;
     use Models\Student as Student;
+    use DAO\Connection as Connection;
 
     class StudentDAO implements IStudentDAO
     {
-        private $studentList = array();
+        private $connection;
+        private $tableName = "students";
 
         public function add(Student $student)
         {
-            $this->retrieveData();
-            $student->setStudentId($this->getNextId());
-            array_push($this->studentList, $student);
-            $this->saveData();
+            try
+            {
+                $query = "INSERT INTO ".$this->tableName." (studentId, careerId, firstName, lastName, dni, fileNumber, gender, birthDate, email, phoneNumber, active) VALUES (:studentId, :careerId, :firstName, :lastName, :dni, :fileNumber, :gender, :birthDate, :email, :phoneNumber, :active);";
+                
+                $parameters["studentId"] = $student->getStudentId();
+                $parameters["careerId"] = $student->getCareerId();
+                $parameters["firstName"] = $student->getFirstName();
+                $parameters["lastName"] = $student->getLastName();
+                $parameters["dni"] = $student->getDni();
+                $parameters["fileNumber"] = $student->getFileNumber();
+                $parameters["gender"] = $student->getGender();
+                $parameters["birthDate"] = $student->getBirthDate();
+                $parameters["email"] = $student->getEmail();
+                $parameters["phoneNumber"] = $student->getPhoneNumber();
+                $parameters["active"] = $student->getActive();
+
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
         }
 
         public function getAll()
         {
-            $this->retrieveData();
-            return $this->studentList;
+            try
+            {
+                $studentList = array();
+                $query = "SELECT * FROM ".$this->tableName;
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($query);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $student = new Student();
+                    $student->setStudentId($row["studentId"]);
+                    $student->setCareerId($row["careerId"]);
+                    $student->setFirstName($row["firstName"]);
+                    $student->setLastName($row["lastName"]);
+                    $student->setDni($row["dni"]);
+                    $student->setFileNumber($row["fileNumber"]);
+                    $student->setGender($row["gender"]);
+                    $student->setBirthDate($row["birthDate"]);
+                    $student->setEmail($row["email"]);
+                    $student->setPhoneNumber($row["phoneNumber"]);
+                    $student->setActive($row["active"]);
+
+                    array_push($studentList, $student);
+                }
+
+                return $studentList;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
         }
 
-        public function update(Student $newStudent)
+        public function update($firstName, $lastName, $dni, $fileNumber, $gender, $birthDate, $email, $phoneNumber, $studentId)
         {
-            $this->retrieveData();
-            $flag = 0;
+            $update = "UPDATE  $this->tableName 
+            SET firstName='$firstName', lastName='$lastName', dni='$dni', fileNumber='$fileNumber', gender='$gender', 
+            birthDate='$birthDate', email='$email', phoneNumber='$phoneNumber'
+            WHERE studentId = '$studentId'";
 
-            foreach($this->studentList as $key => $student)
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->ExecuteNonQuery($update);
+        }
+
+        public function searchStudentById($studentId)
+        {
+            try
             {
-                if($student->getStudentId() == $newStudent->getStudentId())
-                {
-                    $this->studentList[$key] = $newStudent;
-                    $flag = 1;
+
+                $search = "SELECT * FROM $this->tableName WHERE studentId = '$studentId'";
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($search);
+            
+                foreach ($resultSet as $row)
+                {                
+                    $student = new Student();
+                    $student->setStudentId($row["studentId"]);
+                    $student->setCareerId($row["careerId"]);
+                    $student->setFirstName($row["firstName"]);
+                    $student->setLastName($row["lastName"]);
+                    $student->setDni($row["dni"]);
+                    $student->setFileNumber($row["fileNumber"]);
+                    $student->setGender($row["gender"]);
+                    $student->setBirthDate($row["birthDate"]);
+                    $student->setEmail($row["email"]);
+                    $student->setPhoneNumber($row["phoneNumber"]);
                 }
+
+                return $student;
             }
-
-            $this->saveData();
-            return $flag;
-
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
         }
 
         public function remove($studentId)
         {
-            $this->retrieveData();
-
-            foreach($this->studentList as $key => $student)
+            try
             {
-                if($student->getStudentId() == $studentId)
-                {
-                    unset($this->studentList[$key]);
-                }
+                $remove = "DELETE FROM $this->tableName WHERE studentId = '$studentId'"; 
+                $this->connection = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($remove);
             }
-
-            $this->saveData();
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
         }
 
         public function getStudentsFromAPI()
@@ -89,109 +165,6 @@
 
                 $this->add($newStudent);
             }            
-        }
-
-        private function saveData()
-        {
-            $arrayToEncode = array();
-
-            foreach($this->studentList as $student)
-            {
-                $valuesArray["studentId"] = $student->getStudentId();
-                $valuesArray["careerId"] = $student->getCareerId();
-                $valuesArray["firstName"] = $student->getFirstName();
-                $valuesArray["lastName"] = $student->getLastName();
-                $valuesArray["dni"] = $student->getDni();
-                $valuesArray["fileNumber"] = $student->getFileNumber();
-                $valuesArray["gender"] = $student->getGender();
-                $valuesArray["birthDate"] = $student->getBirthDate();
-                $valuesArray["email"] = $student->getEmail();
-                $valuesArray["phoneNumber"] = $student->getPhoneNumber();
-                $valuesArray["active"] = $student->getActive();
-
-                array_push($arrayToEncode, $valuesArray);
-            }
-
-            $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
-            
-            file_put_contents('Data/Students.json', $jsonContent);
-        }
-
-        public function retrieveData()
-        {
-            $this->studentList = array();
-
-            if(file_exists('Data/Students.json'))
-            {
-                $jsonContent = file_get_contents('Data/Students.json');
-
-                $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
-
-                foreach($arrayToDecode as $valuesArray)
-                {
-                    $student = new Student();
-                    $student->setStudentId($valuesArray["studentId"]);
-                    $student->setCareerId($valuesArray["careerId"]);
-                    $student->setFirstName($valuesArray["firstName"]);
-                    $student->setLastName($valuesArray["lastName"]);
-                    $student->setDni($valuesArray["dni"]);
-                    $student->setFileNumber($valuesArray["fileNumber"]);
-                    $student->setGender($valuesArray["gender"]);
-                    $student->setBirthDate($valuesArray["birthDate"]);
-                    $student->setEmail($valuesArray["email"]);
-                    $student->setPhoneNumber($valuesArray["phoneNumber"]);
-                    $student->setActive($valuesArray["active"]);
-
-                    array_push($this->studentList, $student);
-                }
-            }
-        }
-
-        public function getStudentList(){ 
-            $this->retrieveData();
-            return $this->studentList; 
-        }
-
-        private function getNextId()
-        {
-            $id = 0;
-
-            foreach($this->studentList as $student)
-            {
-                $id = ($student->getStudentId() > $id) ? $student->getStudentId() : $id;
-            }
-
-            return $id + 1;
-        }
-
-        public function enableStudent($studentId)
-        {
-            $this->retrieveData();
-
-            foreach($this->studentList as $key => $student)
-            {
-                if($student->getStudentId() == $studentId)
-                {
-                    $this->studentList[$key]->setActive(true);
-                }
-            }
-
-            $this->saveData();                        
-        }
-
-        public function disableStudent($studentId)
-        {
-            $this->retrieveData();
-
-            foreach($this->studentList as $key => $student)
-            {
-                if($student->getStudentId() == $studentId)
-                {
-                    $this->studentList[$key]->setActive(false);
-                }
-            }
-
-            $this->saveData();                        
         }
     }
 ?>
