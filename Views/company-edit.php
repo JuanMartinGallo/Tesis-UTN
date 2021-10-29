@@ -29,7 +29,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="">Numero de Telefono</label>
+                            <label for="">Numero telefonico</label>
                             <input type="text" name="phoneNumber" value="<?php echo $company->getPhoneNumber() ?>" class="form-control" required>
                         </div>
                     </div>

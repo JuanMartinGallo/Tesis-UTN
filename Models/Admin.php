@@ -9,7 +9,7 @@
         private $email;
         private $adminId;
 
-        public function __construct($firstName = NULL, $lastName = NULL, $dni = NULL, $email = NULL, $adminId=NULL)
+        public function __construct($firstName = NULL, $lastName = NULL, $dni = NULL, $email = NULL, $adminId = NULL)
         {
             $this->firstName = $firstName;
             $this->lastName = $lastName;

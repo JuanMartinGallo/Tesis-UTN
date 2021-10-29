@@ -77,7 +77,8 @@
         public function update($firstName, $lastName, $dni, $fileNumber, $gender, $birthDate, $email, $phoneNumber, $studentId)
         {
             $update = "UPDATE  $this->tableName 
-            SET firstName='$firstName', lastName='$lastName', dni='$dni', fileNumber='$fileNumber', gender='$gender', birthDate='$birthDate', email='$email', phoneNumber='$phoneNumber'
+            SET firstName='$firstName', lastName='$lastName', dni='$dni', fileNumber='$fileNumber', gender='$gender', 
+            birthDate='$birthDate', email='$email', phoneNumber='$phoneNumber'
             WHERE studentId = '$studentId'";
 
             $this->connection = Connection::GetInstance();
@@ -123,7 +124,7 @@
             {
                 $remove = "DELETE FROM $this->tableName WHERE studentId = '$studentId'"; 
                 $this->connection = Connection::GetInstance();
-                $resultSet = $this->connection->ExecuteNonQuery($remove);
+                $this->connection->ExecuteNonQuery($remove);
             }
             catch(Exception $ex)
             {

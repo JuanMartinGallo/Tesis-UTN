@@ -40,11 +40,8 @@
             try
             {
                 $companyList = array();
-
                 $query = "SELECT * FROM ".$this->tableName;
-
                 $this->connection = Connection::GetInstance();
-
                 $resultSet = $this->connection->Execute($query);
                 
                 foreach ($resultSet as $row)
@@ -54,9 +51,7 @@
                     $company->setCuit($row["cuit"]);
                     $company->setLocation($row["location"]);
                     $company->setPhoneNumber($row["phoneNumber"]);
-                    $company->setcompanyId($row["companyId"]);
-
-
+                    $company->setCompanyId($row["companyId"]);
 
                     array_push($companyList, $company);
                 }
@@ -73,11 +68,9 @@
         {
             try
             {
-            $remove = "DELETE FROM $this->tableName WHERE companyId = '$companyId'"; 
-            $this->connection = Connection::GetInstance();
-            $resultSet = $this->connection->ExecuteNonQuery($remove);
-
-            //return $resultSet; PARA PREGUNTAR
+                $remove = "DELETE FROM $this->tableName WHERE companyId = '$companyId'"; 
+                $this->connection = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($remove);
             }
             catch(Exception $ex)
             {
@@ -87,23 +80,22 @@
 
         public function search($companyId)
         {
-            try{
+            try
+            {
 
-            $search = "SELECT * FROM $this->tableName WHERE companyId = '$companyId'";
-
-            $this->connection = Connection::GetInstance();
-            
-            $resultSet = $this->connection->Execute($search);
-            
-            foreach ($resultSet as $row)
-            {                
-                $company = new Company();
-                $company->setName($row["name"]);
-                $company->setCuit($row["cuit"]);
-                $company->setLocation($row["location"]);
-                $company->setPhoneNumber($row["phoneNumber"]);
-                $company->setcompanyId($row["companyId"]);
-            }
+                $search = "SELECT * FROM $this->tableName WHERE companyId = '$companyId'";
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($search);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $company = new Company();
+                    $company->setName($row["name"]);
+                    $company->setCuit($row["cuit"]);
+                    $company->setLocation($row["location"]);
+                    $company->setPhoneNumber($row["phoneNumber"]);
+                    $company->setcompanyId($row["companyId"]);
+                }
 
                 return $company;
             }
@@ -120,8 +112,7 @@
             WHERE companyId = '$companyId'";
 
             $this->connection = Connection::GetInstance();
-
-            $resultSet = $this->connection->ExecuteNonQuery($update);
+            $this->connection->ExecuteNonQuery($update);
         }
 
         public function live_search()
