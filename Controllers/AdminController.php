@@ -32,10 +32,10 @@
         }
 
         public function edit ($firstName, $lastName, $dni, $email, $adminId)
-    {
-        $this->adminDAO->update($firstName, $lastName, $dni, $email, $adminId);
-        $this->showListView();
-    }
+        {
+            $this->adminDAO->update($firstName, $lastName, $dni, $email, $adminId);
+            $this->showListView();
+        }
 
         public function add($firstName, $lastName, $dni, $email)
         {

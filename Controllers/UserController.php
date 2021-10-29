@@ -30,7 +30,9 @@
             }
             else
             {
-                require_once(VIEWS_PATH . "login.php");//deberia saltarle un mensaje al usuario erroneo sobre su cuenta que no esta registrada
+                echo '<script language="javascript">alert("Email no Registrado");</script>';
+                require_once(VIEWS_PATH . "login.php");
+
             }
         }
     }

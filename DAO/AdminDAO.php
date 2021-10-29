@@ -24,7 +24,6 @@
                 $parameters["adminId"] = $admin->getAdminId();
 
                 $this->connection = Connection::GetInstance();
-
                 $this->connection->ExecuteNonQuery($query, $parameters);
             }
             catch(Exception $ex)
@@ -38,11 +37,8 @@
             try
             {
                 $adminList = array();
-
                 $query = "SELECT * FROM ".$this->tableName;
-
                 $this->connection = Connection::GetInstance();
-
                 $resultSet = $this->connection->Execute($query);
                 
                 foreach ($resultSet as $row)
@@ -53,8 +49,6 @@
                     $admin->setDni($row["dni"]);
                     $admin->setEmail($row["email"]);
                     $admin->setAdminId($row["adminId"]);
-
-
 
                     array_push($adminList, $admin);
                 }
@@ -71,10 +65,9 @@
         {
             try
             {
-            $remove = "DELETE FROM $this->tableName WHERE adminId = '$adminId'"; 
-            $this->connection = Connection::GetInstance();
-            $this->connection->ExecuteNonQuery($remove);
-
+                $remove = "DELETE FROM $this->tableName WHERE adminId = '$adminId'"; 
+                $this->connection = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($remove);
             }
             catch(Exception $ex)
             {
@@ -84,25 +77,24 @@
 
         public function search($adminId)
         {
-            try{
+            try
+            {
 
-            $search = "SELECT * FROM $this->tableName WHERE adminId = '$adminId'";
+                $search = "SELECT * FROM $this->tableName WHERE adminId = '$adminId'";
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($search);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $admin = new Admin();
+                    $admin->setFirstName($row["firstName"]);
+                    $admin->setLastName($row["lastName"]);
+                    $admin->setDni($row["dni"]);
+                    $admin->setEmail($row["email"]);
+                    $admin->setAdminId($row["adminId"]);
+                }
 
-            $this->connection = Connection::GetInstance();
-            
-            $resultSet = $this->connection->Execute($search);
-            
-            foreach ($resultSet as $row)
-            {                
-                $admin = new Admin();
-                $admin->setFirstName($row["firstName"]);
-                $admin->setLastName($row["lastName"]);
-                $admin->setDni($row["dni"]);
-                $admin->setEmail($row["email"]);
-                $admin->setAdminId($row["adminId"]);
-            }
-
-            return $admin;
+                return $admin;
             }
             catch(Exception $ex)
             {
