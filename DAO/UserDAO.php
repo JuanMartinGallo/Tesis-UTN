@@ -38,10 +38,10 @@
                 $this->careerDAO->getCareersFromAPI();
             }
 
-            /*if(empty($jobPositionList))
-            //{
+            if(empty($jobPositionList))
+            {
                 $this->jobPositionDAO->getJobPositionsFromAPI();
-            }*/
+            }
         
             foreach($studentList as $student)
             {

@@ -48,8 +48,28 @@ INSERT INTO admins (firstName, lastName, dni, email) VALUES ('Martin', 'Gallo', 
 CREATE TABLE careers
 (
     careerId INT NOT NULL AUTO_INCREMENT,
-    description VARCHAR(20) NOT NULL,
+    description VARCHAR(100) NOT NULL,
     active boolean,
 
     CONSTRAINT pk_career_id PRIMARY KEY (careerId)
 );
+
+CREATE TABLE jobPositions
+(
+    jobPositionId INT NOT NULL AUTO_INCREMENT,
+    careerId INT NOT NULL,
+    description VARCHAR(100) NOT NULL,
+
+    CONSTRAINT pk_jobPosition_id PRIMARY KEY (jobPositionId),
+    CONSTRAINT fk_career_id FOREIGN KEY (careerId) REFERENCES careers (careerId)
+);
+
+CREATE TABLE cities
+(
+    zipCode INT NOT NULL,
+    cityName VARCHAR(50) NOT NULL,
+    location VARCHAR(50) NOT NULL,
+
+    CONSTRAINT fk_zip_code PRIMARY KEY (zipCode);
+);
+
