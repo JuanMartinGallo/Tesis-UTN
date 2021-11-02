@@ -2,6 +2,7 @@
     namespace Controllers;
 
     use DAO\UserDAO as UserDAO;
+    use Models\User as User;
 
     class UserController
     {
@@ -15,6 +16,14 @@
         public function showRegisterView()
         {
             require_once(VIEWS_PATH . "register.php");
+        }
+
+        public function add($email, $password){
+            $user = new User;
+            $user->setEmail($email);
+            $user->setPassword($password);
+            $user->setRole('student');
+            $this->userDAO->add($user);
         }
 
         public function login($email)

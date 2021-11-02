@@ -6,15 +6,13 @@
         private $firstName;
         private $lastName;
         private $dni;
-        private $email;
         private $adminId;
 
-        public function __construct($firstName = NULL, $lastName = NULL, $dni = NULL, $email = NULL, $adminId = NULL)
+        public function __construct($firstName = NULL, $lastName = NULL, $dni = NULL, $adminId = NULL)
         {
             $this->firstName = $firstName;
             $this->lastName = $lastName;
             $this->dni = $dni;
-            $this->email = $email;
             $this->adminId = $adminId;
         }
 
@@ -26,9 +24,6 @@
 
         public function getDni(){ return $this->dni; }
         public function setDni($dni): self { $this->dni = $dni; return $this; }
-
-        public function getEmail(){ return $this->email; }
-        public function setEmail($email): self { $this->email = $email; return $this; }
 
         public function getAdminId(){ return $this->adminId; }
         public function setAdminId($adminId): self { $this->adminId = $adminId; return $this; }

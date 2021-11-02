@@ -1,5 +1,8 @@
 <?php
-     session_start();
+
+use Models\Student;
+
+session_start();
      require_once('nav.php');
 ?>
 
@@ -20,7 +23,7 @@
                          <th>Telefono</th>
                     </thead>
                     <tbody>
-                    <?php foreach($studentList as $student) { ?>
+                    <?php foreach($studentList as $student){ ?>
                          <tr>
                               <td><?php echo $student->getFirstName() ?></td>
                               <td><?php echo $student->getLastName() ?></td>

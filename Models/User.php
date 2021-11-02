@@ -5,13 +5,15 @@
     {
         private $role;
         private $password;
-        private $id;
+        private $userId;
+        private $email;
 
-        function __construct($role = NULL, $password = NULL, $id = NULL)
+        function __construct($role = NULL, $password = NULL, $userId = NULL, $email = NULL)
         {
             $this->role = $role;
             $this->password = $password;
-            $this->id = $id;
+            $this->userId = $userId;
+            $this->email = $email;
         }
 
         public function getRole(){ return $this->role; }
@@ -20,7 +22,10 @@
         public function getPassword(){ return $this->password; }
         public function setPassword($password): self { $this->password = $password; return $this; }
 
-        public function getId(){ return $this->id; }
-        public function setId($id): self { $this->id = $id; return $this; }
+        public function getUserId(){ return $this->userId; }
+        public function setUserId($userId): self { $this->userId = $userId; return $this; }
+
+        public function getEmail(){ return $this->email; }
+        public function setEmail($email): self { $this->email = $email; return $this; }
     }
 ?>

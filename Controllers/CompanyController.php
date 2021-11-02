@@ -63,23 +63,6 @@ class CompanyController
         $this->showListView();
     }
 
-    public function action($remove = "", $edit = "", $getData = "")
-    {
-        if ($edit != "")
-        {
-            $this->showEditView($edit);
-        }
-        else if($remove != "")
-        {
-            $this->companyDAO->remove($remove);
-            $this->showListView();
-        }
-        else if($getData != "")
-        {
-            $this->showDataView($getData);
-        }
-    }
-
     public function filterList($companyList, $name, $cuit, $location)
     { 
         if($name)

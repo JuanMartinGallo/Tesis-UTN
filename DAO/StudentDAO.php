@@ -5,6 +5,8 @@
     use DAO\IStudentDAO as IStudentDAO;
     use Models\Student as Student;
     use DAO\Connection as Connection;
+    use DAO\UserDAO as UserDAO;
+    use Models\User as User;
 
     class StudentDAO implements IStudentDAO
     {
@@ -15,9 +17,10 @@
         {
             try
             {
-                $query = "INSERT INTO ".$this->tableName." (studentId, careerId, firstName, lastName, dni, fileNumber, gender, birthDate, email, phoneNumber, active) VALUES (:studentId, :careerId, :firstName, :lastName, :dni, :fileNumber, :gender, :birthDate, :email, :phoneNumber, :active);";
+                $query = "INSERT INTO ".$this->tableName. " (studentId, userId, careerId, firstName, lastName, dni, fileNumber, gender, birthDate, email,phoneNumber, active) VALUES (:studentId, :userId, :careerId, :firstName, :lastName, :dni, :fileNumber, :gender, :birthDate, :email, :phoneNumber, :active);";
                 
                 $parameters["studentId"] = $student->getStudentId();
+                $parameters["userId"] = $this->getNextId();
                 $parameters["careerId"] = $student->getCareerId();
                 $parameters["firstName"] = $student->getFirstName();
                 $parameters["lastName"] = $student->getLastName();
@@ -39,6 +42,19 @@
             }
         }
 
+        private function getNextId()
+        {
+            $id = 0;
+            $userList = $this->getAll();
+
+            foreach($userList as $user)
+            {
+                $id = ($user->getUserId() > $id) ? $user->getUserId() : $id;
+            }
+
+            return $id + 1;
+        }
+
         public function getAll()
         {
             try
@@ -52,6 +68,7 @@
                 {                
                     $student = new Student();
                     $student->setStudentId($row["studentId"]);
+                    $student->setUserId($row["userId"]);
                     $student->setCareerId($row["careerId"]);
                     $student->setFirstName($row["firstName"]);
                     $student->setLastName($row["lastName"]);
@@ -83,14 +100,13 @@
 
             $this->connection = Connection::GetInstance();
 
-            $resultSet = $this->connection->ExecuteNonQuery($update);
+            $this->connection->ExecuteNonQuery($update);
         }
 
         public function searchStudentById($studentId)
         {
             try
             {
-
                 $search = "SELECT * FROM $this->tableName WHERE studentId = '$studentId'";
                 $this->connection = Connection::GetInstance();
                 $resultSet = $this->connection->Execute($search);
@@ -132,7 +148,7 @@
             }
         }
 
-        public function getStudentsFromAPI()
+        public function getStudentsFromAPI($userEmail)
         {
             $ch = curl_init();
 
@@ -150,21 +166,26 @@
 
             foreach($arrayToDecode as $valuesArray)
             {
-                $newStudent = new Student();
-                $newStudent->setStudentId($valuesArray["studentId"]);
-                $newStudent->setCareerId($valuesArray["careerId"]);
-                $newStudent->setFirstName($valuesArray["firstName"]);
-                $newStudent->setLastName($valuesArray["lastName"]);
-                $newStudent->setDni($valuesArray["dni"]);
-                $newStudent->setFileNumber($valuesArray["fileNumber"]);
-                $newStudent->setGender($valuesArray["gender"]);
-                $newStudent->setBirthDate($valuesArray["birthDate"]);
-                $newStudent->setEmail($valuesArray["email"]);
-                $newStudent->setPhoneNumber($valuesArray["phoneNumber"]);
-                $newStudent->setActive($valuesArray["active"]);
+                if($valuesArray["email"] == $userEmail)
+                {
+                    $newStudent = new Student();
+                    $newStudent->setStudentId($valuesArray["studentId"]);
+                    $newStudent->setCareerId($valuesArray["careerId"]);
+                    $newStudent->setFirstName($valuesArray["firstName"]);
+                    $newStudent->setLastName($valuesArray["lastName"]);
+                    $newStudent->setDni($valuesArray["dni"]);
+                    $newStudent->setFileNumber($valuesArray["fileNumber"]);
+                    $newStudent->setGender($valuesArray["gender"]);
+                    $newStudent->setBirthDate($valuesArray["birthDate"]);
+                    $newStudent->setEmail($valuesArray["email"]);
+                    $newStudent->setPhoneNumber($valuesArray["phoneNumber"]);
+                    $newStudent->setActive($valuesArray["active"]);
 
-                $this->add($newStudent);
-            }            
+                    $this->add($newStudent);
+                    return $newStudent;
+                }           
+            }
+            return null;
         }
     }
 ?>
