@@ -82,6 +82,8 @@ CREATE TABLE jobOffers
     salary FLOAT NOT NULL,
     isRemote BOOLEAN DEFAULT 1,
     description VARCHAR(200),
+    startingDate DATE NOT NULL,
+    endingDate DATE NOT NULL,
     active BOOLEAN DEFAULT 1,
 
     CONSTRAINT pk_jobOffers_id PRIMARY KEY (jobOfferId),
