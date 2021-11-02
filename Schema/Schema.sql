@@ -70,6 +70,22 @@ CREATE TABLE cities
     cityName VARCHAR(50) NOT NULL,
     location VARCHAR(50) NOT NULL,
 
-    CONSTRAINT fk_zip_code PRIMARY KEY (zipCode);
+    CONSTRAINT fk_zip_code PRIMARY KEY (zipCode)
+);
+
+CREATE TABLE jobOffers
+(
+    jobOfferId INT NOT NULL AUTO_INCREMENT,
+    jobPosition INT NOT NULL,
+    company INT NOT NULL,
+    city INT NOT NULL,
+    salary FLOAT NOT NULL,
+    isRemote BOOLEAN DEFAULT 1,
+    description VARCHAR(200),
+    active BOOLEAN DEFAULT 1,
+
+    CONSTRAINT pk_jobOffers_id PRIMARY KEY (jobOfferId),
+    CONSTRAINT fk_jobPosition_id FOREIGN KEY (jobPosition) REFERENCES jobPositions (jobPositionId),
+    CONSTRAINT fk_company_id FOREIGN KEY (company) REFERENCES companies (companyId)
 );
 

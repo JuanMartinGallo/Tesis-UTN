@@ -17,13 +17,12 @@
         {
             try
             {
-                $query = "INSERT INTO ".$this->tableName." (name, cuit, location, phoneNumber, companyId) VALUES (:name, :cuit, :location, :phoneNumber, :companyId);";
+                $query = "INSERT INTO ".$this->tableName." (name, cuit, location, phoneNumber) VALUES (:name, :cuit, :location, :phoneNumber);";
                 
                 $parameters["name"] = $company->getName();
                 $parameters["cuit"] = $company->getCuit();
                 $parameters["location"] = $company->getLocation();
                 $parameters["phoneNumber"] = $company->getPhoneNumber();
-                $parameters["companyId"] = $company->getcompanyId()+1;
 
                 $this->connection = Connection::GetInstance();
 
@@ -107,16 +106,19 @@
 
         public function update($name, $cuit, $location, $phoneNumber, $companyId)
         {
-            $update = "UPDATE  $this->tableName 
-            SET name='$name', cuit='$cuit', location='$location', phoneNumber='$phoneNumber'
-            WHERE companyId = '$companyId'";
+            try
+            {
+                $update = "UPDATE  $this->tableName 
+                SET name='$name', cuit='$cuit', location='$location', phoneNumber='$phoneNumber'
+                WHERE companyId = '$companyId'";
+    
+                $this->connection = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($update);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
 
-            $this->connection = Connection::GetInstance();
-            $this->connection->ExecuteNonQuery($update);
-        }
-
-        public function live_search()
-        {
-                
         }
     }
