@@ -49,7 +49,7 @@ CREATE TABLE careers
 (
     careerId INT NOT NULL AUTO_INCREMENT,
     description VARCHAR(100) NOT NULL,
-    active boolean,
+    active boolean DEFAULT 1,
 
     CONSTRAINT pk_career_id PRIMARY KEY (careerId)
 );
@@ -73,3 +73,18 @@ CREATE TABLE cities
     CONSTRAINT fk_zip_code PRIMARY KEY (zipCode);
 );
 
+CREATE TABLE jobOffers
+(
+    jobOfferId INT NOT NULL AUTO_INCREMENT,
+    jobPosition INT NOT NULL,
+    company INT NOT NULL,
+    city INT NOT NULL,
+    salary FLOAT NOT NULL,
+    isRemote BOOLEAN DEFAULT 1,
+    description VARCHAR(200),
+    active BOOLEAN DEFAULT 1,
+
+    CONSTRAINT pk_jobOffers_id PRIMARY KEY (jobOfferId),
+    CONSTRAINT fk_jobPosition_id FOREIGN KEY (jobPosition) REFERENCES jobPositions (jobPositionId),
+    CONSTRAINT fk_company_id FOREIGN KEY (company) REFERENCES companies (companyId)
+);
