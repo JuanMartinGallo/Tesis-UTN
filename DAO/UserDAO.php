@@ -43,15 +43,21 @@
 
                 if($this->dbChecker($user)){
                     $this->connection->ExecuteNonQuery($query, $parameters);
-                    //TODO: deberia saltar un cartel de que el registro fue un exito
+                    echo "<script> if(confirm('El usuario fue registrado con exito'));</script>";
+                    echo "window.location = '../login.php';
+		            </script>";
                 }
                 elseif($this->apiChecker($user)){
                     $this->connection->ExecuteNonQuery($query, $parameters);
-                    //TODO: deberia saltar un cartel de que el registro fue un exito
+                    $studentFromApi= $this->studentDAO->getStudentsFromAPI($user);
+                    $this->studentDAO->add($studentFromApi);
+                    echo "<script> if(confirm('El usuario fue registrado con exito'));</script>";
+                    header("location: ../login.php");
+		            
                 }
                 else{
-                    echo "Error: El usuario ya existe";
-                    //throw new Exception("El usuario que intenta registrar no se encuentra en la API"); preguntar como usar bien el throw
+                    
+                    throw new Exception("El usuario que intenta registrar no se encuentra en la API");
                 }
 
             }
@@ -76,7 +82,7 @@
         }
 
         public function apiChecker(user $user){
-            $studentFromApi= $this->studentDAO->getStudentsFromAPI($user->getEmail());
+            $studentFromApi= $this->studentDAO->getStudentsFromAPI($user);
             if(!empty($studentFromApi)){
                 return true;
             }
@@ -116,11 +122,6 @@
             $careerList = $this->careerDAO->getAll();
             //$jobPositionList = $this->jobPositionDAO->getAll();
 
-            if(empty($studentList))
-            {
-                $this->studentDAO->getStudentsFromAPI(); //TODO: ver como arreglar desde aca
-            }
-
             if(empty($careerList))
             {
                 $this->careerDAO->getCareersFromAPI();
@@ -130,25 +131,21 @@
             {
                 $this->jobPositionDAO->getJobPositionsFromAPI();
             }*/
-        
-            foreach($studentList as $student)
-            {
-                if($student->getEmail() == $email)
-                {
-                $student->setRole("Student");
-                    return $student;
+            if(!empty($studentList)){
+                foreach($studentList as $student){
+                    if($student->getEmail() == $email){
+                        return $student;
+                    }
                 }
             }
             
-            foreach($adminList as $admin)
-            {
-                if($admin->getEmail() == $email)
-                {
-                    $admin->setRole("Admin");
-                    return $admin;
+            if(!empty($adminList)){
+                foreach($adminList as $admin){
+                    if($admin->getEmail() == $email){
+                        return $admin;
+                    }
                 }
             }
-            
             return NULL;
         }
     }

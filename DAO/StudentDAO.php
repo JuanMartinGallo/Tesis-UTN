@@ -5,6 +5,7 @@
     use DAO\IStudentDAO as IStudentDAO;
     use Models\Student as Student;
     use DAO\Connection as Connection;
+    use DAO\IUserDAO as IUserDAO;
     use DAO\UserDAO as UserDAO;
     use Models\User as User;
 
@@ -12,13 +13,19 @@
     {
         private $connection;
         private $tableName = "students";
+        private $userDAO;
+
+        public function __construct()
+        {
+            $this->userDAO = new UserDAO();
+        }
 
         public function add(Student $student)
         {
             try
             {
-                $query = "INSERT INTO ".$this->tableName. " (studentId, userId, careerId, firstName, lastName, dni, fileNumber, gender, birthDate, email,phoneNumber, active) VALUES (:studentId, :userId, :careerId, :firstName, :lastName, :dni, :fileNumber, :gender, :birthDate, :email, :phoneNumber, :active);";
-                
+                $query = "INSERT INTO ".$this->tableName. " (studentId, userId, careerId, firstName, lastName, dni, fileNumber, gender, birthDate, email, phoneNumber, active) VALUES (:studentId, :userId, :careerId, :firstName, :lastName, :dni, :fileNumber, :gender, :birthDate, :email, :phoneNumber, :active);";
+
                 $parameters["studentId"] = $student->getStudentId();
                 $parameters["userId"] = $this->getNextId();
                 $parameters["careerId"] = $student->getCareerId();
@@ -31,9 +38,9 @@
                 $parameters["email"] = $student->getEmail();
                 $parameters["phoneNumber"] = $student->getPhoneNumber();
                 $parameters["active"] = $student->getActive();
-
+                
                 $this->connection = Connection::GetInstance();
-
+                
                 $this->connection->ExecuteNonQuery($query, $parameters);
             }
             catch(Exception $ex)
@@ -45,7 +52,7 @@
         private function getNextId()
         {
             $id = 0;
-            $userList = $this->getAll();
+            $userList = $this->userDAO->GetAll();
 
             foreach($userList as $user)
             {
@@ -148,7 +155,7 @@
             }
         }
 
-        public function getStudentsFromAPI($userEmail)
+        public function getStudentsFromAPI($user)
         {
             $ch = curl_init();
 
@@ -166,10 +173,11 @@
 
             foreach($arrayToDecode as $valuesArray)
             {
-                if($valuesArray["email"] == $userEmail)
+                if($valuesArray["email"] == $user->getEmail())
                 {
                     $newStudent = new Student();
                     $newStudent->setStudentId($valuesArray["studentId"]);
+                    $newStudent->setUserId($user->getUserId());
                     $newStudent->setCareerId($valuesArray["careerId"]);
                     $newStudent->setFirstName($valuesArray["firstName"]);
                     $newStudent->setLastName($valuesArray["lastName"]);
@@ -180,8 +188,8 @@
                     $newStudent->setEmail($valuesArray["email"]);
                     $newStudent->setPhoneNumber($valuesArray["phoneNumber"]);
                     $newStudent->setActive($valuesArray["active"]);
-
-                    $this->add($newStudent);
+                    
+                    //$this->add($newStudent);
                     return $newStudent;
                 }           
             }
