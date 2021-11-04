@@ -11,11 +11,10 @@
         private $fileNumber;
         private $gender;
         private $birthDate;
-        private $email;
         private $phoneNumber;
         private $active;
         
-        function __construct($studentId = NULL, $careerId = NULL, $firstName = NULL, $lastName = NULL, $dni = NULL, $fileNumber = NULL, $gender = NULL, $birthDate = NULL, $email = NULL, $phoneNumber = NULL, $active = NULL)
+        function __construct($studentId = NULL, $careerId = NULL, $firstName = NULL, $lastName = NULL, $dni = NULL, $fileNumber = NULL, $gender = NULL, $birthDate = NULL, $phoneNumber = NULL, $active = NULL)
         {
             $this->studentId = $studentId;
             $this->careerId = $careerId;
@@ -25,7 +24,6 @@
             $this->fileNumber = $fileNumber;
             $this->gender = $gender;
             $this->birthDate = $birthDate;
-            $this->email = $email;
             $this->phoneNumber = $phoneNumber;
             $this->active = $active;
         }
@@ -53,9 +51,6 @@
 
         public function getBirthDate(){ return $this->birthDate; }
         public function setBirthDate($birthDate): self { $this->birthDate = $birthDate; return $this; }
-
-        public function getEmail(){ return $this->email; }
-        public function setEmail($email): self { $this->email = $email; return $this; }
 
         public function getPhoneNumber(){ return $this->phoneNumber; }
         public function setPhoneNumber($phoneNumber): self { $this->phoneNumber = $phoneNumber; return $this; }

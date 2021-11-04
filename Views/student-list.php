@@ -1,5 +1,8 @@
 <?php
-     session_start();
+
+use Models\Student;
+
+session_start();
      require_once('nav.php');
 ?>
 
@@ -7,7 +10,7 @@
      <section id="listado" class="mb-5">
           <div class="container">
                <h2 class="mb-4">Listado de alumnos</h2>
-               <table class="table bg-light-alpha">
+               <table class="table bg-light-alpha">       
                     <thead>
                          <th>Nombre</th>
                          <th>Apellido</th>
@@ -20,14 +23,19 @@
                          <th>Telefono</th>
                     </thead>
                     <tbody>
-                    <?php foreach($studentList as $student) { ?>
+                    <?php foreach($studentList as $student){ ?>
                          <tr>
                               <td><?php echo $student->getFirstName() ?></td>
                               <td><?php echo $student->getLastName() ?></td>
                               <td><?php echo $student->getDni() ?></td>
                               <td><?php echo $student->getFileNumber() ?></td>
                               <td><?php echo $student->getGender() ?></td>
-                              <td><?php echo $student->getCareerId() ?></td>
+                              <td><?php foreach($careerList as $career){
+                                   if($career->getCareerId() == $student->getCareerId()){
+                                        echo $career->getDescription();
+                                   }
+                              }?></td>
+                              </td>
                               <td><?php echo $student->getBirthDate() ?></td>
                               <td><?php echo $student->getEmail() ?></td>
                               <td><?php echo $student->getPhoneNumber() ?></td>

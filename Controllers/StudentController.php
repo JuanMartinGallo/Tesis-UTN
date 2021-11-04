@@ -3,19 +3,22 @@
 
     use DAO\StudentDAO as StudentDAO;
     use Models\Student as Student;
+    use DAO\CareerDAO as CareerDAO;
 
     class StudentController
     {
         private $studentDAO;
+        private $careerDAO;
 
         public function __construct()
         {
             $this->studentDAO = new StudentDAO();
+            $this->careerDAO = new CareerDAO();
         }
 
         public function showListView()
         {
-            
+            $careerList = $this->careerDAO->getAll();
             $studentList = $this->studentDAO->getAll();
 
             require_once(VIEWS_PATH."student-list.php");
