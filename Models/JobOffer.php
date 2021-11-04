@@ -5,22 +5,29 @@
     {
         private $jobOfferId;
         private $jobPosition;
-        private $company;
+        private $careerId;
         private $city;
         private $salary;
         private $isRemote;
         private $description;
+        private $skills;
+        private $startingDate;
+        private $endingDate;
         private $active;
 
-        public function __construct($jobOfferId = NULL, $jobPosition = NULL, $company = NULL, $city = NULL, $salary = NULL, $isRemote = true, $description = NULL, $active = true)
+        public function __construct($jobOfferId = NULL, $jobPosition = NULL, $careerId = NULL, $company = NULL, $city = NULL, $salary = NULL, $isRemote = true, $description = NULL, $skills = NULL, $startingDate = NULL, $endingDate = NULL, $active = true)
         {
             $this->jobOfferId = $jobOfferId;
             $this->jobPosition = $jobPosition;
+            $this->careerId = $careerId;
             $this->company = $company;
             $this->city = $city;
             $this->salary = $salary;
             $this->isRemote = $isRemote;
             $this->description = $description;
+            $this->skills = $skills;
+            $this->startingDate = $startingDate;
+            $this->endingDate = $endingDate;
             $this->active = $active;
         }
 
@@ -29,6 +36,9 @@
 
         public function getJobPosition(){ return $this->jobPosition; }
         public function setJobPosition($jobPosition): self { $this->jobPosition = $jobPosition; return $this; }
+
+        public function getCareerId(){ return $this->careerId; }
+        public function setCareerId($careerId): self { $this->careerId = $careerId; return $this; }
 
         public function getCompany(){ return $this->company; }
         public function setCompany($company): self { $this->company = $company; return $this; }
@@ -44,6 +54,15 @@
 
         public function getDescription(){ return $this->description; }
         public function setDescription($description): self { $this->description = $description; return $this; }
+
+        public function getSkills(){ return $this->skills; }
+        public function setSkills($skills): self { $this->skills = $skills; return $this; }
+
+        public function getStartingDate(){ return $this->startingDate; }
+        public function setStartingDate($startingDate): self { $this->startingDate = $startingDate; return $this; }
+
+        public function getEndingDate(){ return $this->endingDate; }
+        public function setEndingDate($endingDate): self { $this->endingDate = $endingDate; return $this; }
 
         public function getActive(){ return $this->active; }
         public function setActive($active): self { $this->active = $active; return $this; }

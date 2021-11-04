@@ -82,8 +82,7 @@
             WHERE studentId = '$studentId'";
 
             $this->connection = Connection::GetInstance();
-
-            $resultSet = $this->connection->ExecuteNonQuery($update);
+            $this->connection->ExecuteNonQuery($update);
         }
 
         public function searchStudentById($studentId)

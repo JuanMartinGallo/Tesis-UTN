@@ -24,6 +24,12 @@ require_once('header.php');
           <li class="nav-item">
                <a class="nav-link" href="<?php echo FRONT_ROOT ?>Admin/ShowListView">Listar administradores</a>
           </li>
+          <li class="nav-item">
+               <a class="nav-link" href="<?php echo FRONT_ROOT ?>JobOffer/ShowAddView">Agregar postulacion laboral</a>
+          </li>
+          <li class="nav-item">
+               <a class="nav-link" href="<?php echo FRONT_ROOT ?>JobOffer/ShowListView">Listar postulacion</a>
+          </li>
           <?php }
                else 
                { ?>

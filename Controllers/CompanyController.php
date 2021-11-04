@@ -46,7 +46,6 @@ class CompanyController
     public function add($name, $cuit, $location, $phoneNumber)
     {
         $company = new Company();
-        $company->setCompanyId(count($this->companyDAO->getAll())+1);
         $company->setName($name);
         $company->setCuit($cuit);
         $company->setLocation($location);
@@ -61,23 +60,6 @@ class CompanyController
     {
         $this->companyDAO->update($name, $cuit, $location, $phoneNumber, $companyId);
         $this->showListView();
-    }
-
-    public function action($remove = "", $edit = "", $getData = "")
-    {
-        if ($edit != "")
-        {
-            $this->showEditView($edit);
-        }
-        else if($remove != "")
-        {
-            $this->companyDAO->remove($remove);
-            $this->showListView();
-        }
-        else if($getData != "")
-        {
-            $this->showDataView($getData);
-        }
     }
 
     public function filterList($companyList, $name, $cuit, $location)
