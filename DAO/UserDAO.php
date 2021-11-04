@@ -44,15 +44,14 @@
                 if($this->dbChecker($user)){
                     $this->connection->ExecuteNonQuery($query, $parameters);
                     echo "<script> if(confirm('El usuario fue registrado con exito'));</script>";
-                    echo "window.location = '../login.php';
-		            </script>";
+                    echo "window.location = '../login.php';";
                 }
                 elseif($this->apiChecker($user)){
                     $this->connection->ExecuteNonQuery($query, $parameters);
                     $studentFromApi= $this->studentDAO->getStudentsFromAPI($user);
                     $this->studentDAO->add($studentFromApi);
                     echo "<script> if(confirm('El usuario fue registrado con exito'));</script>";
-                    header("location: ../login.php");
+                    echo "window.location = '../login.php';";
 		            
                 }
                 else{

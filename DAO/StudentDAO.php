@@ -11,14 +11,9 @@
 
     class StudentDAO implements IStudentDAO
     {
+
         private $connection;
         private $tableName = "students";
-        private $userDAO;
-
-        public function __construct()
-        {
-            $this->userDAO = new UserDAO();
-        }
 
         public function add(Student $student)
         {
@@ -40,7 +35,6 @@
                 $parameters["active"] = $student->getActive();
                 
                 $this->connection = Connection::GetInstance();
-                
                 $this->connection->ExecuteNonQuery($query, $parameters);
             }
             catch(Exception $ex)
@@ -52,14 +46,15 @@
         private function getNextId()
         {
             $id = 0;
-            $userList = $this->userDAO->GetAll();
+            $userDAO = new UserDAO();
+            $userList = $userDAO->getAll();
 
             foreach($userList as $user)
             {
                 $id = ($user->getUserId() > $id) ? $user->getUserId() : $id;
             }
 
-            return $id + 1;
+            return $id;
         }
 
         public function getAll()
