@@ -1,6 +1,15 @@
 <?php
 session_start();
 require_once('nav.php');
+
+use DAO\JobPositionDAO as JobPositionDAO;
+use DAO\CareerDAO as CareerDAO;
+
+$careerDAO = new CareerDAO();
+$jobPositionDAO = new JobPositionDAO();
+$careerList = $careerDAO->getAll();
+$jobPositionList = $jobPositionDAO->getAll();
+
 ?>
 
 <main class="py-5">
@@ -13,8 +22,8 @@ require_once('nav.php');
                         <div class="form-group">
                             <select name="jobPositionId" id="jobPositionId" class="form-control">
                                 <option value="">Seleccione una posicion laboral</option>
-                                <?php foreach ($jobPositionList as $jobPosition) { ?>
-                                    <option value="<?php echo $jobPosition->getJobPositionId(); ?>"><?php echo $jobPosition->getName(); ?></option>
+                                <?php foreach ($jobPositionList as $jobPosition) { ?>                                    
+                                    <option value="<?php echo $jobPosition->getDescription(); ?>"><?php echo $jobPosition->getDescription(); ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -24,7 +33,7 @@ require_once('nav.php');
                         <select name="careerId" id="careerId" class="form-control">
                                 <option value="">Seleccione una carrera</option>
                                 <?php foreach ($careerList as $career) { ?>
-                                    <option value="<?php echo $career->getCareerId(); ?>"><?php echo $jobPosition->getDescription(); ?></option>
+                                    <option value="<?php echo $career->getDescription(); ?>"><?php echo $career->getDescription(); ?></option>
                                 <?php } ?>
                             </select>
                         </div>
