@@ -35,7 +35,7 @@ INSERT INTO companies (name, cuit, location, phoneNumber) VALUES ('Globant', '30
 CREATE TABLE students
 (
     studentId INT NOT NULL AUTO_INCREMENT,
-    UserId INT,
+    userId INT,
     careerId INT NOT NULL,
     firstName VARCHAR(50) NOT NULL,
     lastName VARCHAR(50) NOT NULL,

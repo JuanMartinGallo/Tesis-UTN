@@ -1,6 +1,7 @@
 <?php
     namespace Controllers;
 
+    use \Exception as Exception;
     use DAO\UserDAO as UserDAO;
     use Models\User as User;
 
@@ -19,11 +20,17 @@
         }
 
         public function add($email, $password){
-            $user = new User;
-            $user->setEmail($email);
-            $user->setPassword($password);
-            $user->setRole('student');
-            $this->userDAO->add($user);
+            //$alert = new Alert();
+            try{
+                $user = new User;
+                $user->setEmail($email);
+                $user->setPassword($password);
+                $user->setRole('student');
+                $this->userDAO->add($user);
+            }
+            catch(Exception $ex){
+                throw $ex;
+            }
         }
 
         public function login($email)
