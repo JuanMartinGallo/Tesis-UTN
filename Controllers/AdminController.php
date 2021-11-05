@@ -37,14 +37,14 @@
             $this->showListView();
         }
 
-        public function add($firstName, $lastName, $dni, $email)
+        public function add($firstName, $lastName, $dni, $email, $password)
         {
             $admin = new Admin();
-            $admin->setfirstName($firstName);
+            $admin->setFirstName($firstName);
             $admin->setLastName($lastName);
             $admin->setDni($dni);
             $admin->setEmail($email);
-            $admin->setAdminId(count($this->adminDAO->getAll())+1);;
+            $admin->setPassword($password);
 
             $this->adminDAO->add($admin);
 

@@ -10,8 +10,7 @@ require_once('header.php');
           <li class="nav-item">
                <a class="nav-link" href="<?php echo FRONT_ROOT ?>Career/ShowListView">Listar carreras</a>
           </li>
-          <?php if($_SESSION['userLogged']->getRole() == "")
-               { ?>
+          <?php if($_SESSION['userLogged']->getRole() == "admin"){ ?>                
           <li class="nav-item">
                <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowListView">Listar alumnos</a>
           </li>
@@ -31,8 +30,7 @@ require_once('header.php');
                <a class="nav-link" href="<?php echo FRONT_ROOT ?>JobOffer/ShowListView">Listar postulacion</a>
           </li>
           <?php }
-               else 
-               { ?>
+               else{ ?>
           <li class="nav-item">
                <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowProfileView">Ver tus datos</a>
           </li>
