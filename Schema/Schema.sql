@@ -2,6 +2,8 @@ CREATE DATABASE TPFinalLab4;
 
 USE TPFinalLab4;
 
+#DROP DATABASE tpfinallab4;
+
 CREATE TABLE cities
 (
     zipCode INT NOT NULL,
@@ -18,6 +20,18 @@ INSERT INTO cities (zipCode, cityName, location) VALUES
 (1878, 'Quilmes', 'Buenos Aires'),
 (1629, 'Pilar', 'Buenos Aires'),
 (1708, 'Moron', 'Buenos Aires');
+
+CREATE TABLE users
+(
+    userId INT NOT NULL AUTO_INCREMENT,
+    role VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    email VARCHAR(30) NOT NULL,
+
+    CONSTRAINT pk_user_id PRIMARY KEY (userId)
+);
+
+#truncate table users;
 
 CREATE TABLE companies
 (
@@ -41,11 +55,13 @@ CREATE TABLE students
     careerId INT NOT NULL,
     firstName VARCHAR(50) NOT NULL,
     lastName VARCHAR(50) NOT NULL,
+    role VARCHAR(50) NOT NULL,
     dni VARCHAR(20) NOT NULL,
     fileNumber VARCHAR(20) NOT NULL,
     gender VARCHAR(20) NOT NULL,
     birthDate date NOT NULL,
     email VARCHAR(30) NOT NULL,
+    password VARCHAR(50) NOT NULL, 
     phoneNumber VARCHAR(20),
     active boolean DEFAULT 1,
 
@@ -53,7 +69,6 @@ CREATE TABLE students
     CONSTRAINT fk_user_id FOREIGN KEY (userId) REFERENCES users(userId) ON DELETE CASCADE
 );
 
-#select * from students;
 #truncate table students;
 
 CREATE TABLE admins
@@ -61,16 +76,15 @@ CREATE TABLE admins
     adminId INT NOT NULL AUTO_INCREMENT,
     firstName VARCHAR(50) NOT NULL,
     lastName VARCHAR(50) NOT NULL,
+    role VARCHAR(50) NOT NULL,
     dni VARCHAR(20) NOT NULL,
     email VARCHAR(30) NOT NULL,
+    password VARCHAR(50) NOT NULL,
 
     CONSTRAINT pk_admin_id PRIMARY KEY (adminId)
 );
 
-INSERT INTO admins (firstName, lastName, dni, email) VALUES 
-('Martin', 'Gallo', '40-568-4785', 'martin833@gmail.com'), 
-('Yani', 'Pontoni', '87-548-4722', 'yani.pontoni@gmail.com'), 
-('Diego', 'Arzondo', '12-148-4757', 'eldiegote2021@gmail.com');
+INSERT INTO admins (firstName, lastName, role, dni, email, password) VALUES ('Martin', 'Gallo', 'admin', '40-568-4785', 'martin833@gmail.com', 'martin'), ('Yani', 'Pontoni', 'admin', '87-548-4722', 'yani.pontoni@gmail.com', 'yani'), ('Diego', 'Arzondo', 'admin', '12-148-4757', 'eldiegote2021@gmail.com', 'diego');
 
 CREATE TABLE careers
 (
