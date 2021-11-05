@@ -32,7 +32,7 @@ CREATE TABLE companies
     CONSTRAINT fk_zip_code FOREIGN KEY (zipCode) REFERENCES cities (zipCode)
 );
 
-INSERT INTO companies (name, cuit, location, phoneNumber) VALUES ('Globant', '30-458778-9', 'Mar del Plata', '223-636-2356'), ('Infosys', '30-666128-9', 'Mar del Plata', '223-636-9999'), ('Toledo', '32-258778-9', 'Mar del Plata', '223-625-2756');
+INSERT INTO companies (zipCode, name, cuit, location, phoneNumber) VALUES (7600, 'Globant', '30-458778-9', 'Mar del Plata', '223-636-2356'), (7600, 'Infosys', '30-666128-9', 'Mar del Plata', '223-636-9999'), (7600, 'Toledo', '32-258778-9', 'Mar del Plata', '223-625-2756');
 
 CREATE TABLE students
 (
@@ -91,11 +91,11 @@ CREATE TABLE jobOffers
     jobOfferId INT NOT NULL AUTO_INCREMENT,
     jobPosition INT NOT NULL,
     careerId INT NOT NULL,
-    city INT NOT NULL,
-    salary FLOAT NOT NULL,
-    isRemote BOOLEAN DEFAULT 1,
-    description VARCHAR(200),
-    skills VARCHAR(100),
+    company VARCHAR(50) NOT NULL,
+    salary FLOAT,
+    isRemote BOOLEAN DEFAULT 0,
+    description VARCHAR(200) NOT NULL,
+    skills VARCHAR(100) NOT NULL,
     startingDate DATE NOT NULL,
     endingDate DATE NOT NULL,
     active BOOLEAN DEFAULT 1,
