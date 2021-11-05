@@ -13,6 +13,8 @@ $careerList = $careerDAO->getAll();
 $jobPositionList = $jobPositionDAO->getAll();
 $companyList = $companyDAO->getAll();
 
+$today = date("Y-m-d");
+
 ?>
 
 <main class="py-5">
@@ -26,7 +28,7 @@ $companyList = $companyDAO->getAll();
                             <select name="jobPosition" id="jobPosition" class="form-control">
                                 <option value="">Seleccione una posicion laboral</option>
                                 <?php foreach ($jobPositionList as $jobPosition) { ?>                                    
-                                    <option value="<?php echo $jobPosition->getDescription(); ?>"><?php echo $jobPosition->getDescription(); ?></option>
+                                    <option value="<?php echo $jobPosition->getJobPositionId(); ?>"><?php echo $jobPosition->getDescription(); ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -36,7 +38,7 @@ $companyList = $companyDAO->getAll();
                         <select name="careerId" id="careerId" class="form-control">
                                 <option value="">Seleccione una carrera</option>
                                 <?php foreach ($careerList as $career) { ?>
-                                    <option value="<?php echo $career->getDescription(); ?>"><?php echo $career->getDescription(); ?></option>
+                                    <option value="<?php echo $career->getCareerId(); ?>"><?php echo $career->getDescription(); ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -60,7 +62,8 @@ $companyList = $companyDAO->getAll();
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="">Acepta trabajo remoto?</label>
-                            <input type="checkbox" name="isRemote" value="1" class="form-control">
+                            <input type="radio" name="isRemote" value="1" class="form-control">Si
+                            <input type="radio" name="isRemote" value="0" class="form-control">No
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -76,19 +79,20 @@ $companyList = $companyDAO->getAll();
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="">Fecha inicial</label>
-                            <input type="date" name="startingDate" value="" class="form-control" required>
+                            <input type="date" name="startingDate" value="<?php echo $today ?>" class="form-control" min=<?php echo $today ?> required>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="">Fecha de caducidad</label>
-                            <input type="date" name="endingDate" value="" class="form-control" required>
+                            <input type="date" name="endingDate" value="" class="form-control" min=<?php echo $today ?> required>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="">Activa</label>
-                            <input type="checkbox" name="active" value="" class="form-control">
+                            <label for="">Activa?</label>
+                            <input type="radio" name="active" value="1" class="form-control">Si
+                            <input type="radio" name="active" value="0" class="form-control">No
                         </div>
                     </div>
                 </div>
