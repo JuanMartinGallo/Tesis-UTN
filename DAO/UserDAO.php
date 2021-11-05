@@ -116,17 +116,17 @@
             }
         }
 
-        public function getByEmail($email)
+        public function getByEmail($email, $password)
         {
             $studentList = $this->studentDAO->getAll();
             $adminList = $this->adminDAO->getAll();
-            $careerList = $this->careerDAO->getAll();
+            //$careerList = $this->careerDAO->getAll();
             //$jobPositionList = $this->jobPositionDAO->getAll();
 
-            if(empty($careerList))
+            /*if(empty($careerList))
             {
                 $this->careerDAO->getCareersFromAPI();
-            }
+            }*/
 
             /*if(empty($jobPositionList))
             {
@@ -135,7 +135,9 @@
             if(!empty($studentList)){
                 foreach($studentList as $student){
                     if($student->getEmail() == $email){
-                        return $student;
+                        if($student->getPassword() == $password){
+                            return $student;
+                        }
                     }
                 }
             }
@@ -143,7 +145,9 @@
             if(!empty($adminList)){
                 foreach($adminList as $admin){
                     if($admin->getEmail() == $email){
-                        return $admin;
+                        if($admin->getPassword() == $password){
+                            return $admin;
+                        }
                     }
                 }
             }

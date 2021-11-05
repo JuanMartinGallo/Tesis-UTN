@@ -25,7 +25,7 @@
                 $user = new User;
                 $user->setEmail($email);
                 $user->setPassword($password);
-                $user->setRole('student');
+                $user->setRole('user');
                 $this->userDAO->add($user);
             }
             catch(Exception $ex){
@@ -33,9 +33,9 @@
             }
         }
 
-        public function login($email)
+        public function login($email, $password)
         {
-            $user = $this->userDAO->GetByEmail($email);
+            $user = $this->userDAO->GetByEmail($email, $password);
 
             if (($user != null)) {
                 session_start();
@@ -46,9 +46,9 @@
             }
             else
             {
-                echo '<script language="javascript">alert("Email no Registrado");</script>';
-                require_once(VIEWS_PATH . "login.php");
-
+                    echo "<script> if(confirm('El Usuario no se encuentra registrado, registrese para iniciar sesion.'));";
+                    echo "window.location = '../Home';
+                   </script>";
             }
         }
     }

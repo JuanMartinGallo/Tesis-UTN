@@ -15,13 +15,13 @@
         {
             try
             {
-                $query = "INSERT INTO ".$this->tableName." (firstName, lastName, dni, email, adminId) VALUES (:firstName, :lastName, :dni, :email, :adminId);";
+                $query = "INSERT INTO ".$this->tableName." (firstName, lastName, dni, email, password) VALUES (:firstName, :lastName, :dni, :email, :password);";
                 
                 $parameters["firstName"] = $admin->getFirstName();
                 $parameters["lastName"] = $admin->getLastName();
                 $parameters["dni"] = $admin->getDni();
                 $parameters["email"] = $admin->getEmail();
-                $parameters["adminId"] = $admin->getAdminId();
+                $parameters["password"] = $admin->getPassword();
 
                 $this->connection = Connection::GetInstance();
                 $this->connection->ExecuteNonQuery($query, $parameters);
@@ -44,11 +44,13 @@
                 foreach ($resultSet as $row)
                 {                
                     $admin = new Admin();
+                    $admin->setAdminId($row["adminId"]);
                     $admin->setFirstName($row["firstName"]);
                     $admin->setLastName($row["lastName"]);
+                    $admin->setRole($row["role"]);
                     $admin->setDni($row["dni"]);
                     $admin->setEmail($row["email"]);
-                    $admin->setAdminId($row["adminId"]);
+                    $admin->setPassword($row["password"]);
 
                     array_push($adminList, $admin);
                 }
