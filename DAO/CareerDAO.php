@@ -42,6 +42,7 @@
                 foreach ($resultSet as $row)
                 {                
                     $career = new Career();
+                    $career->setCareerId($row["careerId"]);
                     $career->setDescription($row["description"]);
                     $career->setActive($row["active"]);
 

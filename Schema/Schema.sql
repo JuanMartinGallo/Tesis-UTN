@@ -93,12 +93,12 @@ CREATE TABLE jobOffers
     careerId INT NOT NULL,
     company VARCHAR(50) NOT NULL,
     salary FLOAT,
-    isRemote BOOLEAN DEFAULT 0,
+    isRemote BOOLEAN,
     description VARCHAR(200) NOT NULL,
     skills VARCHAR(100) NOT NULL,
     startingDate DATE NOT NULL,
     endingDate DATE NOT NULL,
-    active BOOLEAN DEFAULT 1,
+    active BOOLEAN,
 
     CONSTRAINT pk_jobOffers_id PRIMARY KEY (jobOfferId),
     CONSTRAINT fk_jobPosition_id FOREIGN KEY (jobPosition) REFERENCES jobPositions (jobPositionId)
