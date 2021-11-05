@@ -17,12 +17,13 @@
         {
             try
             {
-                $query = "INSERT INTO ".$this->tableName." (name, cuit, location, phoneNumber) VALUES (:name, :cuit, :location, :phoneNumber);";
+                $query = "INSERT INTO ".$this->tableName." (name, cuit, location, phoneNumber,zipCode) VALUES (:name, :cuit, :location, :phoneNumber, :zipCode);";
                 
                 $parameters["name"] = $company->getName();
                 $parameters["cuit"] = $company->getCuit();
                 $parameters["location"] = $company->getLocation();
                 $parameters["phoneNumber"] = $company->getPhoneNumber();
+                $parameters["zipCode"] = $company->getZipCode();
 
                 $this->connection = Connection::GetInstance();
                 $this->connection->ExecuteNonQuery($query, $parameters);
@@ -50,6 +51,7 @@
                     $company->setLocation($row["location"]);
                     $company->setPhoneNumber($row["phoneNumber"]);
                     $company->setCompanyId($row["companyId"]);
+                    $company->setZipCode($row["zipCode"]);
 
                     array_push($companyList, $company);
                 }
@@ -93,6 +95,7 @@
                     $company->setLocation($row["location"]);
                     $company->setPhoneNumber($row["phoneNumber"]);
                     $company->setcompanyId($row["companyId"]);
+                    $company->setZipCode($row["zipCode"]);
                 }
 
                 return $company;
@@ -103,11 +106,11 @@
             }
         }
 
-        public function update($name, $cuit, $location, $phoneNumber, $companyId)
+        public function update($name, $cuit, $location, $phoneNumber, $companyId, $zipCode)
         {
             try
             {
-                $query = "UPDATE $this->tableName SET name = '$name', cuit = '$cuit', location = '$location', phoneNumber = '$phoneNumber' WHERE companyId = '$companyId'";
+                $query = "UPDATE $this->tableName SET name = '$name', cuit = '$cuit', location = '$location', phoneNumber = '$phoneNumber', zipCode = '$zipCode' WHERE companyId = '$companyId'";
                 $this->connection = Connection::GetInstance();
                 $this->connection->ExecuteNonQuery($query);
             }
@@ -116,6 +119,5 @@
                 throw $ex;
             }
         }
-
-        }
     }
+?>

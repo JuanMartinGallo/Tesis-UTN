@@ -33,6 +33,12 @@ require_once('nav.php');
                             <input type="text" name="phoneNumber" value="" class="form-control" required>
                         </div>
                     </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="">Codigo Postal</label>
+                            <input type="text" name="zipCode" value="" class="form-control" required>
+                        </div>
+                    </div>
                 </div>
                 <button type="submit" name="" class="btn btn-dark ml-auto d-block">Agregar</button>
             </form>

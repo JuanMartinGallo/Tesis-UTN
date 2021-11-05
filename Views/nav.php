@@ -10,7 +10,7 @@ require_once('header.php');
           <li class="nav-item">
                <a class="nav-link" href="<?php echo FRONT_ROOT ?>Career/ShowListView">Listar carreras</a>
           </li>
-          <?php if($_SESSION['userLogged']->getRole() == "Admin")
+          <?php if($_SESSION['userLogged']->getRole() == "")
                { ?>
           <li class="nav-item">
                <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowListView">Listar alumnos</a>

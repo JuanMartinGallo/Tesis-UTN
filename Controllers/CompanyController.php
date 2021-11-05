@@ -43,22 +43,23 @@ class CompanyController
         require_once (VIEWS_PATH."company-list.php");
     }
 
-    public function add($name, $cuit, $location, $phoneNumber)
+    public function add($name, $cuit, $location, $phoneNumber, $zipCode)
     {
         $company = new Company();
         $company->setName($name);
         $company->setCuit($cuit);
         $company->setLocation($location);
         $company->setPhoneNumber($phoneNumber);
+        $company->setZipCode($zipCode);
 
         $this->companyDAO->add($company);
 
         $this->showListView();
     }
 
-    public function edit ($name, $cuit, $location, $phoneNumber, $companyId)
+    public function edit ($name, $cuit, $location, $phoneNumber, $companyId, $zipCode)
     {
-        $this->companyDAO->update($name, $cuit, $location, $phoneNumber, $companyId);
+        $this->companyDAO->update($name, $cuit, $location, $phoneNumber, $companyId, $zipCode);
         $this->showListView();
     }
 

@@ -50,7 +50,7 @@ CREATE TABLE students
     active boolean DEFAULT 1,
 
     CONSTRAINT pk_student_id PRIMARY KEY (studentId),
-    CONSTRAINT fk_user_id FOREIGN KEY (UserId) REFERENCES users(userId) ON DELETE CASCADE
+    CONSTRAINT fk_user_id FOREIGN KEY (userId) REFERENCES users(userId) ON DELETE CASCADE
 );
 
 #select * from students;

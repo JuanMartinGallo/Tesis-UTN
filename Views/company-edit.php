@@ -33,6 +33,12 @@
                             <input type="text" name="phoneNumber" value="<?php echo $company->getPhoneNumber() ?>" class="form-control" required>
                         </div>
                     </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="">Codigo Postal</label>
+                            <input type="text" name="zipCode" value="<?php echo $company->getZipCode() ?>" class="form-control" required>
+                        </div>
+                    </div>
                 </div>
                 <button type="submit" name="companyId" value="<?php echo $company->getCompanyId() ?>" class="btn btn-dark ml-auto d-block">Editar</button>
             </form>
