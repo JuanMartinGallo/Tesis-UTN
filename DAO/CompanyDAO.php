@@ -25,7 +25,6 @@
                 $parameters["phoneNumber"] = $company->getPhoneNumber();
 
                 $this->connection = Connection::GetInstance();
-
                 $this->connection->ExecuteNonQuery($query, $parameters);
             }
             catch(Exception $ex)
@@ -108,17 +107,15 @@
         {
             try
             {
-                $update = "UPDATE  $this->tableName 
-                SET name='$name', cuit='$cuit', location='$location', phoneNumber='$phoneNumber'
-                WHERE companyId = '$companyId'";
-    
+                $query = "UPDATE $this->tableName SET name = '$name', cuit = '$cuit', location = '$location', phoneNumber = '$phoneNumber' WHERE companyId = '$companyId'";
                 $this->connection = Connection::GetInstance();
-                $this->connection->ExecuteNonQuery($update);
+                $this->connection->ExecuteNonQuery($query);
             }
             catch(Exception $ex)
             {
                 throw $ex;
             }
+        }
 
         }
     }

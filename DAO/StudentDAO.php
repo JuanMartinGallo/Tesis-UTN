@@ -101,7 +101,6 @@
             WHERE studentId = '$studentId'";
 
             $this->connection = Connection::GetInstance();
-
             $this->connection->ExecuteNonQuery($update);
         }
 
