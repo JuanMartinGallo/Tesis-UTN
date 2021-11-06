@@ -2,6 +2,8 @@
     namespace Controllers;
 
     use DAO\AdminDAO as AdminDAO;
+    use \Exception as Exception;
+    use Models\Alert as Alert;
     use Models\Admin as Admin;
 
     class AdminController
@@ -13,7 +15,7 @@
             $this->adminDAO = new AdminDAO();
         }
 
-        public function showAddView()
+        public function showAddView($alert = NULL)
         {
             require_once(VIEWS_PATH."admin-add.php");
         }
@@ -21,7 +23,6 @@
         public function showListView()
         {
             $adminList = $this->adminDAO->getAll();
-
             require_once(VIEWS_PATH."admin-list.php");
         }
 
@@ -39,16 +40,40 @@
 
         public function add($firstName, $lastName, $dni, $email)
         {
-            $admin = new Admin();
-            $admin->setfirstName($firstName);
-            $admin->setLastName($lastName);
-            $admin->setDni($dni);
-            $admin->setEmail($email);
-            $admin->setAdminId(count($this->adminDAO->getAll())+1);;
+            try
+            {
+                $alert = new Alert();
 
-            $this->adminDAO->add($admin);
+                $admin = new Admin();
+                $admin->setfirstName($firstName);
+                $admin->setLastName($lastName);
+                $admin->setDni($dni);
+                $admin->setEmail($email);
+                $admin->setAdminId(count($this->adminDAO->getAll())+1);
 
-            $this->showListView();
-        }
+                $this->adminDAO->add($admin);
+
+                $alert->setType("success");
+                $alert->setMessage("El administrador ha sido ingresado correctamente.");
+            }
+            catch (Exception $e)
+            {
+                if(str_contains($e->getMessage(), 1062))
+                {
+                    $alert->setType("warning");
+                    $alert->setMessage("El administrador no puede ser agregado debido a una entrada duplicada de email o dni.");
+
+                }
+                else
+                {
+                    $alert->setType("danger");
+                    $alert->setMessage("Error al ingresar el administrador.");
+                }
+            }
+            finally
+            {
+                $this->showAddView($alert);
+            }
+        }            
     }
 ?>

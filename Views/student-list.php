@@ -1,6 +1,11 @@
 <?php
      session_start();
      require_once('nav.php');
+
+     use DAO\CareerDAO as CareerDAO;
+     $careerDAO = new CareerDAO();
+     $careerList = $careerDAO->getAll();
+
 ?>
 
 <main class="py-5">
@@ -27,7 +32,13 @@
                               <td><?php echo $student->getDni() ?></td>
                               <td><?php echo $student->getFileNumber() ?></td>
                               <td><?php echo $student->getGender() ?></td>
-                              <td><?php echo $student->getCareerId() ?></td>
+                              <?php foreach($careerList as $career) 
+                              {
+                                   if($student->getCareerId() == $career->getCareerId())
+                                   {
+                                        echo "<td>".$career->getDescription()."</td>";
+                                   }
+                              } ?>
                               <td><?php echo $student->getBirthDate() ?></td>
                               <td><?php echo $student->getEmail() ?></td>
                               <td><?php echo $student->getPhoneNumber() ?></td>

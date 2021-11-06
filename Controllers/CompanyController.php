@@ -61,30 +61,27 @@
                 $this->companyDAO->add($company);
 
                 $alert->setType("success");
-                $alert->setMessage("La empresa ha sido ingresada correctamente");
+                $alert->setMessage("La empresa ha sido ingresada correctamente.");
             }
             catch(Exception $e)
             {
+                var_dump($e->getMessage());
+
                 if(str_contains($e->getMessage(), 1062))
                 {
                     $alert->setType("warning");
-                    $alert->setMessage("La empresa que intenta agregar ya contiene esos datos");
+                    $alert->setMessage("La empresa que intenta agregar contiene un CUIT ya existente en la base de datos.");
                 }
                 else
                 {
                     $alert->setType("danger");
-                    $alert->setMessage("Error al ingresar la empresa");
+                    $alert->setMessage("Error al ingresar la empresa.");
                 }
             }
             finally
             {
                 $this->showAddView($alert);
             }
-            
-
-            $this->companyDAO->add($company);
-
-            $this->showListView();
         }
 
         public function edit ($name, $cuit, $location, $phoneNumber, $companyId)

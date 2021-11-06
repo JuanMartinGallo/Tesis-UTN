@@ -12,6 +12,7 @@
                          <th>Nombre</th>
                          <th>CUIT</th>
                          <th>Ubicacion</th>
+                         <th>Codigo postal</th>
                          <th>Numero telefonico</th>
                     </thead>
                     <tbody>
@@ -19,6 +20,7 @@
                          <td><?php echo $company->getName() ?></td>
                          <td><?php echo $company->getCuit() ?></td>
                          <td><?php echo $company->getLocation() ?></td>
+                         <td><?php echo $company->getZipCode() ?></td>
                          <td><?php echo $company->getPhoneNumber() ?></td>
                          </tr>
                     </tbody>
