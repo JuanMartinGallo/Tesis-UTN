@@ -43,7 +43,8 @@ CREATE TABLE companies
     phoneNumber VARCHAR(20) NOT NULL,
 
     CONSTRAINT pk_company_id PRIMARY KEY (companyId),
-    CONSTRAINT fk_zip_code FOREIGN KEY (zipCode) REFERENCES cities (zipCode)
+    CONSTRAINT fk_zip_code FOREIGN KEY (zipCode) REFERENCES cities (zipCode),
+    CONSTRAINT unq_company_cuit UNIQUE (cuit)
 );
 
 INSERT INTO companies (zipCode, name, cuit, location, phoneNumber) VALUES (7600, 'Globant', '30-458778-9', 'Mar del Plata', '223-636-2356'), (7600, 'Infosys', '30-666128-9', 'Mar del Plata', '223-636-9999'), (7600, 'Toledo', '32-258778-9', 'Mar del Plata', '223-625-2756');
@@ -66,7 +67,10 @@ CREATE TABLE students
     active boolean DEFAULT 1,
 
     CONSTRAINT pk_student_id PRIMARY KEY (studentId),
-    CONSTRAINT fk_user_id FOREIGN KEY (userId) REFERENCES users(userId) ON DELETE CASCADE
+    CONSTRAINT fk_user_id FOREIGN KEY (userId) REFERENCES users(userId) ON DELETE CASCADE,
+    CONSTRAINT unq_email_student UNIQUE (email),
+    CONSTRAINT unq_dni_student UNIQUE (dni),
+    CONSTRAINT unq_file_number_student UNIQUE (fileNumber)
 );
 
 #truncate table students;
@@ -81,7 +85,9 @@ CREATE TABLE admins
     email VARCHAR(30) NOT NULL,
     password VARCHAR(50) NOT NULL,
 
-    CONSTRAINT pk_admin_id PRIMARY KEY (adminId)
+    CONSTRAINT pk_admin_id PRIMARY KEY (adminId),
+    CONSTRAINT unq_email_admin UNIQUE (email),
+    CONSTRAINT unq_dni_admin UNIQUE (dni)
 );
 
 INSERT INTO admins (firstName, lastName, role, dni, email, password) VALUES ('Martin', 'Gallo', 'admin', '40-568-4785', 'martin833@gmail.com', 'martin'), ('Yani', 'Pontoni', 'admin', '87-548-4722', 'yani.pontoni@gmail.com', 'yani'), ('Diego', 'Arzondo', 'admin', '12-148-4757', 'eldiegote2021@gmail.com', 'diego');

@@ -17,13 +17,13 @@
         {
             try
             {
-                $query = "INSERT INTO ".$this->tableName." (name, cuit, location, phoneNumber,zipCode) VALUES (:name, :cuit, :location, :phoneNumber, :zipCode);";
+                $query = "INSERT INTO ".$this->tableName." (zipCode, name, cuit, location, phoneNumber) VALUES (:zipCode, :name, :cuit, :location, :phoneNumber);";
                 
+                $parameters["zipCode"] = $company->getZipCode();
                 $parameters["name"] = $company->getName();
                 $parameters["cuit"] = $company->getCuit();
                 $parameters["location"] = $company->getLocation();
                 $parameters["phoneNumber"] = $company->getPhoneNumber();
-                $parameters["zipCode"] = $company->getZipCode();
 
                 $this->connection = Connection::GetInstance();
                 $this->connection->ExecuteNonQuery($query, $parameters);
@@ -46,12 +46,12 @@
                 foreach ($resultSet as $row)
                 {                
                     $company = new Company();
+                    $company->setZipCode($row["zipCode"]);
                     $company->setName($row["name"]);
                     $company->setCuit($row["cuit"]);
                     $company->setLocation($row["location"]);
                     $company->setPhoneNumber($row["phoneNumber"]);
                     $company->setCompanyId($row["companyId"]);
-                    $company->setZipCode($row["zipCode"]);
 
                     array_push($companyList, $company);
                 }
@@ -90,12 +90,12 @@
                 foreach ($resultSet as $row)
                 {                
                     $company = new Company();
+                    $company->setZipCode($row["zipCode"]);
                     $company->setName($row["name"]);
                     $company->setCuit($row["cuit"]);
                     $company->setLocation($row["location"]);
                     $company->setPhoneNumber($row["phoneNumber"]);
                     $company->setcompanyId($row["companyId"]);
-                    $company->setZipCode($row["zipCode"]);
                 }
 
                 return $company;
