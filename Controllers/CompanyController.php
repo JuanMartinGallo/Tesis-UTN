@@ -84,9 +84,9 @@
             }
         }
 
-        public function edit ($name, $cuit, $location, $phoneNumber, $companyId)
+        public function edit ($zipCode, $name, $cuit, $location, $phoneNumber, $companyId)
         {
-            $this->companyDAO->update($name, $cuit, $location, $phoneNumber, $companyId);
+            $this->companyDAO->update($zipCode, $name, $cuit, $location, $phoneNumber, $companyId);
             $this->showListView();
         }
 
