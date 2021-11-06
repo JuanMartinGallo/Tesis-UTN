@@ -120,13 +120,13 @@
         {
             $studentList = $this->studentDAO->getAll();
             $adminList = $this->adminDAO->getAll();
-            //$careerList = $this->careerDAO->getAll();
+            $careerList = $this->careerDAO->getAll();
             //$jobPositionList = $this->jobPositionDAO->getAll();
 
-            /*if(empty($careerList))
+            if(empty($careerList))
             {
                 $this->careerDAO->getCareersFromAPI();
-            }*/
+            }
 
             /*if(empty($jobPositionList))
             {
