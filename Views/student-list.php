@@ -4,6 +4,11 @@ use Models\Student;
 
 session_start();
      require_once('nav.php');
+
+     use DAO\CareerDAO as CareerDAO;
+     $careerDAO = new CareerDAO();
+     $careerList = $careerDAO->getAll();
+
 ?>
 
 <main class="py-5">

@@ -1,11 +1,13 @@
-<?php 
+<?php
     namespace Models;
 
-    class Alert {
+    class Alert
+    {
         private $type;
         private $message;
 
-        public function __construct($type = " ", $message = " ") {
+        public function __construct($type = NULL, $message = NULL)
+        {
             $this->type = $type;
             $this->message = $message;
         }
@@ -15,6 +17,5 @@
 
         public function getMessage(){ return $this->message; }
         public function setMessage($message): self { $this->message = $message; return $this; }
-    }    
-
+    }
 ?>
