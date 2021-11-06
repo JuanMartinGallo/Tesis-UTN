@@ -17,8 +17,9 @@
         {
             try
             {
-                $query = "INSERT INTO ".$this->tableName." (name, cuit, location, phoneNumber) VALUES (:name, :cuit, :location, :phoneNumber);";
+                $query = "INSERT INTO ".$this->tableName." (zipCode, name, cuit, location, phoneNumber) VALUES (:zipCode, :name, :cuit, :location, :phoneNumber);";
                 
+                $parameters["zipCode"] = $company->getZipCode();
                 $parameters["name"] = $company->getName();
                 $parameters["cuit"] = $company->getCuit();
                 $parameters["location"] = $company->getLocation();
@@ -45,6 +46,7 @@
                 foreach ($resultSet as $row)
                 {                
                     $company = new Company();
+                    $company->setZipCode($row["zipCode"]);
                     $company->setName($row["name"]);
                     $company->setCuit($row["cuit"]);
                     $company->setLocation($row["location"]);
@@ -88,6 +90,7 @@
                 foreach ($resultSet as $row)
                 {                
                     $company = new Company();
+                    $company->setZipCode($row["zipCode"]);
                     $company->setName($row["name"]);
                     $company->setCuit($row["cuit"]);
                     $company->setLocation($row["location"]);
@@ -115,10 +118,5 @@
             {
                 throw $ex;
             }
-        }
-
-        public function live_search()
-        {
-                
         }
     }

@@ -29,7 +29,8 @@ CREATE TABLE companies
     phoneNumber VARCHAR(20) NOT NULL,
 
     CONSTRAINT pk_company_id PRIMARY KEY (companyId),
-    CONSTRAINT fk_zip_code FOREIGN KEY (zipCode) REFERENCES cities (zipCode)
+    CONSTRAINT fk_zip_code FOREIGN KEY (zipCode) REFERENCES cities (zipCode),
+    CONSTRAINT unq_company_cuit UNIQUE (cuit)
 );
 
 INSERT INTO companies (zipCode, name, cuit, location, phoneNumber) VALUES (7600, 'Globant', '30-458778-9', 'Mar del Plata', '223-636-2356'), (7600, 'Infosys', '30-666128-9', 'Mar del Plata', '223-636-9999'), (7600, 'Toledo', '32-258778-9', 'Mar del Plata', '223-625-2756');
@@ -48,7 +49,10 @@ CREATE TABLE students
     phoneNumber VARCHAR(20),
     active boolean DEFAULT 1,
 
-    CONSTRAINT pk_student_id PRIMARY KEY (studentId)
+    CONSTRAINT pk_student_id PRIMARY KEY (studentId),
+    CONSTRAINT unq_email_student UNIQUE (email),
+    CONSTRAINT unq_dni_student UNIQUE (dni),
+    CONSTRAINT unq_file_number_student UNIQUE (fileNumber)
 );
 
 CREATE TABLE admins
@@ -59,7 +63,9 @@ CREATE TABLE admins
     dni VARCHAR(20) NOT NULL,
     email VARCHAR(30) NOT NULL,
 
-    CONSTRAINT pk_admin_id PRIMARY KEY (adminId)
+    CONSTRAINT pk_admin_id PRIMARY KEY (adminId),
+    CONSTRAINT unq_email_admin UNIQUE (email),
+    CONSTRAINT unq_dni_admin UNIQUE (dni)
 );
 
 INSERT INTO admins (firstName, lastName, dni, email) VALUES 

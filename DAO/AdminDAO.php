@@ -79,7 +79,6 @@
         {
             try
             {
-
                 $search = "SELECT * FROM $this->tableName WHERE adminId = '$adminId'";
                 $this->connection = Connection::GetInstance();
                 $resultSet = $this->connection->Execute($search);
@@ -112,11 +111,5 @@
 
             $resultSet = $this->connection->ExecuteNonQuery($update);
         }
-
-        public function live_search()
-        {
-                
-        }
-        
     }
 ?>
