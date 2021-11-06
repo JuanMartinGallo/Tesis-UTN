@@ -12,6 +12,7 @@
      $jobOfferList = $jobOfferDAO->getAll();
      $jobPositionList = $jobPositionDAO->getAll();
      $careerList = $careerDAO->getAll();
+
      
 ?>
 
@@ -32,7 +33,8 @@
                          <th>Fecha de expiracion</th>
                     </thead>
                     <tbody>
-                         <?php foreach($jobOfferList as $jobOffer) { ?>
+                         <?php foreach($jobOfferList as $jobOffer) { 
+                              if($_SESSION['userLogged']->getRole() == "admin" || $jobOffer->getActive()){?>
                               <tr>
                                    <?php foreach($jobPositionList as $jobPosition) {
                                         if($jobPosition->getJobPositionId() == $jobOffer->getJobPosition()) { ?>
@@ -45,7 +47,7 @@
                                         <?php } ?>
                                    <?php } ?>
                                    <td><?php echo $jobOffer->getCompany() ?></td>
-                                   <td><?php echo $jobOffer->getSalary() ?></td>
+                                   <td><?php echo "$".$jobOffer->getSalary() ?></td>
                                    <td><?php if ($jobOffer->getIsRemote() == 1){
                                              echo "Si";
                                     } else {
@@ -55,8 +57,26 @@
                                    <td><?php echo $jobOffer->getSkills() ?></td>
                                    <td><?php echo $jobOffer->getStartingDate() ?></td>
                                    <td><?php echo $jobOffer->getEndingDate() ?></td>
+                                   <?php if($_SESSION['userLogged']->getRole() == "admin") {?>
+                                   
+                                   <td>
+                                        <form action="<?php echo FRONT_ROOT ?>JobOffer/ShowEditView" method="POST">
+                                             <button type="submit" name='jobOfferId' value=<?php echo $jobOffer->getJobOfferId() ?>  class="btn btn-dark ml-auto d-block">Editar</button>
+                                        </form>
+                                   </td>
+                                   <td>
+                                        <form action="<?php echo FRONT_ROOT ?>JobOffer/delete" method="POST">
+                                             <button type="submit" name='jobOfferId' value=<?php echo $jobOffer->getJobOfferId() ?>  class="btn btn-dark ml-auto d-block">Eliminar</button>
+                                        </form>
+                                   </td>
+                                   <?php } else{?>
+                                   <td>
+                                        <form action="<?php echo FRONT_ROOT ?>JobOffer/delete" method="POST">
+                                             <button type="submit" name='jobOfferId' value=<?php echo $jobOffer->getJobOfferId() ?>  class="btn btn-dark ml-auto d-block">Postularte</button>
+                                        </form>
+                                   </td>
                               </tr>
-                         <?php } ?>
+                         <?php } }}?>
                     </tbody>
                </table>
           </div>

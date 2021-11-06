@@ -55,9 +55,9 @@
             $this->showListView();
         }
 
-        public function edit ($jobPositionId, $jobPosition, $careerId, $company, $salary, $isRemote, $description, $skills, $startingDate, $endingDate, $active)
+        public function edit ($jobPosition, $careerId, $company, $salary, $isRemote, $description, $skills, $startingDate, $endingDate, $active, $jobOfferId)
         {
-            $this->jobOfferDAO->update($jobPositionId, $jobPosition, $careerId, $company, $salary, $isRemote, $description, $skills, $startingDate, $endingDate, $active);
+            $this->jobOfferDAO->update($jobPosition, $careerId, $company, $salary, $isRemote, $description, $skills, $startingDate, $endingDate, $active,$jobOfferId);
             $this->showListView();
         }
 

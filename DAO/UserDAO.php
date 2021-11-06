@@ -9,7 +9,6 @@
     use DAO\AdminDAO as AdminDAO;
     use DAO\CareerDAO as CareerDAO;
     use DAO\JobPositionDAO as JobPositionDAO;
-    use Throwable;	
 
     class UserDAO implements IUserDAO
     {
@@ -120,18 +119,19 @@
         {
             $studentList = $this->studentDAO->getAll();
             $adminList = $this->adminDAO->getAll();
-            //$careerList = $this->careerDAO->getAll();
-            //$jobPositionList = $this->jobPositionDAO->getAll();
+            $careerList = $this->careerDAO->getAll();
+            $jobPositionList = $this->jobPositionDAO->getAll();
 
-            /*if(empty($careerList))
+
+            if(empty($careerList))
             {
                 $this->careerDAO->getCareersFromAPI();
-            }*/
+            }
 
-            /*if(empty($jobPositionList))
+            if(empty($jobPositionList))
             {
                 $this->jobPositionDAO->getJobPositionsFromAPI();
-            }*/
+            }
             if(!empty($studentList)){
                 foreach($studentList as $student){
                     if($student->getEmail() == $email){
