@@ -4,6 +4,7 @@
     use \Exception as Exception;
     use DAO\UserDAO as UserDAO;
     use Models\User as User;
+    use Models\Alert as Alert;
 
     class UserController
     {
@@ -19,36 +20,52 @@
             require_once(VIEWS_PATH . "register.php");
         }
 
-        public function add($email, $password){
-            //$alert = new Alert();
+        public function add($email, $password, $value){
             try{
+                $alert = new Alert();
+
                 $user = new User;
                 $user->setEmail($email);
                 $user->setPassword($password);
                 $user->setRole('user');
-                $this->userDAO->add($user);
+                $this->userDAO->add($user, $value);
+
+                $alert->setType("success");
+                $alert->setMessage("El usuario ha sido ingresado correctamente."); //TODO:como hacer para que se vean estas excepciones
             }
             catch(Exception $ex){
-                throw $ex;
+                 if(str_contains($ex->getMessage(), 1062))
+                {
+                    $alert->setType("warning");
+                    $alert->setMessage("El usuario que intenta registrar ya se encuentra registrado");
+
+                }
+                else
+                {
+                    $alert->setType("danger");
+                    $alert->setMessage("Error al ingresar el usuario.");
+                }
             }
         }
 
-        public function login($email, $password)
-        {
-            $user = $this->userDAO->GetByEmail($email, $password);
+        public function login($email, $password){    
+            try{
+                $Alert= new Alert();
 
-            if (($user != null)) {
-                session_start();
+                $user = $this->userDAO->GetByEmail($email, $password);
 
-                $_SESSION["userLogged"] = $user;
-
-                require_once(VIEWS_PATH . "home.php");
+                if ($user != null) {
+                    session_start();
+                    
+                    $_SESSION["userLogged"] = $user;
+                    
+                    require_once(VIEWS_PATH . "home.php");
+                }
             }
-            else
-            {
-                    echo "<script> if(confirm('El Usuario no se encuentra registrado, registrese para iniciar sesion.'));";
-                    echo "window.location = '../Home';
-                   </script>";
+            catch(Exception $ex){
+                echo $ex->getMessage();
+                $Alert->setType("danger");
+                $Alert->setMessage("El usuario no existe, debe registrarse para poder iniciar sesion.");
             }
         }
     }

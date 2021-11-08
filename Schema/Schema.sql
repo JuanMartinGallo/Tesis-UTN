@@ -36,6 +36,7 @@ CREATE TABLE users
 CREATE TABLE companies
 (
     companyId INT NOT NULL AUTO_INCREMENT,
+    userId INT,
     zipCode INT NOT NULL,
     name VARCHAR(50) NOT NULL,
     cuit VARCHAR(20) NOT NULL,
@@ -44,7 +45,8 @@ CREATE TABLE companies
 
     CONSTRAINT pk_company_id PRIMARY KEY (companyId),
     CONSTRAINT fk_zip_code FOREIGN KEY (zipCode) REFERENCES cities (zipCode),
-    CONSTRAINT unq_company_cuit UNIQUE (cuit)
+    CONSTRAINT unq_company_cuit UNIQUE (cuit),
+    CONSTRAINT fk_id_user FOREIGN KEY (userId) REFERENCES users (userId)
 );
 
 INSERT INTO companies (zipCode, name, cuit, location, phoneNumber) VALUES (7600, 'Globant', '30-458778-9', 'Mar del Plata', '223-636-2356'), (7600, 'Infosys', '30-666128-9', 'Mar del Plata', '223-636-9999'), (7600, 'Toledo', '32-258778-9', 'Mar del Plata', '223-625-2756');
@@ -61,16 +63,15 @@ CREATE TABLE students
     fileNumber VARCHAR(20) NOT NULL,
     gender VARCHAR(20) NOT NULL,
     birthDate date NOT NULL,
-    email VARCHAR(30) NOT NULL,
-    password VARCHAR(50) NOT NULL, 
+    email VARCHAR(30) NOT NULL, 
     phoneNumber VARCHAR(20),
     active boolean DEFAULT 1,
 
-    CONSTRAINT pk_student_id PRIMARY KEY (studentId),
-    CONSTRAINT fk_user_id FOREIGN KEY (userId) REFERENCES users(userId) ON DELETE CASCADE,
     CONSTRAINT unq_email_student UNIQUE (email),
     CONSTRAINT unq_dni_student UNIQUE (dni),
-    CONSTRAINT unq_file_number_student UNIQUE (fileNumber)
+    CONSTRAINT unq_file_number_student UNIQUE (fileNumber),
+    CONSTRAINT pk_student_id PRIMARY KEY (studentId),
+    CONSTRAINT fk_user_id FOREIGN KEY (userId) REFERENCES users(userId) ON DELETE CASCADE
 );
 
 #truncate table students;

@@ -10,30 +10,29 @@ require_once('header.php');
           <li class="nav-item">
                <a class="nav-link" href="<?php echo FRONT_ROOT ?>Career/ShowListView">Listar carreras</a>
           </li>
-          <?php if($_SESSION['userLogged']->getRole() == "admin"){ ?>                
-          <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowListView">Listar alumnos</a>
-          </li>
-          <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Company/ShowAddView">Agregar empresa</a>
-          </li>
-          <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Admin/ShowAddView">Agregar administrador</a>
-          </li>
-          <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Admin/ShowListView">Listar administradores</a>
-          </li>
-          <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT ?>JobOffer/ShowAddView">Agregar postulacion laboral</a>
-          </li>
-          <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT ?>JobOffer/ShowListView">Listar postulacion</a>
-          </li>
-          <?php }
-               else{ ?>
-          <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowProfileView">Ver tus datos</a>
-          </li>
+          <?php if ($_SESSION['userLogged']->getRole() == "admin") { ?>
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowListView">Listar alumnos</a>
+               </li>
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT ?>User/showRegisterView">Agregar usuario</a>
+               </li>
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT ?>Admin/ShowAddView">Agregar administrador</a>
+               </li>
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT ?>Admin/ShowListView">Listar administradores</a>
+               </li>
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT ?>JobOffer/ShowAddView">Agregar postulacion laboral</a>
+               </li>
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT ?>JobOffer/ShowListView">Listar postulacion</a>
+               </li>
+          <?php } else { ?>
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowProfileView">Ver tus datos</a>
+               </li>
           <?php } ?>
           <li class="nav-item">
                <a class="nav-link" href="<?php echo FRONT_ROOT ?>Company/ShowListView">Listar empresas</a>

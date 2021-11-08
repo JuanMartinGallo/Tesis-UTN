@@ -9,13 +9,14 @@
     use DAO\AdminDAO as AdminDAO;
     use DAO\CareerDAO as CareerDAO;
     use DAO\JobPositionDAO as JobPositionDAO;
-    use Throwable;	
+    use DAo\CompanyDAO as CompanyDAO;
 
-    class UserDAO implements IUserDAO
+class UserDAO implements IUserDAO
     {
         private $studentDAO;
         private $adminDAO;
         private $careerDAO;
+        private $companyDAO;
         private $jobPositionDAO;
 
         public function __construct()
@@ -23,13 +24,14 @@
             $this->studentDAO = new StudentDAO();
             $this->adminDAO = new AdminDAO();
             $this->careerDAO = new CareerDAO();
+            $this->companyDAO = new CompanyDAO();
             $this->jobPositionDAO = new JobPositionDAO();
         }
 
         private $connection;
         private $tableName = "users";
 
-        public function add(user $user)
+        public function add(user $user, $value)
         {
             try
             {
@@ -41,26 +43,21 @@
 
                 $this->connection = Connection::GetInstance();
 
-                if($this->dbChecker($user)){
-                    $this->connection->ExecuteNonQuery($query, $parameters);
-                    echo "<script> if(confirm('El Usuario fue registrado con exito.'));";
-                    echo "window.location = '../Home';
-                   </script>";
-                }
-                elseif($this->apiChecker($user)){
-                    $this->connection->ExecuteNonQuery($query, $parameters);
-                    $studentFromApi= $this->studentDAO->getStudentsFromAPI($user);
-                    $this->studentDAO->add($studentFromApi);
-                    echo "<script> if(confirm('El Usuario fue registrado con exito.'));";
-                    echo "window.location = '../Home';
-                    </script>";
-		            
+                if($value == 0){
+                    if($this->dbChecker($user)){
+                        $this->connection->ExecuteNonQuery($query, $parameters);
+                    }
+                     elseif($this->apiChecker($user)){
+                        $this->connection->ExecuteNonQuery($query, $parameters);
+                        $studentFromApi= $this->studentDAO->getStudentsFromAPI($user);
+                        $this->studentDAO->add($studentFromApi);
+                    }
                 }
                 else{
-                    
-                    throw new Exception("El usuario que intenta registrar no se encuentra en la API");
+                    $this->connection->ExecuteNonQuery($query, $parameters);
+                    $alert= null;
+                    require_once (VIEWS_PATH."company-add.php");
                 }
-
             }
             catch(Exception $ex)
             {
@@ -116,42 +113,75 @@
             }
         }
 
+        public function loadingLists(){
+                $careerList = $this->careerDAO->getAll();
+                $jobPositionList = $this->jobPositionDAO->getAll();
+
+                if(empty($careerList))
+                {
+                    $this->careerDAO->getCareersFromAPI();
+                }
+
+                if(empty($jobPositionList))
+                {
+                    $this->jobPositionDAO->getJobPositionsFromAPI();
+                }
+        }
+
         public function getByEmail($email, $password)
         {
-            $studentList = $this->studentDAO->getAll();
-            $adminList = $this->adminDAO->getAll();
-            $careerList = $this->careerDAO->getAll();
-            //$jobPositionList = $this->jobPositionDAO->getAll();
+            try{
+                $userList = $this->getAll();
+                $adminList = $this->adminDAO->getAll();
+                $studentList = $this->studentDAO->getAll();
+                $companyList = $this->companyDAO->getAll();
+                $this->loadingLists();
 
-            if(empty($careerList))
-            {
-                $this->careerDAO->getCareersFromAPI();
-            }
-
-            /*if(empty($jobPositionList))
-            {
-                $this->jobPositionDAO->getJobPositionsFromAPI();
-            }*/
-            if(!empty($studentList)){
-                foreach($studentList as $student){
-                    if($student->getEmail() == $email){
-                        if($student->getPassword() == $password){
-                            return $student;
+                if(!empty($studentList)){
+                    foreach($userList as $user){
+                        if($user->getEmail() == $email && $user->getPassword() == $password){
+                            foreach($studentList as $student){
+                                if($student->getEmail() == $email){
+                                    return $student;
+                                }
+                            }
                         }
                     }
                 }
-            }
-            
-            if(!empty($adminList)){
-                foreach($adminList as $admin){
-                    if($admin->getEmail() == $email){
-                        if($admin->getPassword() == $password){
-                            return $admin;
+
+                if(!empty($companyList)){
+                    foreach($userList as $user){
+                        if($user->getEmail() == $email && $user->getPassword() == $password){
+                            foreach($companyList as $company){
+                                if($company->getEmail() == $email){
+                                    return $company;
+                                }
+                            }
                         }
                     }
                 }
+
+                if(!empty($adminList)){
+                    foreach($adminList as $admin){
+                        if($admin->getEmail() == $email){
+                            if($admin->getPassword() == $password){
+                                return $admin;
+                            }
+                            else{
+                                throw new Exception("Password incorrect");
+                                require_once (VIEWS_PATH."login.php");
+                            }
+                        }
+                    }
+                }
+
+                return null; //TODO: ver como hacer para que tire un error cuando intento logearme con una cuenta no registrada o usa una contraseña incorrecta
             }
-            return NULL;
+
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
         }
     }
 ?>

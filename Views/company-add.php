@@ -44,14 +44,8 @@ require_once('nav.php');
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label for="">Codigo Postal</label>
-                            <input type="text" name="zipCode" value="" class="form-control" required>
-                        </div>
-                    </div>
+                    <button type="submit" name="" class="btn btn-dark ml-auto d-block">Agregar</button>
                 </div>
-                <button type="submit" name="" class="btn btn-dark ml-auto d-block">Agregar</button>
             </form>
         </div>
     </section>

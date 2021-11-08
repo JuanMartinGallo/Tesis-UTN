@@ -62,8 +62,8 @@ $today = date("Y-m-d");
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="">Acepta trabajo remoto?</label>
-                            <input type="radio" name="isRemote" value="1" class="form-control">Si
-                            <input type="radio" name="isRemote" value="0" class="form-control">No
+                            <input type="radio" name="isRemote" value="1" class="form-control" required>Si
+                            <input type="radio" name="isRemote" value="0" class="form-control" required>No
                         </div>
                     </div>
                     <div class="col-md-4">

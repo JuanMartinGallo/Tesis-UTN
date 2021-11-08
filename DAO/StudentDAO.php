@@ -19,7 +19,7 @@
         {
             try
             {
-                $query = "INSERT INTO ".$this->tableName. " (studentId, userId, careerId, firstName, lastName, role, dni, fileNumber, gender, birthDate, email, password, phoneNumber, active) VALUES (:studentId, :userId, :careerId, :firstName, :lastName, :role, :dni, :fileNumber, :gender, :birthDate, :email, :password, :phoneNumber, :active);";
+                $query = "INSERT INTO ".$this->tableName. " (studentId, userId, careerId, firstName, lastName, role, dni, fileNumber, gender, birthDate, email, phoneNumber, active) VALUES (:studentId, :userId, :careerId, :firstName, :lastName, :role, :dni, :fileNumber, :gender, :birthDate, :email, :phoneNumber, :active);";
 
                 $parameters["studentId"] = $student->getStudentId();
                 $parameters["userId"] = $this->getNextId();
@@ -32,7 +32,6 @@
                 $parameters["gender"] = $student->getGender();
                 $parameters["birthDate"] = $student->getBirthDate();
                 $parameters["email"] = $student->getEmail();
-                $parameters["password"] = $student->getPassword();
                 $parameters["phoneNumber"] = $student->getPhoneNumber();
                 $parameters["active"] = $student->getActive();
                 
@@ -81,7 +80,6 @@
                     $student->setGender($row["gender"]);
                     $student->setBirthDate($row["birthDate"]);
                     $student->setEmail($row["email"]);
-                    $student->setPassword($row["password"]);
                     $student->setPhoneNumber($row["phoneNumber"]);
                     $student->setActive($row["active"]);
 

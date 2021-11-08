@@ -17,8 +17,9 @@
         {
             try
             {
-                $query = "INSERT INTO ".$this->tableName." (zipCode, name, cuit, location, phoneNumber) VALUES (:zipCode, :name, :cuit, :location, :phoneNumber);";
+                $query = "INSERT INTO ".$this->tableName." (userId, zipCode, name, cuit, location, phoneNumber) VALUES (:userId, :zipCode, :name, :cuit, :location, :phoneNumber);";
                 
+                $parameters["userId"] = $this->getNextId();
                 $parameters["zipCode"] = $company->getZipCode();
                 $parameters["name"] = $company->getName();
                 $parameters["cuit"] = $company->getCuit();
@@ -32,6 +33,20 @@
             {
                 throw $ex;
             }
+        }
+
+        private function getNextId()
+        {
+            $id = 0;
+            $userDAO = new UserDAO();
+            $userList = $userDAO->getAll();
+
+            foreach($userList as $user)
+            {
+                $id = ($user->getUserId() > $id) ? $user->getUserId() : $id;
+            }
+
+            return $id;
         }
 
         public function getAll()

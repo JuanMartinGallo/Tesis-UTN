@@ -38,7 +38,7 @@
             $this->showListView();
         }
 
-        public function add($firstName, $lastName, $dni, $email, $password)
+         public function add($firstName, $lastName, $dni, $email, $password)
         {
             try
             {
