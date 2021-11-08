@@ -5,8 +5,9 @@
     use \Exception as Exception;
     use Models\Alert as Alert;
     use Models\Admin as Admin;
+    use FPDF\FPDF as FPDF;
 
-    class AdminController
+class AdminController
     {
         private $adminDAO;
 
@@ -74,6 +75,32 @@
             {
                 $this->showAddView($alert);
             }
-        }            
+        }
+        
+        public function generatePDF()
+        {
+            $pdf = new FPDF('P','mm','A4');
+            $pdf->AliasNbPages();
+            $pdf->AddPage();
+            $pdf->SetFont('Arial','',16);
+            $adminList = $this->adminDAO->getAll();
+
+            $pdf->Cell(0,20,('Listado de Administradores'),0,0,'C',0);
+            $pdf->Ln(30);
+            $pdf->Cell(40,10,utf8_decode('Nombre'),1,0,'C',0);
+            $pdf->Cell(40,10,utf8_decode('Apellido'),1,0,'C',0);
+            $pdf->Cell(90,10,utf8_decode('EMail'),1,1,'C',0);
+
+            foreach ($adminList as $admin)
+            {
+                $pdf->Cell(40,10,$admin->getFirstName(),1,0,'C',0);
+                $pdf->Cell(40,10,$admin->getLastName(),1,0,'C',0);
+                $pdf->Cell(90,10,$admin->getEmail(),1,1,'C',0);
+            }
+
+            
+            $pdf->Output();
+
+        }
     }
 ?>
