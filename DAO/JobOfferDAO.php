@@ -38,6 +38,33 @@
             }
         }
 
+        public function addPostulant($studentId, $jobOfferId)
+        {
+            if($jobOfferId == null)
+            {
+                echo "Error: Job Offer Id is null";
+            }
+            else
+            {
+                echo $jobOfferId;
+            }
+
+            try
+            {
+                $query = "INSERT INTO students_x_jobOffers (studentId, jobOfferId) VALUES (:studentId, :jobOfferId);";
+                
+                $parameters["studentId"] = $studentId;
+                $parameters["jobOfferId"] = $jobOfferId;
+
+                $this->connection = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
         public function getAll()
         {
             try

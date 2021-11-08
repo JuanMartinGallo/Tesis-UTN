@@ -76,8 +76,9 @@
                                    </td>
                                    <?php } else { ?>
                                    <td>
-                                        <form action="<?php echo FRONT_ROOT ?>JobOffer/PostulateView" method="POST">
-                                        <button type="submit" name='studentId' value=<?php echo $_SESSION['userLogged']->getStudentId() ?> class="btn btn-dark ml-auto d-block">Postularse</button>
+                                        <form action="<?php echo FRONT_ROOT ?>JobOffer/AddPostulant" method="POST">
+                                             <input type="hidden" name="jobOfferId" value=<?php $jobOffer->getJobOfferId() ?>> 
+                                             <button type="submit" name='studentId' value=<?php echo $_SESSION['userLogged']->getStudentId() ?> class="btn btn-dark ml-auto d-block">Postularse</button>
                                         </form>
                                    </td>
                                    </tr>

@@ -37,6 +37,12 @@
             require_once (VIEWS_PATH."jobOffer-data.php");
         }
 
+        public function addPostulant($studentId, $jobOfferId)
+        {
+            $this->jobOfferDAO->addPostulant($studentId, $jobOfferId);
+            require_once (VIEWS_PATH."jobOffer-postulate.php");
+        }
+
         public function add($jobPosition, $careerId, $company, $salary, $isRemote, $description, $skills, $startingDate, $endingDate, $active)
         {
             $jobOffer = new JobOffer();

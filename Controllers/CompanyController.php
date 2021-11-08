@@ -65,8 +65,6 @@
             }
             catch(Exception $e)
             {
-                var_dump($e->getMessage());
-
                 if(str_contains($e->getMessage(), 1062))
                 {
                     $alert->setType("warning");
