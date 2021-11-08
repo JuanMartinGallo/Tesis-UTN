@@ -120,13 +120,13 @@
             }
         }
 
-        public function update($jobPositionId, $jobPosition, $careerId, $company, $salary, $isRemote, $description, $skills, $startingDate, $endingDate, $active)
+        public function update($jobPosition, $careerId, $company, $salary, $isRemote, $description, $skills, $startingDate, $endingDate, $active, $jobOfferId)
         {
             try
             {
                 $update = "UPDATE $this->tableName SET jobPosition = '$jobPosition', careerId = '$careerId', company = '$company', salary = '$salary', 
                 isRemote = '$isRemote', description = '$description', skills = '$skills', startingDate = '$startingDate', 
-                endingDate = '$endingDate', active = '$active' WHERE jobOfferId = '$jobPositionId'";
+                endingDate = '$endingDate', active = '$active' WHERE jobOfferId = '$jobOfferId'";
                 $this->connection = Connection::GetInstance();
                 $this->connection->ExecuteNonQuery($update);
             }
