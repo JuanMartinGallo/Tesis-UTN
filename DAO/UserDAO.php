@@ -9,7 +9,7 @@
     use DAO\AdminDAO as AdminDAO;
     use DAO\CareerDAO as CareerDAO;
     use DAO\JobPositionDAO as JobPositionDAO;
-    use DAo\CompanyDAO as CompanyDAO;
+    use DAO\CompanyDAO as CompanyDAO;
 
 class UserDAO implements IUserDAO
     {
