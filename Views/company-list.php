@@ -29,7 +29,7 @@
                                              <button type="submit" name='companyId' value=<?php echo $company->getCompanyId() ?> class="btn btn-dark ml-auto d-block">Ver Perfil</button>
                                         </form>
                                    </td>
-                                   <?php if ($_SESSION['userLogged']->getRole() == "")
+                                   <?php if ($_SESSION['userLogged']->getRole() == "Admin")
                                         { ?>
                                    <td>
                                         <form action="<?php echo FRONT_ROOT ?>Company/ShowEditView" method="POST">

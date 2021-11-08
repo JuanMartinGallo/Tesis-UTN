@@ -48,7 +48,7 @@ $today = date("Y-m-d");
                         <select name="company" id="company" class="form-control">
                                 <option value="">Seleccione una compañia</option>
                                 <?php foreach ($companyList as $company) { ?>
-                                    <option value="<?php echo $company->getName(); ?>"><?php echo $company->getName(); ?></option>
+                                    <option value="<?php echo $company->getCompanyId(); ?>"><?php echo $company->getName(); ?></option>
                                 <?php } ?>
                             </select>
                         </div>
