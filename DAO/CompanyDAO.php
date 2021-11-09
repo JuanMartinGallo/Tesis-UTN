@@ -61,12 +61,13 @@
                 foreach ($resultSet as $row)
                 {                
                     $company = new Company();
+                    $company->setCompanyId($row["companyId"]);
+                    $company->setUserId($row["userId"]);
                     $company->setZipCode($row["zipCode"]);
                     $company->setName($row["name"]);
                     $company->setCuit($row["cuit"]);
                     $company->setLocation($row["location"]);
                     $company->setPhoneNumber($row["phoneNumber"]);
-                    $company->setCompanyId($row["companyId"]);
 
                     array_push($companyList, $company);
                 }

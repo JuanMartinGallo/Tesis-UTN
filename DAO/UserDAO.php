@@ -136,7 +136,7 @@ class UserDAO implements IUserDAO
                 $studentList = $this->studentDAO->getAll();
                 $companyList = $this->companyDAO->getAll();
                 $this->loadingLists();
-
+                
                 if(!empty($studentList)){
                     foreach($userList as $user){
                         if($user->getEmail() == $email && $user->getPassword() == $password){
@@ -148,10 +148,11 @@ class UserDAO implements IUserDAO
                         }
                     }
                 }
-
+                
                 if(!empty($companyList)){
                     foreach($userList as $user){
                         if($user->getEmail() == $email && $user->getPassword() == $password){
+                           var_dump($user);
                             foreach($companyList as $company){
                                 if($company->getEmail() == $email){
                                     return $company;
@@ -160,7 +161,7 @@ class UserDAO implements IUserDAO
                         }
                     }
                 }
-
+                
                 if(!empty($adminList)){
                     foreach($adminList as $admin){
                         if($admin->getEmail() == $email){

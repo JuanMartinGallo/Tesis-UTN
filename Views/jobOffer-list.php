@@ -77,7 +77,7 @@
                                    <?php } else { ?>
                                    <td>
                                         <form action="<?php echo FRONT_ROOT ?>JobOffer/AddPostulant" method="POST">
-                                             <input type="hidden" name="jobOfferId" value=<?php $jobOffer->getJobOfferId() ?>> 
+                                             <input type="hidden" name="jobOfferId" value=<?php echo $jobOffer->getJobOfferId() ?>> \\TODO: ver que hacer ahora que funciona la tabla de yani
                                              <button type="submit" name='studentId' value=<?php echo $_SESSION['userLogged']->getStudentId() ?> class="btn btn-dark ml-auto d-block">Postularse</button>
                                         </form>
                                    </td>

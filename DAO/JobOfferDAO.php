@@ -40,15 +40,6 @@
 
         public function addPostulant($studentId, $jobOfferId)
         {
-            if($jobOfferId == null)
-            {
-                echo "Error: Job Offer Id is null";
-            }
-            else
-            {
-                echo $jobOfferId;
-            }
-
             try
             {
                 $query = "INSERT INTO students_x_jobOffers (studentId, jobOfferId) VALUES (:studentId, :jobOfferId);";

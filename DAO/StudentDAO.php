@@ -75,6 +75,7 @@
                     $student->setCareerId($row["careerId"]);
                     $student->setFirstName($row["firstName"]);
                     $student->setLastName($row["lastName"]);
+                    $student->setRole($row["role"]);
                     $student->setDni($row["dni"]);
                     $student->setFileNumber($row["fileNumber"]);
                     $student->setGender($row["gender"]);
