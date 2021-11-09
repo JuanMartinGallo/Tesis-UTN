@@ -5,13 +5,16 @@ require_once('nav.php');
 
 use DAO\JobPositionDAO as JobPositionDAO;
 use DAO\CareerDAO as CareerDAO;
+use DAO\CompanyDAO as CompanyDAO;
 
 
 $jobPositionDAO = new JobPositionDAO();
 $careerDAO = new CareerDAO();
+$companyDAO = new CompanyDAO();
 
 $jobPositionList = $jobPositionDAO->getAll();
 $careerList = $careerDAO->getAll();
+$companyList = $companyDAO->getAll();
 
 ?>
 
