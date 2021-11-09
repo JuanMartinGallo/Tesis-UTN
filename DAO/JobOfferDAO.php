@@ -153,5 +153,20 @@
                 throw $ex;
             }
         }
+
+        public function disableJobOffer($jobOfferId,$active)
+        {
+            try
+            {
+                $disable =  "UPDATE $this->tableName SET active = '$active'  WHERE jobOfferId = '$jobOfferId'";
+                $this->connection = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($disable);
+            }
+            
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
     }
 ?>

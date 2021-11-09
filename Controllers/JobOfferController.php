@@ -96,6 +96,12 @@
                 }
             $this->showListView($filterList);
         }
+
+        public function disableJobOffer($jobOfferId,$active)
+        {
+            $this->jobOfferDAO->disableJobOffer($jobOfferId,$active);
+            $this->showListView();
+        }
     }?>
 
      
