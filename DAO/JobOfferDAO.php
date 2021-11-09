@@ -15,12 +15,12 @@
         {
             try
             {
-                $query = "INSERT INTO ".$this->tableName." (jobPosition, careerId, company, salary, isRemote, description, skills, startingDate, endingDate, active) VALUES 
-                (:jobPosition, :careerId, :company, :salary, :isRemote, :description, :skills, :startingDate, :endingDate, :active);";
-                
+                $query = "INSERT INTO ".$this->tableName." (jobPosition, careerId, companyId, salary, isRemote, description, skills, startingDate, endingDate, active) VALUES 
+                (:jobPosition, :careerId, :companyId, :salary, :isRemote, :description, :skills, :startingDate, :endingDate, :active);";
+
                 $parameters["jobPosition"] = $jobOffer->getJobPosition();
                 $parameters["careerId"] = $jobOffer->getCareerId();
-                $parameters["company"] = $jobOffer->getCompany();
+                $parameters["companyId"] = $jobOffer->getCompanyId();
                 $parameters["salary"] = $jobOffer->getSalary();
                 $parameters["isRemote"] = $jobOffer->getIsRemote();
                 $parameters["description"] = $jobOffer->getDescription();
@@ -28,7 +28,7 @@
                 $parameters["startingDate"] = $jobOffer->getStartingDate();
                 $parameters["endingDate"] = $jobOffer->getEndingDate();
                 $parameters["active"] = $jobOffer->getActive();
-
+          
                 $this->connection = Connection::GetInstance();
                 $this->connection->ExecuteNonQuery($query, $parameters);
             }
@@ -71,7 +71,7 @@
                     $jobOffer->setJobOfferId($row["jobOfferId"]);
                     $jobOffer->setJobPosition($row["jobPosition"]);
                     $jobOffer->setCareerId($row["careerId"]);
-                    $jobOffer->setCompany($row["company"]);
+                    $jobOffer->setCompanyId($row["companyId"]);
                     $jobOffer->setSalary($row["salary"]);
                     $jobOffer->setIsRemote($row["isRemote"]);
                     $jobOffer->setDescription($row["description"]);
@@ -120,7 +120,7 @@
                     $jobOffer->setJobOfferId($row["jobOfferId"]);
                     $jobOffer->setJobPosition($row["jobPosition"]);
                     $jobOffer->setCareerId($row["careerId"]);
-                    $jobOffer->setCompany($row["company"]);
+                    $jobOffer->setCompanyId($row["companyId"]);
                     $jobOffer->setSalary($row["salary"]);
                     $jobOffer->setIsRemote($row["isRemote"]);
                     $jobOffer->setDescription($row["description"]);
@@ -138,11 +138,11 @@
             }
         }
 
-        public function update($jobPosition, $careerId, $company, $salary, $isRemote, $description, $skills, $startingDate, $endingDate, $active, $jobOfferId)
+        public function update($jobPosition, $careerId, $companyId, $salary, $isRemote, $description, $skills, $startingDate, $endingDate, $active, $jobOfferId)
         {
             try
             {
-                $update = "UPDATE $this->tableName SET jobPosition = '$jobPosition', careerId = '$careerId', company = '$company', salary = '$salary', 
+                $update = "UPDATE $this->tableName SET jobPosition = '$jobPosition', careerId = '$careerId', companyId = '$companyId', salary = '$salary', 
                 isRemote = '$isRemote', description = '$description', skills = '$skills', startingDate = '$startingDate', 
                 endingDate = '$endingDate', active = '$active' WHERE jobOfferId = '$jobOfferId'";
                 $this->connection = Connection::GetInstance();

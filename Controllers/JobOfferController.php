@@ -43,12 +43,12 @@
             require_once (VIEWS_PATH."jobOffer-postulate.php");
         }
 
-        public function add($jobPosition, $careerId, $company, $salary, $isRemote, $description, $skills, $startingDate, $endingDate, $active)
+        public function add($jobPosition, $careerId, $companyId, $salary, $isRemote, $description, $skills, $startingDate, $endingDate, $active)
         {
             $jobOffer = new JobOffer();
             $jobOffer->setJobPosition($jobPosition);
             $jobOffer->setCareerId($careerId);
-            $jobOffer->setCompany($company);
+            $jobOffer->setCompanyId($companyId);
             $jobOffer->setSalary($salary);
             $jobOffer->setIsRemote($isRemote);
             $jobOffer->setDescription($description);
@@ -61,9 +61,9 @@
             $this->showListView();
         }
 
-        public function edit ($jobPosition, $careerId, $company, $salary, $isRemote, $description, $skills, $startingDate, $endingDate, $active, $jobOfferId)
+        public function edit ($jobPosition, $careerId, $companyId, $salary, $isRemote, $description, $skills, $startingDate, $endingDate, $active, $jobOfferId)
         {
-            $this->jobOfferDAO->update($jobPosition, $careerId, $company, $salary, $isRemote, $description, $skills, $startingDate, $endingDate, $active, $jobOfferId);
+            $this->jobOfferDAO->update($jobPosition, $careerId, $companyId, $salary, $isRemote, $description, $skills, $startingDate, $endingDate, $active, $jobOfferId);
             $this->showListView();
         }
 

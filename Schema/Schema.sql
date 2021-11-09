@@ -31,7 +31,26 @@ CREATE TABLE users
     CONSTRAINT pk_user_id PRIMARY KEY (userId)
 );
 
+INSERT INTO users (userId, role, password, email) VALUES ('1', 'company', 'coca', 'cocacola@gmail.com'), ('2', 'company', 'globo', 'globant@gmail.com');
+
 #truncate table users;
+
+CREATE TABLE admins
+(
+    adminId INT NOT NULL AUTO_INCREMENT,
+    firstName VARCHAR(50) NOT NULL,
+    lastName VARCHAR(50) NOT NULL,
+    role VARCHAR(50) NOT NULL,
+    dni VARCHAR(20) NOT NULL,
+    email VARCHAR(30) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+
+    CONSTRAINT pk_admin_id PRIMARY KEY (adminId),
+    CONSTRAINT unq_email_admin UNIQUE (email),
+    CONSTRAINT unq_dni_admin UNIQUE (dni)
+);
+
+INSERT INTO admins (firstName, lastName, role, dni, email, password) VALUES ('Martin', 'Gallo', 'admin', '40-568-4785', 'martin833@gmail.com', 'martin'), ('Yani', 'Pontoni', 'admin', '87-548-4722', 'yani.pontoni@gmail.com', 'yani'), ('Diego', 'Arzondo', 'admin', '12-148-4757', 'eldiegote2021@gmail.com', 'diego');
 
 CREATE TABLE companies
 (
@@ -49,6 +68,14 @@ CREATE TABLE companies
     CONSTRAINT unq_company_cuit UNIQUE (cuit),
     CONSTRAINT fk_id_user FOREIGN KEY (userId) REFERENCES users (userId)
 );
+
+INSERT INTO companies (userId, zipCode, name, role, cuit, location, phoneNumber) VALUES 
+(1, 2000, 'Coca Cola', 'company', '20-12345678-9', 'Rosario', '15-12345678'),
+(2, 4000, 'Globant', 'company', '20-54677657-9', 'San Miguel de Tucuman', '15-2138675');
+#(3, 7650, 'Pepsico', 'company', '20-879879789-9', 'Mar del Plata', '15-4682245'),
+#(4, 1878, 'Google', 'company', '20-12546457-9', 'Quilmes', '15-583236745'),
+#(5, 1629, 'Mac Donald', 'company', '20-2784425-9', 'Pilar', '15-7186786'),
+#(6, 1708, 'Pepsi', 'company', '20-4789203445-9', 'Moron', '15-26767876'); 
 
 CREATE TABLE students
 (
@@ -75,23 +102,6 @@ CREATE TABLE students
 
 #truncate table students;
 
-CREATE TABLE admins
-(
-    adminId INT NOT NULL AUTO_INCREMENT,
-    firstName VARCHAR(50) NOT NULL,
-    lastName VARCHAR(50) NOT NULL,
-    role VARCHAR(50) NOT NULL,
-    dni VARCHAR(20) NOT NULL,
-    email VARCHAR(30) NOT NULL,
-    password VARCHAR(50) NOT NULL,
-
-    CONSTRAINT pk_admin_id PRIMARY KEY (adminId),
-    CONSTRAINT unq_email_admin UNIQUE (email),
-    CONSTRAINT unq_dni_admin UNIQUE (dni)
-);
-
-INSERT INTO admins (firstName, lastName, role, dni, email, password) VALUES ('Martin', 'Gallo', 'admin', '40-568-4785', 'martin833@gmail.com', 'martin'), ('Yani', 'Pontoni', 'admin', '87-548-4722', 'yani.pontoni@gmail.com', 'yani'), ('Diego', 'Arzondo', 'admin', '12-148-4757', 'eldiegote2021@gmail.com', 'diego');
-
 CREATE TABLE careers
 (
     careerId INT NOT NULL AUTO_INCREMENT,
@@ -116,7 +126,7 @@ CREATE TABLE jobOffers
     jobOfferId INT NOT NULL AUTO_INCREMENT,
     jobPosition INT NOT NULL,
     careerId INT NOT NULL,
-    company INT NOT NULL,
+    companyId INT NOT NULL,
     salary FLOAT,
     isRemote BOOLEAN,
     description VARCHAR(200) NOT NULL,
@@ -127,7 +137,7 @@ CREATE TABLE jobOffers
 
     CONSTRAINT pk_jobOffers_id PRIMARY KEY (jobOfferId),
     CONSTRAINT fk_jobPosition_id FOREIGN KEY (jobPosition) REFERENCES jobPositions (jobPositionId) ON DELETE CASCADE,
-    CONSTRAINT fk_jobOffer_company_id FOREIGN KEY (company) REFERENCES companies (companyId)
+    CONSTRAINT fk_jobOffer_company_id FOREIGN KEY (companyId) REFERENCES companies (companyId)
 );
 
 CREATE TABLE students_x_jobOffers
