@@ -1,6 +1,6 @@
-<?php 
-     session_start();
-     require_once('nav.php');
+<?php
+session_start();
+require_once('nav.php');
 ?>
 
 <main class="py-5">
@@ -15,21 +15,27 @@
                          <th>Email</th>
                     </thead>
                     <tbody>
-                    <?php foreach($adminList as $admin) { ?>
-                         <tr>
-                              <td><?php echo $admin->getFirstName() ?></td>
-                              <td><?php echo $admin->getLastName() ?></td>
-                              <td><?php echo $admin->getDni() ?></td>
-                              <td><?php echo $admin->getEmail() ?></td>
-                              <td>
+                         <?php foreach ($adminList as $admin) { ?>
+                              <tr>
+                                   <td><?php echo $admin->getFirstName() ?></td>
+                                   <td><?php echo $admin->getLastName() ?></td>
+                                   <td><?php echo $admin->getDni() ?></td>
+                                   <td><?php echo $admin->getEmail() ?></td>
+                                   <td>
                                         <form action="<?php echo FRONT_ROOT ?>Admin/ShowEditView" method="POST">
                                              <button type="submit" name='adminId' value=<?php echo $admin->getAdminId() ?> class="btn btn-dark ml-auto d-block">Editar</button>
                                         </form>
                                    </td>
-                         </tr>
+                              </tr>
                          <?php } ?>
                     </tbody>
                </table>
+               <td>
+                    <form action="<?php echo FRONT_ROOT ?>Admin/generatePDF" method="POST">
+                         <button type="submit" name='' value="OK" class="btn btn-dark ml-auto d-block" onclick="this.form.action='<?php echo FRONT_ROOT ?>Admin/generatePDF'" formtarget="_blank">GENERAR PDF</button>
+                    </form>
+               </td>
           </div>
+
      </section>
 </main>
