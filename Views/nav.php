@@ -32,6 +32,9 @@ require_once('header.php');
                <li class="nav-item">
                     <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowProfileView">Ver tus datos</a>
                </li>
+               <li class="nav-item">
+               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Home/Logout">Mis Postulaciones</a>
+          </li>
           <?php } ?>
           <li class="nav-item">
                <a class="nav-link" href="<?php echo FRONT_ROOT ?>Company/ShowListView">Listar empresas</a>
