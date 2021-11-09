@@ -36,6 +36,7 @@ CREATE TABLE users
 CREATE TABLE companies
 (
     companyId INT NOT NULL AUTO_INCREMENT,
+    userId INT,
     zipCode INT NOT NULL,
     name VARCHAR(50) NOT NULL,
     cuit VARCHAR(20) NOT NULL,
@@ -44,7 +45,8 @@ CREATE TABLE companies
 
     CONSTRAINT pk_company_id PRIMARY KEY (companyId),
     CONSTRAINT fk_zip_code FOREIGN KEY (zipCode) REFERENCES cities (zipCode),
-    CONSTRAINT unq_company_cuit UNIQUE (cuit)
+    CONSTRAINT unq_company_cuit UNIQUE (cuit),
+    CONSTRAINT fk_id_user FOREIGN KEY (userId) REFERENCES users (userId)
 );
 
 INSERT INTO companies (zipCode, name, cuit, location, phoneNumber) VALUES (7600, 'Globant', '30-458778-9', 'Mar del Plata', '223-636-2356'), (7600, 'Infosys', '30-666128-9', 'Mar del Plata', '223-636-9999'), (7600, 'Toledo', '32-258778-9', 'Mar del Plata', '223-625-2756');
@@ -61,16 +63,15 @@ CREATE TABLE students
     fileNumber VARCHAR(20) NOT NULL,
     gender VARCHAR(20) NOT NULL,
     birthDate date NOT NULL,
-    email VARCHAR(30) NOT NULL,
-    password VARCHAR(50) NOT NULL, 
+    email VARCHAR(30) NOT NULL, 
     phoneNumber VARCHAR(20),
     active boolean DEFAULT 1,
 
-    CONSTRAINT pk_student_id PRIMARY KEY (studentId),
-    CONSTRAINT fk_user_id FOREIGN KEY (userId) REFERENCES users(userId) ON DELETE CASCADE,
     CONSTRAINT unq_email_student UNIQUE (email),
     CONSTRAINT unq_dni_student UNIQUE (dni),
-    CONSTRAINT unq_file_number_student UNIQUE (fileNumber)
+    CONSTRAINT unq_file_number_student UNIQUE (fileNumber),
+    CONSTRAINT pk_student_id PRIMARY KEY (studentId),
+    CONSTRAINT fk_user_id FOREIGN KEY (userId) REFERENCES users(userId) ON DELETE CASCADE
 );
 
 #truncate table students;
@@ -108,7 +109,7 @@ CREATE TABLE jobPositions
     description VARCHAR(100) NOT NULL,
 
     CONSTRAINT pk_jobPosition_id PRIMARY KEY (jobPositionId),
-    CONSTRAINT fk_career_id FOREIGN KEY (careerId) REFERENCES careers (careerId)
+    CONSTRAINT fk_career_id FOREIGN KEY (careerId) REFERENCES careers (careerId) ON DELETE CASCADE
 );
 
 CREATE TABLE jobOffers
@@ -116,7 +117,7 @@ CREATE TABLE jobOffers
     jobOfferId INT NOT NULL AUTO_INCREMENT,
     jobPosition INT NOT NULL,
     careerId INT NOT NULL,
-    company VARCHAR(50) NOT NULL,
+    company INT NOT NULL,
     salary FLOAT,
     isRemote BOOLEAN,
     description VARCHAR(200) NOT NULL,
@@ -126,5 +127,16 @@ CREATE TABLE jobOffers
     active BOOLEAN,
 
     CONSTRAINT pk_jobOffers_id PRIMARY KEY (jobOfferId),
-    CONSTRAINT fk_jobPosition_id FOREIGN KEY (jobPosition) REFERENCES jobPositions (jobPositionId)
+    CONSTRAINT fk_jobPosition_id FOREIGN KEY (jobPosition) REFERENCES jobPositions (jobPositionId) ON DELETE CASCADE,
+    CONSTRAINT fk_jobOffer_company_id FOREIGN KEY (company) REFERENCES companies (companyId)
+);
+
+CREATE TABLE students_x_jobOffers
+(
+    studentId INT NOT NULL,
+    jobOfferId INT NOT NULL,
+
+    CONSTRAINT pk_students_x_jobOffers_id PRIMARY KEY (studentId, jobOfferId),
+    CONSTRAINT fk_students_id FOREIGN KEY (studentId) REFERENCES students (studentId) ON DELETE CASCADE,
+    CONSTRAINT fk_jobOffers_id FOREIGN KEY (jobOfferId) REFERENCES jobOffers (jobOfferId) ON DELETE CASCADE
 );

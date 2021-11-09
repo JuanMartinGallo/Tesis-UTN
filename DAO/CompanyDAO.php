@@ -17,8 +17,9 @@
         {
             try
             {
-                $query = "INSERT INTO ".$this->tableName." (zipCode, name, cuit, location, phoneNumber) VALUES (:zipCode, :name, :cuit, :location, :phoneNumber);";
+                $query = "INSERT INTO ".$this->tableName." (userId, zipCode, name, cuit, location, phoneNumber) VALUES (:userId, :zipCode, :name, :cuit, :location, :phoneNumber);";
                 
+                $parameters["userId"] = $this->getNextId();
                 $parameters["zipCode"] = $company->getZipCode();
                 $parameters["name"] = $company->getName();
                 $parameters["cuit"] = $company->getCuit();
@@ -34,6 +35,20 @@
             }
         }
 
+        private function getNextId()
+        {
+            $id = 0;
+            $userDAO = new UserDAO();
+            $userList = $userDAO->getAll();
+
+            foreach($userList as $user)
+            {
+                $id = ($user->getUserId() > $id) ? $user->getUserId() : $id;
+            }
+
+            return $id;
+        }
+
         public function getAll()
         {
             try
@@ -46,12 +61,13 @@
                 foreach ($resultSet as $row)
                 {                
                     $company = new Company();
+                    $company->setCompanyId($row["companyId"]);
+                    $company->setUserId($row["userId"]);
                     $company->setZipCode($row["zipCode"]);
                     $company->setName($row["name"]);
                     $company->setCuit($row["cuit"]);
                     $company->setLocation($row["location"]);
                     $company->setPhoneNumber($row["phoneNumber"]);
-                    $company->setCompanyId($row["companyId"]);
 
                     array_push($companyList, $company);
                 }

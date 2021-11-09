@@ -48,7 +48,7 @@ $today = date("Y-m-d");
                         <select name="company" id="company" class="form-control">
                                 <option value="">Seleccione una compañia</option>
                                 <?php foreach ($companyList as $company) { ?>
-                                    <option value="<?php echo $company->getName(); ?>"><?php echo $company->getName(); ?></option>
+                                    <option value="<?php echo $company->getCompanyId(); ?>"><?php echo $company->getName(); ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -62,8 +62,8 @@ $today = date("Y-m-d");
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="">Acepta trabajo remoto?</label>
-                            <input type="radio" name="isRemote" value="1" class="form-control">Si
-                            <input type="radio" name="isRemote" value="0" class="form-control">No
+                            <input type="radio" name="isRemote" value="1" class="form-control" required>Si
+                            <input type="radio" name="isRemote" value="0" class="form-control" required>No
                         </div>
                     </div>
                     <div class="col-md-4">

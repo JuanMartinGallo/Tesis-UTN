@@ -38,6 +38,24 @@
             }
         }
 
+        public function addPostulant($studentId, $jobOfferId)
+        {
+            try
+            {
+                $query = "INSERT INTO students_x_jobOffers (studentId, jobOfferId) VALUES (:studentId, :jobOfferId);";
+                
+                $parameters["studentId"] = $studentId;
+                $parameters["jobOfferId"] = $jobOfferId;
+
+                $this->connection = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
         public function getAll()
         {
             try
@@ -120,13 +138,13 @@
             }
         }
 
-        public function update($jobPositionId, $jobPosition, $careerId, $company, $salary, $isRemote, $description, $skills, $startingDate, $endingDate, $active)
+        public function update($jobPosition, $careerId, $company, $salary, $isRemote, $description, $skills, $startingDate, $endingDate, $active, $jobOfferId)
         {
             try
             {
                 $update = "UPDATE $this->tableName SET jobPosition = '$jobPosition', careerId = '$careerId', company = '$company', salary = '$salary', 
                 isRemote = '$isRemote', description = '$description', skills = '$skills', startingDate = '$startingDate', 
-                endingDate = '$endingDate', active = '$active' WHERE jobOfferId = '$jobPositionId'";
+                endingDate = '$endingDate', active = '$active' WHERE jobOfferId = '$jobOfferId'";
                 $this->connection = Connection::GetInstance();
                 $this->connection->ExecuteNonQuery($update);
             }

@@ -1,7 +1,7 @@
 <?php 
     namespace Models;
 
-    class Company
+    class Company extends User
     {
         private $zipCode;
         private $name;
