@@ -141,20 +141,18 @@ class UserDAO implements IUserDAO
                     foreach($userList as $user){
                         if($user->getEmail() == $email && $user->getPassword() == $password){
                             foreach($studentList as $student){
-                                if($student->getEmail() == $email){
+                                if($student->getUserId() == $user->getUserId()){
                                     return $student;
                                 }
                             }
                         }
                     }
                 }
-                
                 if(!empty($companyList)){
                     foreach($userList as $user){
                         if($user->getEmail() == $email && $user->getPassword() == $password){
-                           var_dump($user);
                             foreach($companyList as $company){
-                                if($company->getEmail() == $email){
+                                if($company->getUserId() == $user->getUserId()){
                                     return $company;
                                 }
                             }

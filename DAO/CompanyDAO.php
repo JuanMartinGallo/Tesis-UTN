@@ -17,11 +17,12 @@
         {
             try
             {
-                $query = "INSERT INTO ".$this->tableName." (userId, zipCode, name, cuit, location, phoneNumber) VALUES (:userId, :zipCode, :name, :cuit, :location, :phoneNumber);";
+                $query = "INSERT INTO ".$this->tableName." (userId, zipCode, name, role, cuit, location, phoneNumber) VALUES (:userId, :zipCode, :name, :role, :cuit, :location, :phoneNumber);";
                 
                 $parameters["userId"] = $this->getNextId();
                 $parameters["zipCode"] = $company->getZipCode();
                 $parameters["name"] = $company->getName();
+                $parameters["role"] = 'company';
                 $parameters["cuit"] = $company->getCuit();
                 $parameters["location"] = $company->getLocation();
                 $parameters["phoneNumber"] = $company->getPhoneNumber();
@@ -65,6 +66,7 @@
                     $company->setUserId($row["userId"]);
                     $company->setZipCode($row["zipCode"]);
                     $company->setName($row["name"]);
+                    $company->setRole($row["role"]);
                     $company->setCuit($row["cuit"]);
                     $company->setLocation($row["location"]);
                     $company->setPhoneNumber($row["phoneNumber"]);
