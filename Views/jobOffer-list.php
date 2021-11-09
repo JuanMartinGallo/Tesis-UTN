@@ -20,15 +20,30 @@ $careerList = $careerDAO->getAll();
      <section id="listado" class="mb-5">
           <div class="container">
 
-
-          <form action="<?php echo FRONT_ROOT ?>JobOffer/Filter" method="POST">
-                    <div class="col-lg-3">
-                         <div class="form-group">
-                              <h4 class="mb-4">Filtrar Empleos</h4>
-                              <input type="text" name="search" value="" class="form-control">
-                         </div>
+               <form action="<?php echo FRONT_ROOT ?>JobOffer/filterSelect" method="POST">
+                     <div class="col-lg-4">
+                        <div class="form-group">
+                            <select name="jobPositionId" class="form-control">
+                                <option value="">Buscar por posicion laboral</option>
+                                <?php foreach ($jobPositionList as $jobPosition) { ?>                                    
+                                    <option value="<?php echo $jobPosition->getJobPositionId(); ?>"><?php echo $jobPosition->getDescription(); ?></option>
+                                <?php } ?>
+                            </select>
+                            <button type="submit" name='careerId' value=""  class="btn btn-dark ml-auto d-block">Buscar </button>
+                        </div>
                     </div>
-               </form>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                        <select name="careerId" class="form-control">
+                                <option value="">Buscar por Carrera</option>
+                                <?php foreach ($careerList as $career) { ?>
+                                    <option value="<?php echo $career->getCareerId(); ?>"><?php echo $career->getDescription(); ?></option>
+                                <?php } ?>
+                         </select>
+                         <button type="submit" name='jobPositionId' value="" class="btn btn-dark ml-auto d-block">Buscar</button>
+                        </div>
+                    </div>
+                </form>
 
                <h2 class="mb-4">Datos de postulacion</h2>
                <table class="table bg-light-alpha">

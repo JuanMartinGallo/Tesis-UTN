@@ -3,22 +3,14 @@
 
     use DAO\JobOfferDAO as JobOfferDAO;
     use Models\JobOffer as JobOffer;
-    use DAO\JobPositionDAO as JobPositionDAO;
-    use DAO\CareerDAO as CareerDAO;
-
-
 
     class JobOfferController
     {
         private $jobOfferDAO;
-        private $jobPositionDAO;
-        private $careerDAO;
 
         public function __construct()
         {
             $this->jobOfferDAO = new JobOfferDAO();
-            $this->jobPositionDAO = new JobPositionDAO();
-            $this->careerDAO = new CareerDAO();
         }
 
         public function ShowAddView()
@@ -26,16 +18,13 @@
             require_once(VIEWS_PATH."jobOffer-add.php");
         }
 
-        public function showListView($filterList = NULL)
+        public function showListView($jobOfferList = NULL)
         {
-            if($filterList == NULL)
+            if($jobOfferList == NULL)
             {
                 $jobOfferList = $this->jobOfferDAO->GetAll();
             }
-            else
-            {
-                $jobOfferList=$filterList;
-            }
+            
 
             require_once(VIEWS_PATH."jobOffer-list.php");
         }
@@ -82,47 +71,23 @@
             $this->jobOfferDAO->remove($jobOfferId);
             $this->showListView();
         }
-        
-        
 
-        public function filter($search)
+
+        public function filterSelect($jobPositionId, $careerId)
         {
-
-
             $filterList = array();
-            $jobPositionList = $this->jobPositionDAO->getAll();
-            $careerList = $this->careerDAO->getAll();
 
             $newList = $this->jobOfferDAO->getAll();
-
-
-            foreach ($newList as $jobOffer) {
-            
-            foreach ($jobPositionList as $jobPosition) {
-                
-                similar_text(strtolower($jobPosition->getDescription()), strtolower($search), $similar);
-                    
-                if ($similar > 5 && $jobOffer->getJobPosition() == $jobPosition->getJobPositionId()) {
-                    array_push($filterList, $jobOffer);
-                }
-            }
-            }
-
-            foreach ($careerList as $career) {
-                
-                similar_text(strtolower($career->getDescription()), strtolower($search), $similar);
-
-                if ($similar > 5 && $jobOffer->getCareerId() == $career->getCareerId()) {
-                    array_push($filterList, $jobOffer);
-                }
-            }
         
-
-            if($search == NULL)
-            {
-                $filterList = $this->jobOfferDAO->getAll();
-            }
-
+            foreach ($newList as $jobOffer) {
+                    if ($jobOffer->getJobPosition() == $jobPositionId) {
+                        array_push($filterList, $jobOffer);
+                    }
+                    elseif($jobOffer->getCareerId() == $careerId)
+                    {
+                        array_push($filterList, $jobOffer);
+                    }
+                }
             $this->showListView($filterList);
         }
     }?>
