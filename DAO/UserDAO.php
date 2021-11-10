@@ -189,7 +189,7 @@ class UserDAO implements IUserDAO
                         }
                     }
                 }
-
+                throw new Exception();
                 return null; //TODO: ver como hacer para que tire un error cuando intento logearme con una cuenta no registrada o usa una contraseña incorrecta
             }
 

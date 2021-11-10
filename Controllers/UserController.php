@@ -50,14 +50,24 @@
             }
             finally
             {
-                $this->showRegisterView($alert);
+                if($value == 0)
+                {
+                    $this->showRegisterView($alert);
+                }
             }
 
         }
 
-        public function login($email, $password){    
-            try{
-                $Alert= new Alert();
+        public function showLoginView($alert = NULL)
+        {
+            require_once(VIEWS_PATH . "login.php");
+        }
+
+        public function login($email, $password)
+        {    
+            try
+            {
+                $alert= new Alert();
 
                 $user = $this->userDAO->GetByEmail($email, $password);
 
@@ -65,14 +75,19 @@
                     session_start();
                     
                     $_SESSION["userLogged"] = $user;
-                    
+
                     require_once(VIEWS_PATH . "home.php");
+                    die();
                 }
             }
-            catch(Exception $ex){
-                echo $ex->getMessage();
-                $Alert->setType("danger");
-                $Alert->setMessage("El usuario no existe, debe registrarse para poder iniciar sesion.");
+            catch(Exception $ex)
+            {
+                $alert->setType("danger");
+                $alert->setMessage("El usuario no existe, debe registrarse para poder iniciar sesion.");
+            }
+            finally
+            {
+                $this->showLoginView($alert);
             }
         }
     }

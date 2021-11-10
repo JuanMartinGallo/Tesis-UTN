@@ -1,6 +1,10 @@
 <?php
     session_start();
     require_once('header.php');
+
+    if(isset($_SESSION['userLogged'])){
+        require_once('nav.php');
+    }
 ?>
 
 <main class="py-5">
@@ -33,7 +37,8 @@
                 <?php
                 } else{?>
                 <button type="submit" name="value" class="btn btn-dark ml-auto d-block" value='0'>Continuar</button>
-                <?php } ?>               
+                <a href="<?php echo FRONT_ROOT ?>Home">Volver a iniciar sesion</a>
+                <?php } ?>
             </form>
         </div>
     </section>
