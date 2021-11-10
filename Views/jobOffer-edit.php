@@ -73,29 +73,33 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label for="">Remuneracion aproximada</label>
-                            <input type="number" name="salary" value="<?php echo $jobOffer->getSalary(); ?>" class="form-control" min="0" required>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label for="">Acepta trabajo remoto?</label>
-                            <input type="radio" name="isRemote" value="1" class="form-control" required>Si
-                            <input type="radio" name="isRemote" value="0" class="form-control" required>No
-                        </div>
-                    </div>
                     <div class="col-md-4">
                         <div class="form-group">
                         <label for="">Descripcion del trabajo</label>
                             <input type="text" name="description" value="<?php echo $jobOffer->getDescription(); ?>" class="form-control" placeholder="<?php echo $jobOffer->getDescription(); ?>" ></textarea>
                         </div>
                     </div>
+  
                     <div class="col-md-4">
                         <div class="form-group">
                         <label for="">Habilidades necesarias</label>
                             <input type="text" name="skills" value="<?php echo $jobOffer->getSkills(); ?>" class="form-control" placeholder="<?php echo $jobOffer->getSkills(); ?>" ></textarea>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                        <label for="">Acepta trabajo Remoto?</label>
+                            <select name="isRemote" id="isRemote" class="form-control"required>
+                                <option value="">-</option>
+                                <option value="1">SI</option>
+                                <option value="0">NO</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="">Remuneracion aproximada</label>
+                            <input type="number" name="salary" value="<?php echo $jobOffer->getSalary(); ?>" class="form-control" min="0" required>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -112,9 +116,11 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="">Activa?</label>
-                            <input type="radio" name="active" value="1" class="form-control" required>Si
-                            <input type="radio" name="active" value="0" class="form-control" required>No
+                            <select name="active" id="isRemote" class="form-control"required>
+                                <option value="">Activa</option>
+                                <option value="1">SI</option>
+                                <option value="0">NO</option>
+                                </select>
                         </div>
                     </div>
                 </div>

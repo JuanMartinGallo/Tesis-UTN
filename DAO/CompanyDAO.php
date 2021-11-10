@@ -124,7 +124,7 @@
             }
         }
 
-        public function update($name, $cuit, $location, $phoneNumber, $companyId, $zipCode)
+        public function update($name, $cuit, $location, $phoneNumber, $zipCode, $companyId)
         {
             try
             {

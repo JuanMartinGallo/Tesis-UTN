@@ -18,12 +18,17 @@
             require_once(VIEWS_PATH."jobOffer-add.php");
         }
 
-        public function showListView()
+        public function showListView($jobOfferList = NULL)
         {
-            $jobOfferList = $this->jobOfferDAO->getAll();
+            if($jobOfferList == NULL)
+            {
+                $jobOfferList = $this->jobOfferDAO->GetAll();
+            }
+            
 
             require_once(VIEWS_PATH."jobOffer-list.php");
         }
+    
 
         public function showEditView($jobOfferId)
         {
@@ -40,6 +45,12 @@
         public function addPostulant($studentId, $jobOfferId)
         {
             $this->jobOfferDAO->addPostulant($studentId, $jobOfferId);
+            require_once (VIEWS_PATH."jobOffer-postulate.php");
+        }
+
+        public function ShowPostulateView()
+        {
+            
             require_once (VIEWS_PATH."jobOffer-postulate.php");
         }
 
@@ -72,5 +83,32 @@
             $this->jobOfferDAO->remove($jobOfferId);
             $this->showListView();
         }
-    }
-?>
+
+
+        public function filterSelect($jobPositionId, $careerId)
+        {
+            $filterList = array();
+
+            $newList = $this->jobOfferDAO->getAll();
+        
+            foreach ($newList as $jobOffer) {
+                    if ($jobOffer->getJobPosition() == $jobPositionId) {
+                        array_push($filterList, $jobOffer);
+                    }
+                    elseif($jobOffer->getCareerId() == $careerId)
+                    {
+                        array_push($filterList, $jobOffer);
+                    }
+                }
+            $this->showListView($filterList);
+        }
+
+        public function disableJobOffer($jobOfferId,$active)
+        {
+            $this->jobOfferDAO->disableJobOffer($jobOfferId,$active);
+            $this->showListView();
+        }
+    }?>
+
+     
+    

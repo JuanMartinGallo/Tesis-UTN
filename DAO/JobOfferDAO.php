@@ -153,5 +153,51 @@
                 throw $ex;
             }
         }
+
+        public function disableJobOffer($jobOfferId,$active)
+        {
+            try
+            {
+                $disable =  "UPDATE $this->tableName SET active = '$active'  WHERE jobOfferId = '$jobOfferId'";
+                $this->connection = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($disable);
+            }
+            
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
+        public function postulatedJob($studentId)
+        {
+            try
+            {
+                $listId = array();
+                $jobOffersList = array();
+                $search = "SELECT * FROM students_x_jobOffers jobOfferId  WHERE studentId = '$studentId'";
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($search);
+
+
+                foreach($resultSet as $row)
+                {
+                    $jobOfferId = $row["jobOfferId"];
+                    array_push($listId, $jobOfferId);
+                }
+
+                foreach($listId as $jobOffer)
+                {
+                    $jobOffer = $this->searchByJobOfferId($jobOfferId);
+                    array_push($jobOffersList, $jobOffer);
+                }
+                return $jobOffersList;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+
+        }
     }
 ?>
