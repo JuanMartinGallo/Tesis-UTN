@@ -5,7 +5,7 @@
     session_start();
     class HomeController
     {
-        public function index($message = "")
+        public function index($message = "", $alert = NULL)
         {
             require_once(VIEWS_PATH . "login.php");
         }

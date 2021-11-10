@@ -188,7 +188,7 @@ class UserDAO implements IUserDAO
                         }
                     }
                 }
-
+                throw new Exception();
                 return null;
             }
 

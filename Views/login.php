@@ -7,6 +7,10 @@ require_once('header.php');
           <header class="text-center text-white">
                <h2>Bienvenido al sistema!</h2>
           </header>
+          <?php
+               if ($alert) { ?>
+                    <div class="alert alert-<?php echo $alert->getType() ?> text-center fwbold" role="alert"><?php echo $alert->getMessage() ?></div>
+               <?php } ?>
           <form action="<?php echo FRONT_ROOT ?>User/Login" method="POST" class="login-form bg-light-alpha p-5 text-dark font-weight-bold">
                <div class="form-group">
                     <label for="">EMAIL</label>
