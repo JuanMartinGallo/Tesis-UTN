@@ -50,7 +50,7 @@ try {
     
 
     $mail->send();
-    echo 'Correo Enviado';
+    
 } catch (Exception $e) {
     echo "Nose que mierda hiciste pero le erraste: {$mail->ErrorInfo}";
 }

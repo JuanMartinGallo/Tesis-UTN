@@ -28,7 +28,7 @@ require_once('header.php');
                     <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowProfileView">Ver tus datos</a>
                </li>
                <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Home/Logout">Mis Postulaciones</a>
+               <a class="nav-link" href="<?php echo FRONT_ROOT ?>JobOffer/ShowPostulateView">Mis Postulaciones</a>
           </li>
           <?php } ?>
           <?php if ($_SESSION['userLogged']->getRole() == "company"  || $_SESSION['userLogged']->getRole() == "admin") { ?>
