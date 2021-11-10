@@ -65,7 +65,6 @@ class UserDAO implements IUserDAO
             {
                 throw $ex;
             }
-    
         }
 
         public function dbChecker(user $user){
@@ -190,7 +189,7 @@ class UserDAO implements IUserDAO
                     }
                 }
 
-                return null; //TODO: ver como hacer para que tire un error cuando intento logearme con una cuenta no registrada o usa una contraseña incorrecta
+                return null;
             }
 
             catch(Exception $ex)

@@ -25,7 +25,7 @@ $today = date("Y-m-d");
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <select name="jobPosition" id="jobPosition" class="form-control"required>
+                            <select name="jobPosition" class="form-control"required>
                                 <option value="">Seleccione una posicion laboral</option>
                                 <?php foreach ($jobPositionList as $jobPosition) { ?>
                                     <option value="<?php echo $jobPosition->getJobPositionId(); ?>"><?php echo $jobPosition->getDescription(); ?></option>
@@ -35,7 +35,7 @@ $today = date("Y-m-d");
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <select name="careerId" id="careerId" class="form-control"required>
+                            <select name="careerId" class="form-control"required>
                                 <option value="">Seleccione una carrera</option>
                                 <?php foreach ($careerList as $career) { ?>
                                     <option value="<?php echo $career->getCareerId(); ?>"><?php echo $career->getDescription(); ?></option>
@@ -48,7 +48,7 @@ $today = date("Y-m-d");
                             <?php if ($_SESSION['userLogged']->getRole() == "company") { ?>
                                 <input type="hidden" name="companyId" class="form-control" value="<?php echo $_SESSION['userLogged']->getCompanyId() ?>">
                             <?php } else { ?>
-                                <select name="companyId" id="companyId" class="form-control">
+                                <select name="companyId" class="form-control">
                                     <option value="">Seleccione una compañia</option>
                                     <?php foreach ($companyList as $company) { ?>
                                         <option value="<?php echo $company->getCompanyId(); ?>"><?php echo $company->getName(); ?></option>
@@ -69,7 +69,7 @@ $today = date("Y-m-d");
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <select name="isRemote" id="isRemote" class="form-control"required>
+                            <select name="isRemote" class="form-control"required>
                                 <option value="">Acepta Trabajo Remoto</option>
                                 <option value="1">SI</option>
                                 <option value="0">NO</option>
@@ -96,7 +96,7 @@ $today = date("Y-m-d");
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <select name="active" id="isRemote" class="form-control" required>
+                            <select name="active" class="form-control" required>
                                 <option value="">Activa</option>
                                 <option value="1">SI</option>
                                 <option value="0">NO</option>
