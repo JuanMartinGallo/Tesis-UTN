@@ -15,13 +15,14 @@
             $this->userDAO = new UserDAO();
         }
 
-        public function showRegisterView()
+        public function showRegisterView($alert = NULL)
         {
             require_once(VIEWS_PATH . "register.php");
         }
 
         public function add($email, $password, $value){
-            try{
+            try
+            {
                 $alert = new Alert();
 
                 $user = new User;
@@ -33,8 +34,9 @@
                 $alert->setType("success");
                 $alert->setMessage("El usuario ha sido ingresado correctamente."); //TODO:como hacer para que se vean estas excepciones
             }
-            catch(Exception $ex){
-                 if(str_contains($ex->getMessage(), 1062))
+            catch(Exception $ex)
+            {
+                if(str_contains($ex->getMessage(), 1062))
                 {
                     $alert->setType("warning");
                     $alert->setMessage("El usuario que intenta registrar ya se encuentra registrado");
@@ -43,9 +45,14 @@
                 else
                 {
                     $alert->setType("danger");
-                    $alert->setMessage("Error al ingresar el usuario.");
+                    $alert->setMessage("El usuario que intenta agregar no existe en la base de datos/API.");
                 }
             }
+            finally
+            {
+                $this->showRegisterView($alert);
+            }
+
         }
 
         public function login($email, $password){    

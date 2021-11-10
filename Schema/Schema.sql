@@ -28,7 +28,8 @@ CREATE TABLE users
     password VARCHAR(50) NOT NULL,
     email VARCHAR(30) NOT NULL,
 
-    CONSTRAINT pk_user_id PRIMARY KEY (userId)
+    CONSTRAINT pk_user_id PRIMARY KEY (userId),
+    CONSTRAINT unq_email UNIQUE (email)
 );
 
 #truncate table users;

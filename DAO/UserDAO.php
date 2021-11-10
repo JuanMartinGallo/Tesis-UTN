@@ -51,6 +51,8 @@ class UserDAO implements IUserDAO
                         $this->connection->ExecuteNonQuery($query, $parameters);
                         $studentFromApi= $this->studentDAO->getStudentsFromAPI($user);
                         $this->studentDAO->add($studentFromApi);
+                    } else {
+                        throw new Exception();
                     }
                 }
                 else{
@@ -63,6 +65,7 @@ class UserDAO implements IUserDAO
             {
                 throw $ex;
             }
+    
         }
 
         public function dbChecker(user $user){
