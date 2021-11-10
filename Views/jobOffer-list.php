@@ -19,8 +19,7 @@ $careerList = $careerDAO->getAll();
 $companyList = $companyDAO->getAll();
 
 
-$hoy = date("F j, Y, g:i a");    
-echo $hoy;
+$today = date("Y-m-d");
 
 ?>
 
@@ -102,7 +101,7 @@ echo $hoy;
                                         <td>
 
                                              <?php
-                                             if ($jobOffer->getEndingDate() == $jobOffer->getStartingDate()) {
+                                             if ($jobOffer->getEndingDate() == $today) {
                                                   $jobOfferDAO->disableJobOffer($jobOffer->getJobOfferId(), false);
                                                   require_once('sendMail.php');
                                              }
