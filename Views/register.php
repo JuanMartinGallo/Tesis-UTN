@@ -12,7 +12,7 @@
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="">Email</label>
-                            <input type="text" name="email" value="" class="form-control" required>
+                            <input type="email" name="email" value="" class="form-control" required>
                         </div>
                     </div>
                     <div class="col-lg-4">
