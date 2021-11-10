@@ -21,12 +21,14 @@
 
                 foreach ($resultSet as $row) {
                     $cities = new Cities();
-                    $cities->setName($row["name"]);
                     $cities->setZipCode($row["zipCode"]);
+                    $cities->setCityName($row["cityName"]);
+                    $cities->setLocation($row["location"]);
 
                 array_push($citiesList, $cities);
                 }
-
+                return $citiesList;
+                
             }catch(Exception $ex){
                 throw $ex;
             }

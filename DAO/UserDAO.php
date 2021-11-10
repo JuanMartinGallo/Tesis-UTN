@@ -40,14 +40,14 @@ class UserDAO implements IUserDAO
                 $parameters["email"] = $user->getEmail();
                 $parameters["password"] = $user->getPassword();
                 $parameters["role"] = $user->getRole();
-
+                
                 $this->connection = Connection::GetInstance();
-
+                
                 if($value == 0){
                     if($this->dbChecker($user)){
                         $this->connection->ExecuteNonQuery($query, $parameters);
                     }
-                     elseif($this->apiChecker($user)){
+                    elseif($this->apiChecker($user)){
                         $this->connection->ExecuteNonQuery($query, $parameters);
                         $studentFromApi= $this->studentDAO->getStudentsFromAPI($user);
                         $this->studentDAO->add($studentFromApi);
@@ -137,7 +137,7 @@ class UserDAO implements IUserDAO
                 $adminList = $this->adminDAO->getAll();
                 $studentList = $this->studentDAO->getAll();
                 $companyList = $this->companyDAO->getAll();
-                //$this->loadingLists(); \\TODO: VER SI ESTO FUNCIONA
+                //$this->loadingLists(); //TODO: VER SI ESTO FUNCIONA
                  $careerList = $this->careerDAO->getAll();
                 $jobPositionList = $this->jobPositionDAO->getAll();
 

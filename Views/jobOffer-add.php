@@ -49,7 +49,7 @@ $today = date("Y-m-d");
                                 <input type="hidden" name="companyId" class="form-control" value="<?php echo $_SESSION['userLogged']->getCompanyId() ?>">
                             <?php } else { ?>
                                 <select name="companyId" class="form-control">
-                                    <option value="">Seleccione una compañia</option>
+                                    <option value="">Seleccione una compañia</option> //TODO: VER SI ESTE OPTION ESTA DE MAS 
                                     <?php foreach ($companyList as $company) { ?>
                                         <option value="<?php echo $company->getCompanyId(); ?>"><?php echo $company->getName(); ?></option>
                                     <?php } ?>

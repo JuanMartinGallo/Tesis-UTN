@@ -32,19 +32,14 @@ $citiesList = $citiesDAO->getAll();
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
+                            <label for="">Ciudad</label>
                             <select name="location" class="form-control" required>
-                                <option value="">Seleccione una ciudad</option>
+                                <option value="">seleccione una ciudad</option>
                                 <?php foreach ($citiesList as $cities) { ?>
-                                    <option value="<?php echo $cities->getName(); ?>"><?php echo $cities->getName(); ?></option>
+                                    <option value="<?php echo $cities->getCityName(); ?>"><?php echo $cities->getCityName(); ?></option>
                                 <?php } ?>
-                                <input type="hidden" name="zipcode" class="form-control" value="<?php echo $cities->getZipCode(); ?>">
+                                <input type="hidden" name="zipCode" class="form-control" value="<?php echo $cities->getZipCode(); ?>">//TODO: VER PORQUE NO GUARDA EL zipCode APROPIADAMENTE
                             </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label for="">Codigo postal</label>
-                            <input type="text" name="zipCode" value="" class="form-control" required>
                         </div>
                     </div>
                     <div class="col-lg-4">
