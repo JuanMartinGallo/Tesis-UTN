@@ -26,7 +26,6 @@ $today = date("Y-m-d");
 <main class="py-5">
      <section id="listado" class="mb-5">
           <div class="container">
-
                <form action="<?php echo FRONT_ROOT ?>JobOffer/filterSelect" method="POST">
                     <div class="col-lg-4">
                          <div class="form-group">
@@ -53,6 +52,10 @@ $today = date("Y-m-d");
                </form>
 
                <h2 class="mb-4">Datos de postulacion</h2>
+               <?php
+               if($alert) { ?>
+                <div class="alert alert-<?php echo $alert->getType()?> text-center fwbold" role="alert"><?php echo $alert->getMessage()?></div>
+                <?php } ?>
                <table class="table bg-light-alpha">
                     <thead>
                          <th>Puesto laboral</th>

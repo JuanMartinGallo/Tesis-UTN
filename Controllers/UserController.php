@@ -50,7 +50,10 @@
             }
             finally
             {
-                $this->showRegisterView($alert);
+                if($value == 0)
+                {
+                    $this->showRegisterView($alert);
+                }
             }
 
         }

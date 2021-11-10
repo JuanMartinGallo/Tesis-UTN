@@ -3,6 +3,8 @@
 
     use DAO\JobOfferDAO as JobOfferDAO;
     use Models\JobOffer as JobOffer;
+    use Models\Alert;
+    use Exception;
 
     class JobOfferController
     {
@@ -13,23 +15,20 @@
             $this->jobOfferDAO = new JobOfferDAO();
         }
 
-        public function ShowAddView()
+        public function ShowAddView($alert = NULL)
         {
             require_once(VIEWS_PATH."jobOffer-add.php");
         }
 
-        public function showListView($jobOfferList = NULL)
+        public function showListView($jobOfferList = NULL, $alert = NULL)
         {
-            if($jobOfferList == NULL)
+            if ($jobOfferList == NULL)
             {
                 $jobOfferList = $this->jobOfferDAO->GetAll();
             }
-            
-
             require_once(VIEWS_PATH."jobOffer-list.php");
         }
     
-
         public function showEditView($jobOfferId)
         {
             $jobOffer = $this->jobOfferDAO->searchByJobOfferId($jobOfferId);
@@ -56,6 +55,11 @@
 
         public function add($jobPosition, $careerId, $companyId, $salary, $isRemote, $description, $skills, $startingDate, $endingDate, $active)
         {
+            try
+            {
+
+            $alert= new Alert();  
+             
             $jobOffer = new JobOffer();
             $jobOffer->setJobPosition($jobPosition);
             $jobOffer->setCareerId($careerId);
@@ -69,7 +73,25 @@
             $jobOffer->setActive($active);
 
             $this->jobOfferDAO->add($jobOffer);
-            $this->showListView();
+            
+            $alert->setType("success");
+            $alert->setMessage("La propuesta laboral a sido cargada exitosamente.");
+
+            if($active == 0)
+            {
+                $alert->setType("warning");
+                $alert->setMessage("La propuesta laboral a sido cargada exitosamente. La propuesta laboral se encuentra inactiva.");
+            }
+
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+            finally 
+            {
+                 $this->ShowAddView($alert);
+            }
         }
 
         public function edit ($jobPosition, $careerId, $companyId, $salary, $isRemote, $description, $skills, $startingDate, $endingDate, $active, $jobOfferId)
@@ -87,28 +109,48 @@
 
         public function filterSelect($jobPositionId, $careerId)
         {
-            $filterList = array();
+            try
+            {
+                $alert= new Alert();
+                
+                $filterList = array();
+                
+                $newList = $this->jobOfferDAO->getAll();
+            
+                foreach ($newList as $jobOffer) {
+                        if ($jobOffer->getJobPosition() == $jobPositionId) {
+                            array_push($filterList, $jobOffer);
+                        }
+                        elseif($jobOffer->getCareerId() == $careerId)
+                        {
+                            array_push($filterList, $jobOffer);
+                        }
+                    }
 
-            $newList = $this->jobOfferDAO->getAll();
-        
-            foreach ($newList as $jobOffer) {
-                    if ($jobOffer->getJobPosition() == $jobPositionId) {
-                        array_push($filterList, $jobOffer);
-                    }
-                    elseif($jobOffer->getCareerId() == $careerId)
+                    $alert->setType("success");
+                    $alert->setMessage("Busqueda exitosa.");
+
+
+                    if($filterList == NULL)
                     {
-                        array_push($filterList, $jobOffer);
+                        $alert->setType("warning");
+                        $alert->setMessage("No se encontraron resultados.");
                     }
-                }
-            $this->showListView($filterList);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+            finally 
+            {
+                $this->showListView($filterList, $alert);
+            }
         }
+
 
         public function disableJobOffer($jobOfferId,$active)
         {
             $this->jobOfferDAO->disableJobOffer($jobOfferId,$active);
             $this->showListView();
         }
-    }?>
-
-     
-    
+    }
