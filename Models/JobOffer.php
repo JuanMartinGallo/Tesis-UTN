@@ -6,6 +6,7 @@
         private $jobOfferId;
         private $jobPosition;
         private $careerId;
+        private $companyId;
         private $city;
         private $salary;
         private $isRemote;
@@ -15,12 +16,12 @@
         private $endingDate;
         private $active;
 
-        public function __construct($jobOfferId = NULL, $jobPosition = NULL, $careerId = NULL, $company = NULL, $city = NULL, $salary = NULL, $isRemote = true, $description = NULL, $skills = NULL, $startingDate = NULL, $endingDate = NULL, $active = true)
+        public function __construct($jobOfferId = NULL, $jobPosition = NULL, $careerId = NULL, $companyId = NULL, $city = NULL, $salary = NULL, $isRemote = true, $description = NULL, $skills = NULL, $startingDate = NULL, $endingDate = NULL, $active = true)
         {
             $this->jobOfferId = $jobOfferId;
             $this->jobPosition = $jobPosition;
             $this->careerId = $careerId;
-            $this->company = $company;
+            $this->companyId = $companyId;
             $this->city = $city;
             $this->salary = $salary;
             $this->isRemote = $isRemote;
@@ -39,9 +40,6 @@
 
         public function getCareerId(){ return $this->careerId; }
         public function setCareerId($careerId): self { $this->careerId = $careerId; return $this; }
-
-        public function getCompany(){ return $this->company; }
-        public function setCompany($company): self { $this->company = $company; return $this; }
 
         public function getCity(){ return $this->city; }
         public function setCity($city): self { $this->city = $city; return $this; }
@@ -66,5 +64,8 @@
 
         public function getActive(){ return $this->active; }
         public function setActive($active): self { $this->active = $active; return $this; }
+
+        public function getCompanyId(){ return $this->companyId; }
+        public function setCompanyId($companyId): self { $this->companyId = $companyId; return $this; }
     }
 ?>

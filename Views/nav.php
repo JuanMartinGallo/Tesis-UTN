@@ -23,11 +23,6 @@ require_once('header.php');
                <li class="nav-item">
                     <a class="nav-link" href="<?php echo FRONT_ROOT ?>Admin/ShowListView">Listar administradores</a>
                </li>
-               <?php if ($_SESSION['userLogged']->getRole() == "company"  || $_SESSION['userLogged']->getRole() == "admin") { ?>
-               <li class="nav-item">
-                    <a class="nav-link" href="<?php echo FRONT_ROOT ?>JobOffer/ShowAddView">Agregar postulacion laboral</a>
-               </li>
-               <?php } ?>
           <?php } else { ?>
                <li class="nav-item">
                     <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowProfileView">Ver tus datos</a>
@@ -35,6 +30,11 @@ require_once('header.php');
                <li class="nav-item">
                <a class="nav-link" href="<?php echo FRONT_ROOT ?>JobOffer/ShowPostulateView">Mis Postulaciones</a>
           </li>
+          <?php } ?>
+          <?php if ($_SESSION['userLogged']->getRole() == "company"  || $_SESSION['userLogged']->getRole() == "admin") { ?>
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT ?>JobOffer/ShowAddView">Agregar postulacion laboral</a>
+               </li>
           <?php } ?>
           <li class="nav-item">
                <a class="nav-link" href="<?php echo FRONT_ROOT ?>Company/ShowListView">Listar empresas</a>
