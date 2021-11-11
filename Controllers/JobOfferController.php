@@ -134,7 +134,7 @@
                     if($filterList == NULL)
                     {
                         $alert->setType("warning");
-                        $alert->setMessage("No se encontraron resultados.");
+                        $alert->setMessage("No se encontraron postulaciones con esa informacion.");
                     }
             }
             catch(Exception $ex)
