@@ -137,9 +137,9 @@ class UserDAO implements IUserDAO
                 $adminList = $this->adminDAO->getAll();
                 $studentList = $this->studentDAO->getAll();
                 $companyList = $this->companyDAO->getAll();
-                //$this->loadingLists(); //TODO: VER SI ESTO FUNCIONA
-                 $careerList = $this->careerDAO->getAll();
-                $jobPositionList = $this->jobPositionDAO->getAll();
+                $this->loadingLists();
+                //$careerList = $this->careerDAO->getAll();
+                //$jobPositionList = $this->jobPositionDAO->getAll();
 
                 if(empty($careerList))
                 {
@@ -180,10 +180,6 @@ class UserDAO implements IUserDAO
                         if($admin->getEmail() == $email){
                             if($admin->getPassword() == $password){
                                 return $admin;
-                            }
-                            else{
-                                throw new Exception("Password incorrect");
-                                require_once (VIEWS_PATH."login.php");
                             }
                         }
                     }
