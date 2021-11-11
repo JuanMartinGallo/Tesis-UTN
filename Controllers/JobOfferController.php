@@ -43,8 +43,26 @@
 
         public function addPostulant($studentId, $jobOfferId)
         {
-            $this->jobOfferDAO->addPostulant($studentId, $jobOfferId);
-            require_once (VIEWS_PATH."jobOffer-postulate.php");
+            try{
+                $alert = new Alert();
+                $this->jobOfferDAO->addPostulant($studentId, $jobOfferId);
+
+                $alert->setType("success");
+                $alert->setMessage("Postulante agregado exitosamente");
+            }
+            catch(Exception $e)
+            {
+                if(str_contains($e->getMessage(), 1062))
+                {
+                    $alert->setType("warning");
+                    $alert->setMessage("Ya te postulaste a esta oferta.");
+
+                }
+            }
+            finally
+            {
+                $this->showListView(NULL, $alert);
+            }
         }
 
         public function ShowPostulateView()
