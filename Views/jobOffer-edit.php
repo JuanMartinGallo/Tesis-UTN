@@ -58,15 +58,15 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <select name="company" id="company" class="form-control">
+                            <select name="companyId" id="company" class="form-control">
                             <?php foreach ($companyList as $company) {
-                                    if ($company->getCompanyId() == $jobOffer->getCompany()) { ?>
+                                    if ($company->getCompanyId() == $jobOffer->getCompanyId()) { ?>
 
-                                        <option value="<?php echo $jobOffer->getCompany(); ?>"><?php echo $company->getName(); ?></option>
+                                        <option value="<?php echo $jobOffer->getCompanyId(); ?>"><?php echo $company->getName(); ?></option>
                                 <?php }
                                 } ?>
                                 <?php foreach ($companyList as $company) {
-                                    if ($jobOffer->getCompany() != $company->getCompanyId()) { ?>
+                                    if ($jobOffer->getCompanyId() != $company->getCompanyId()) { ?>
                                         <option value="<?php echo $company->getName(); ?>"><?php echo $company->getName(); ?></option>
                                 <?php }
                                 } ?>
