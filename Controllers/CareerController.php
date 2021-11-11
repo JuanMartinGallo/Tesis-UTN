@@ -21,7 +21,6 @@
         public function showListView()
         {
             $careerList = $this->careerDAO->getAll();
-
             require_once(VIEWS_PATH."career-list.php");
         }
 

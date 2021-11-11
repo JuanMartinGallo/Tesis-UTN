@@ -5,14 +5,19 @@
     use Models\JobOffer as JobOffer;
     use Models\Alert;
     use Exception;
+    use FPDF\FPDF as FPDF;
+    use DAO\UserDAO as UserDAO;
+
 
     class JobOfferController
     {
         private $jobOfferDAO;
+        private $userDAO;
 
         public function __construct()
         {
             $this->jobOfferDAO = new JobOfferDAO();
+            $this->userDAO = new UserDAO();
         }
 
         public function ShowAddView($alert = NULL)
@@ -170,5 +175,29 @@
         {
             $this->jobOfferDAO->disableJobOffer($jobOfferId,$active);
             $this->showListView();
+        }
+
+        public function generatePDF()
+        {
+            $pdf = new FPDF('P','mm','A4');
+            $pdf->AliasNbPages();
+            $pdf->AddPage();
+            $pdf->SetFont('Arial','',16);
+            $userList=$this->userDAO->GetAll();
+
+            $pdf->Cell(0,20,('Listado de Postulantes'),0,0,'C',0);
+            $pdf->Ln(30);
+            $pdf->Cell(90,10,utf8_decode('Email'),1,1,'C',0);
+
+
+            foreach ($userList as $user)
+            {
+                if($user->getRole() == 'user')
+                {
+                $pdf->Cell(90,10,$user->getEmail(),1,1,'C',0);
+                }
+            }  
+            $pdf->Output();
+
         }
     }

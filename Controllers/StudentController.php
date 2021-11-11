@@ -32,10 +32,7 @@
 
         public function showProfileView()
         {
-            if (isset($_SESSION['userLogged']))
-            {
-                $userLogged = $_SESSION['userLogged'];
-            }
+            $careerList = $this->careerDAO->getAll();
             require_once(VIEWS_PATH."student-profile.php");
         }
 
