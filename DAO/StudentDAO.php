@@ -169,7 +169,7 @@
 
             foreach($arrayToDecode as $valuesArray)
             {
-                if($valuesArray["email"] == $user->getEmail())
+                if($valuesArray["email"] == $user->getEmail() && $valuesArray["active"] == 1)
                 {
                     $newStudent = new Student();
                     $newStudent->setStudentId($valuesArray["studentId"]);

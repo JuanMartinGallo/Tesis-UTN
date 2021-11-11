@@ -45,7 +45,7 @@
                 else
                 {
                     $alert->setType("danger");
-                    $alert->setMessage("El usuario que intenta agregar no existe en la base de datos/API.");
+                    $alert->setMessage("El usuario que intenta agregar no existe en la base de datos/API o se encuentra inactivo.");
                 }
             }
             finally

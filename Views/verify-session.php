@@ -1,14 +1,11 @@
 <?php 
-
-    if(isset($_SESSION['userLogged']) == NULL)
+    if(isset($_SESSION["userLogged"]))
     {
-        echo "<script> if(confirm('El usuario esta fuera de la sesion. Debe loguearse en la pagina principal'));";
-        echo "window.location = 'index.php';
-        </script>";
+        $userLogged = $_SESSION["userLogged"];
     }
     else
     {
-        
+        echo "<script> if(confirm('El usuario esta fuera de la sesion. Debe loguearse en la pagina principal'));";
+        echo "window.location.href='../index.php';</script>";
     }
-
 ?>

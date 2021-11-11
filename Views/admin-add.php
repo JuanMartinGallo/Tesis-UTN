@@ -1,7 +1,6 @@
 <?php
      session_start();
      require_once('nav.php');
-     require_once('verify-session.php');
 ?>
 
 <main class="py-5">
