@@ -1,5 +1,6 @@
 <?php
 require_once('header.php');
+require_once('verify-session.php');
 ?>
 
 <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">

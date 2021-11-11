@@ -1,8 +1,6 @@
 <?php
 
-use Models\Student;
-
-session_start();
+     session_start();
      require_once('nav.php');
 
      use DAO\CareerDAO as CareerDAO;

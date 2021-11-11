@@ -51,6 +51,8 @@ class UserDAO implements IUserDAO
                         $this->connection->ExecuteNonQuery($query, $parameters);
                         $studentFromApi= $this->studentDAO->getStudentsFromAPI($user);
                         $this->studentDAO->add($studentFromApi);
+                    } else {
+                        throw new Exception();
                     }
                 }
                 else{
@@ -63,6 +65,7 @@ class UserDAO implements IUserDAO
             {
                 throw $ex;
             }
+    
         }
 
         public function dbChecker(user $user){
@@ -135,7 +138,20 @@ class UserDAO implements IUserDAO
                 $adminList = $this->adminDAO->getAll();
                 $studentList = $this->studentDAO->getAll();
                 $companyList = $this->companyDAO->getAll();
-                $this->loadingLists();
+                //$this->loadingLists(); \\TODO: VER SI ESTO FUNCIONA
+                 $careerList = $this->careerDAO->getAll();
+                $jobPositionList = $this->jobPositionDAO->getAll();
+
+                if(empty($careerList))
+                {
+                    $this->careerDAO->getCareersFromAPI();
+                }
+
+                if(empty($jobPositionList))
+                {
+                    $this->jobPositionDAO->getJobPositionsFromAPI();
+                }
+
                 
                 if(!empty($studentList)){
                     foreach($userList as $user){
@@ -173,7 +189,7 @@ class UserDAO implements IUserDAO
                         }
                     }
                 }
-
+                throw new Exception();
                 return null; //TODO: ver como hacer para que tire un error cuando intento logearme con una cuenta no registrada o usa una contraseña incorrecta
             }
 
