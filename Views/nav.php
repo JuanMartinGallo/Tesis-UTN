@@ -25,9 +25,11 @@ require_once('verify-session.php');
                     <a class="nav-link" href="<?php echo FRONT_ROOT ?>Admin/ShowListView">Listar administradores</a>
                </li>
           <?php } else { ?>
+               <?php if ($_SESSION['userLogged']->getRole() == "student") { ?>
                <li class="nav-item">
                     <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowProfileView">Ver tus datos</a>
                </li>
+               <?php } ?>
                <li class="nav-item">
                <a class="nav-link" href="<?php echo FRONT_ROOT ?>JobOffer/ShowPostulateView">Mis Postulaciones</a>
           </li>
