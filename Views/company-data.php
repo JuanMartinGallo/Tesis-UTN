@@ -14,7 +14,6 @@
                          <th>Ubicacion</th>
                          <th>Codigo postal</th>
                          <th>Numero telefonico</th>
-                         <th>Codigo Postal</th>
                     </thead>
                     <tbody>
                          <tr>
@@ -23,7 +22,6 @@
                          <td><?php echo $company->getLocation() ?></td>
                          <td><?php echo $company->getZipCode() ?></td>
                          <td><?php echo $company->getPhoneNumber() ?></td>
-                         <td><?php echo $company->getZipCode() ?></td>
                          </tr>
                     </tbody>
                </table>
