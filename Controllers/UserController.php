@@ -32,7 +32,7 @@
                 $this->userDAO->add($user, $value);
 
                 $alert->setType("success");
-                $alert->setMessage("El usuario ha sido ingresado correctamente."); //TODO:como hacer para que se vean estas excepciones
+                $alert->setMessage("El usuario ha sido ingresado correctamente.");
             }
             catch(Exception $ex)
             {
