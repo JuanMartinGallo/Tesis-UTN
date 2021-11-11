@@ -48,8 +48,8 @@ $today = date("Y-m-d");
                             <?php if ($_SESSION['userLogged']->getRole() == "company") { ?>
                                 <input type="hidden" name="companyId" class="form-control" value="<?php echo $_SESSION['userLogged']->getCompanyId() ?>">
                             <?php } else { ?>
-                                <select name="companyId" class="form-control">
-                                    <option value="">Seleccione una compañia</option> //TODO: VER SI ESTE OPTION ESTA DE MAS 
+                                <select name="companyId" class="form-control" required>
+                                    <option value="">Seleccione una compañia</option>
                                     <?php foreach ($companyList as $company) { ?>
                                         <option value="<?php echo $company->getCompanyId(); ?>"><?php echo $company->getName(); ?></option>
                                     <?php } ?>
