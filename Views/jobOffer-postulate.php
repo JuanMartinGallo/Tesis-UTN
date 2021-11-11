@@ -54,7 +54,7 @@ $jobOfferList = $jobOfferDAO->postulatedJob($_SESSION['userLogged']->getStudentI
 
 
                                         <?php foreach ($companyList as $company) {
-                                             if ($company->getCompanyId() == $jobOffer->getCompany()) { ?>
+                                             if ($company->getCompanyId() == $jobOffer->getCompanyId()) { ?>
                                                   <td><?php echo $company->getName(); ?></td>
                                              <?php } ?>
                                         <?php } ?>
