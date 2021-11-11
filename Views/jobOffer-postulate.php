@@ -6,7 +6,6 @@ use DAO\JobPositionDAO as JobPositionDAO;
 use DAO\CareerDAO as CareerDAO;
 use DAO\CompanyDAO as CompanyDAO;
 use DAO\JobOfferDAO as JobOfferDAO;
-use Models\Student;
 
 $jobPositionDAO = new JobPositionDAO();
 $careerDAO = new CareerDAO();

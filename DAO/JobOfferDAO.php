@@ -185,12 +185,12 @@
                     $jobOfferId = $row["jobOfferId"];
                     array_push($listId, $jobOfferId);
                 }
-
-                foreach($listId as $jobOffer)
+                foreach($listId as $id)
                 {
-                    $jobOffer = $this->searchByJobOfferId($jobOfferId);
+                    $jobOffer = new JobOffer();
+                    $jobOffer = $this->searchByJobOfferId($id);
                     array_push($jobOffersList, $jobOffer);
-                }
+                }          
                 return $jobOffersList;
             }
             catch(Exception $ex)
