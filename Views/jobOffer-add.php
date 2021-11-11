@@ -21,6 +21,10 @@ $today = date("Y-m-d");
     <section id="listado" class="mb-5">
         <div class="container">
             <h2 class="mb-4">Agregar nueva postulacion laboral</h2>
+            <?php
+            if($alert) { ?>
+                <div class="alert alert-<?php echo $alert->getType()?> text-center fwbold" role="alert"><?php echo $alert->getMessage()?></div>
+            <?php } ?>
             <form action="<?php echo FRONT_ROOT ?>JobOffer/Add" method="POST" class="bg-light-alpha p-5">
                 <div class="row">
                     <div class="col-lg-4">
