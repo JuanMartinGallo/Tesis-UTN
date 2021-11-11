@@ -40,14 +40,14 @@ class UserDAO implements IUserDAO
                 $parameters["email"] = $user->getEmail();
                 $parameters["password"] = $user->getPassword();
                 $parameters["role"] = $user->getRole();
-
+                
                 $this->connection = Connection::GetInstance();
-
+                
                 if($value == 0){
                     if($this->dbChecker($user)){
                         $this->connection->ExecuteNonQuery($query, $parameters);
                     }
-                     elseif($this->apiChecker($user)){
+                    elseif($this->apiChecker($user)){
                         $this->connection->ExecuteNonQuery($query, $parameters);
                         $studentFromApi= $this->studentDAO->getStudentsFromAPI($user);
                         $this->studentDAO->add($studentFromApi);
@@ -65,7 +65,6 @@ class UserDAO implements IUserDAO
             {
                 throw $ex;
             }
-    
         }
 
         public function dbChecker(user $user){
@@ -138,20 +137,7 @@ class UserDAO implements IUserDAO
                 $adminList = $this->adminDAO->getAll();
                 $studentList = $this->studentDAO->getAll();
                 $companyList = $this->companyDAO->getAll();
-                //$this->loadingLists(); \\TODO: VER SI ESTO FUNCIONA
-                 $careerList = $this->careerDAO->getAll();
-                $jobPositionList = $this->jobPositionDAO->getAll();
-
-                if(empty($careerList))
-                {
-                    $this->careerDAO->getCareersFromAPI();
-                }
-
-                if(empty($jobPositionList))
-                {
-                    $this->jobPositionDAO->getJobPositionsFromAPI();
-                }
-
+                $this->loadingLists();
                 
                 if(!empty($studentList)){
                     foreach($userList as $user){
@@ -182,15 +168,11 @@ class UserDAO implements IUserDAO
                             if($admin->getPassword() == $password){
                                 return $admin;
                             }
-                            else{
-                                throw new Exception("Password incorrect");
-                                require_once (VIEWS_PATH."login.php");
-                            }
                         }
                     }
                 }
                 throw new Exception();
-                return null; //TODO: ver como hacer para que tire un error cuando intento logearme con una cuenta no registrada o usa una contraseña incorrecta
+                return null;
             }
 
             catch(Exception $ex)
