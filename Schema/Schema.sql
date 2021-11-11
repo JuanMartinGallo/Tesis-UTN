@@ -32,7 +32,7 @@ CREATE TABLE users
     CONSTRAINT unq_email UNIQUE (email)
 );
 
-INSERT INTO users (userId, role, password, email) VALUES ('1', 'company', 'coca', 'cocacola@gmail.com'), ('2', 'company', 'globo', 'globant@gmail.com');
+INSERT INTO users (userId, role, password, email) VALUES ('1', 'user', 'coca', 'cocacola@gmail.com'), ('2', 'user', 'globo', 'globant@gmail.com');
 
 #truncate table users;
 
