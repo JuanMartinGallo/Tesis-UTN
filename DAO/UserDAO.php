@@ -138,19 +138,6 @@ class UserDAO implements IUserDAO
                 $studentList = $this->studentDAO->getAll();
                 $companyList = $this->companyDAO->getAll();
                 $this->loadingLists();
-                //$careerList = $this->careerDAO->getAll();
-                //$jobPositionList = $this->jobPositionDAO->getAll();
-
-                if(empty($careerList))
-                {
-                    $this->careerDAO->getCareersFromAPI();
-                }
-
-                if(empty($jobPositionList))
-                {
-                    $this->jobPositionDAO->getJobPositionsFromAPI();
-                }
-
                 
                 if(!empty($studentList)){
                     foreach($userList as $user){
