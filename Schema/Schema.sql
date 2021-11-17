@@ -119,7 +119,7 @@ CREATE TABLE jobPositions
     description VARCHAR(100) NOT NULL,
 
     CONSTRAINT pk_jobPosition_id PRIMARY KEY (jobPositionId),
-    CONSTRAINT fk_career_id FOREIGN KEY (careerId) REFERENCES careers (careerId) ON DELETE CASCADE
+    CONSTRAINT fk_career_id FOREIGN KEY (careerId) REFERENCES careers (careerId) 
 );
 
 CREATE TABLE jobOffers
@@ -137,7 +137,7 @@ CREATE TABLE jobOffers
     active BOOLEAN,
 
     CONSTRAINT pk_jobOffers_id PRIMARY KEY (jobOfferId),
-    CONSTRAINT fk_jobPosition_id FOREIGN KEY (jobPosition) REFERENCES jobPositions (jobPositionId) ON DELETE CASCADE,
+    CONSTRAINT fk_jobPosition_id FOREIGN KEY (jobPosition) REFERENCES jobPositions (jobPositionId),
     CONSTRAINT fk_jobOffer_company_id FOREIGN KEY (companyId) REFERENCES companies (companyId)
 );
 
@@ -147,6 +147,6 @@ CREATE TABLE students_x_jobOffers
     jobOfferId INT NOT NULL,
 
     CONSTRAINT pk_students_x_jobOffers_id PRIMARY KEY (studentId, jobOfferId),
-    CONSTRAINT fk_students_id FOREIGN KEY (studentId) REFERENCES students (studentId) ON DELETE CASCADE,
-    CONSTRAINT fk_jobOffers_id FOREIGN KEY (jobOfferId) REFERENCES jobOffers (jobOfferId) ON DELETE CASCADE
+    CONSTRAINT fk_students_id FOREIGN KEY (studentId) REFERENCES students (studentId),
+    CONSTRAINT fk_jobOffers_id FOREIGN KEY (jobOfferId) REFERENCES jobOffers (jobOfferId) 
 );

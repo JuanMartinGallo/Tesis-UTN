@@ -15,7 +15,13 @@ $jobOfferDAO = new JobOfferDAO();
 $jobPositionList = $jobPositionDAO->getAll();
 $careerList = $careerDAO->getAll();
 $companyList = $companyDAO->getAll();
-$jobOfferList = $jobOfferDAO->postulatedJob($_SESSION['userLogged']->getStudentId());
+if($_SESSION['userLogged']->getRole() == 'student'){
+     $jobOfferList = $jobOfferDAO->postulatedJob($_SESSION['userLogged']->getStudentId());   
+}
+else{
+    $jobOfferList = $jobOfferDAO->companyOffers($_SESSION['userLogged']->getCompanyId());
+}
+
 
 ?>
 
