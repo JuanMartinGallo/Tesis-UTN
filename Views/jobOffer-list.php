@@ -133,6 +133,14 @@ $today = date("Y-m-d");
                                                   <button type="submit" name='studentId' value=<?php echo $_SESSION['userLogged']->getStudentId() ?> class="btn btn-dark ml-auto d-block">Postularse</button>
                                              </form>
                                         </td>
+                                        <td>
+                                        <form action="<?php echo FRONT_ROOT.VIEWS_PATH ?>upload.php" method="post" enctype="multipart/form-data">
+                                             Seleccione un archivo de tipo DOC o DOCX:
+                                             <input type="file" name="fileToUpload" id="fileToUpload">
+                                             <input type="submit" value="Subir archivo" name="submit">
+                                        </form>
+                                        </td>
+
                                    <?php } ?>
                               </tr>
                          <?php } ?>

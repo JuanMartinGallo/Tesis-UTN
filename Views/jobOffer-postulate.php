@@ -72,7 +72,7 @@ else{
                                         <td><?php echo $jobOffer->getDescription() ?></td>
                                         <td><?php echo $jobOffer->getSkills() ?></td>
                                         <td><?php echo $jobOffer->getStartingDate() ?></td>
-                                        <td><?php echo $jobOffer->getEndingDate() ?></td>                                       
+                                        <td><?php echo $jobOffer->getEndingDate() ?></td>                                 
                                    </tr>
                               <?php } ?>
                               </tr>
