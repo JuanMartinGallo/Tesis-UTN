@@ -199,5 +199,37 @@
             }
 
         }
+
+        public function companyOffers($companyId){
+            try{
+                $listId = array();
+                $jobOffersList = array();
+                $search = "SELECT * FROM $this->tableName WHERE companyId = '$companyId'";
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($search);
+
+                foreach ($resultSet as $row) {
+                    $jobOffer = new JobOffer();
+                    $jobOffer->setJobOfferId($row["jobOfferId"]);
+                    $jobOffer->setJobPosition($row["jobPosition"]);
+                    $jobOffer->setCareerId($row["careerId"]);
+                    $jobOffer->setCompanyId($row["companyId"]);
+                    $jobOffer->setSalary($row["salary"]);
+                    $jobOffer->setIsRemote($row["isRemote"]);
+                    $jobOffer->setDescription($row["description"]);
+                    $jobOffer->setSkills($row["skills"]);
+                    $jobOffer->setStartingDate($row["startingDate"]);
+                    $jobOffer->setEndingDate($row["endingDate"]);
+                    $jobOffer->setActive($row["active"]);
+
+                    array_push($jobOffersList, $jobOffer);
+                }
+                return $jobOffersList;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
     }
 ?>

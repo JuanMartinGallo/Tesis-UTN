@@ -76,6 +76,12 @@
             require_once (VIEWS_PATH."jobOffer-postulate.php");
         }
 
+        public function UploadCVToServer()
+        {
+            echo "UploadCVToServer";
+            require_once(VIEWS_PATH."upload.php");
+        }
+
         public function add($jobPosition, $careerId, $companyId, $salary, $isRemote, $description, $skills, $startingDate, $endingDate, $active)
         {
             try
@@ -98,12 +104,12 @@
             $this->jobOfferDAO->add($jobOffer);
             
             $alert->setType("success");
-            $alert->setMessage("La propuesta laboral a sido cargada exitosamente.");
+            $alert->setMessage("La propuesta laboral ha sido cargada exitosamente.");
 
             if($active == 0)
             {
                 $alert->setType("warning");
-                $alert->setMessage("La propuesta laboral a sido cargada exitosamente. La propuesta laboral se encuentra inactiva.");
+                $alert->setMessage("La propuesta laboral ha sido cargada exitosamente. La propuesta laboral se encuentra inactiva.");
             }
 
             }
