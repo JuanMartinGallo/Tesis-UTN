@@ -134,6 +134,11 @@ $today = date("Y-m-d");
                                              </form>
                                         </td>
                                    <?php } ?>
+                                   <?php if ($_SESSION['userLogged']->getRole() == 'admin') { ?>
+                                        <td><a class="btn btn-dark ml-auto d-block" href="<?php echo FRONT_ROOT ?>JobOffer/ShowPostulatedStudentsView">
+                                                  Ver postulados //TODO: falta hacer que acepte o decline las postulaciones
+                                             </a></td>
+                                   <?php } ?>
                               </tr>
                          <?php } ?>
                     </tbody>

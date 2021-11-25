@@ -15,14 +15,11 @@ $jobOfferDAO = new JobOfferDAO();
 $jobPositionList = $jobPositionDAO->getAll();
 $careerList = $careerDAO->getAll();
 $companyList = $companyDAO->getAll();
-if($_SESSION['userLogged']->getRole() == 'student'){
-     $jobOfferList = $jobOfferDAO->postulatedJob($_SESSION['userLogged']->getStudentId());   
+if ($_SESSION['userLogged']->getRole() == 'student') {
+     $jobOfferList = $jobOfferDAO->postulatedJob($_SESSION['userLogged']->getStudentId());
+} else {
+     $jobOfferList = $jobOfferDAO->companyOffers($_SESSION['userLogged']->getCompanyId());
 }
-else{
-    $jobOfferList = $jobOfferDAO->companyOffers($_SESSION['userLogged']->getCompanyId());
-}
-
-
 ?>
 
 <main class="py-5">
@@ -43,37 +40,42 @@ else{
                          <th>Fecha de expiracion</th>
                     </thead>
                     <tbody>
-                         <?php foreach ($jobOfferList as $jobOffer) {?>
-                                   <tr>
-                                        <?php foreach ($jobPositionList as $jobPosition) {
-                                             if ($jobPosition->getJobPositionId() == $jobOffer->getJobPosition()) { ?>
-                                                  <td><?php echo $jobPosition->getDescription(); ?></td>
-                                                  
-                                             <?php } ?>
+                         <?php foreach ($jobOfferList as $jobOffer) { ?>
+                              <tr>
+                                   <?php foreach ($jobPositionList as $jobPosition) {
+                                        if ($jobPosition->getJobPositionId() == $jobOffer->getJobPosition()) { ?>
+                                             <td><?php echo $jobPosition->getDescription(); ?></td>
+
                                         <?php } ?>
-                                        <?php foreach ($careerList as $career) {
-                                             if ($career->getCareerId() == $jobOffer->getCareerId()) { ?>
-                                                  <td><?php echo $career->getDescription(); ?></td>
-                                             <?php } ?>
+                                   <?php } ?>
+                                   <?php foreach ($careerList as $career) {
+                                        if ($career->getCareerId() == $jobOffer->getCareerId()) { ?>
+                                             <td><?php echo $career->getDescription(); ?></td>
                                         <?php } ?>
+                                   <?php } ?>
 
 
-                                        <?php foreach ($companyList as $company) {
-                                             if ($company->getCompanyId() == $jobOffer->getCompanyId()) { ?>
-                                                  <td><?php echo $company->getName(); ?></td>
-                                             <?php } ?>
+                                   <?php foreach ($companyList as $company) {
+                                        if ($company->getCompanyId() == $jobOffer->getCompanyId()) { ?>
+                                             <td><?php echo $company->getName(); ?></td>
                                         <?php } ?>
-                                        <td><?php echo "$" . $jobOffer->getSalary() ?></td>
-                                        <td><?php if ($jobOffer->getIsRemote() == 1) {
-                                                  echo "Si";
-                                             } else {
-                                                  echo "No";
-                                             } ?></td>
-                                        <td><?php echo $jobOffer->getDescription() ?></td>
-                                        <td><?php echo $jobOffer->getSkills() ?></td>
-                                        <td><?php echo $jobOffer->getStartingDate() ?></td>
-                                        <td><?php echo $jobOffer->getEndingDate() ?></td>                                       
-                                   </tr>
-                              <?php } ?>
+                                   <?php } ?>
+                                   <td><?php echo "$" . $jobOffer->getSalary() ?></td>
+                                   <td><?php if ($jobOffer->getIsRemote() == 1) {
+                                             echo "Si";
+                                        } else {
+                                             echo "No";
+                                        } ?></td>
+                                   <td><?php echo $jobOffer->getDescription() ?></td>
+                                   <td><?php echo $jobOffer->getSkills() ?></td>
+                                   <td><?php echo $jobOffer->getStartingDate() ?></td>
+                                   <td><?php echo $jobOffer->getEndingDate() ?></td>
+                                   <?php if ($_SESSION['userLogged']->getRole() == 'company') { ?>
+                                        <td><a class="btn btn-primary btn-block btn-lg mt-4" style="text-decoration:none; color:white; background-color:gray;" href="<?php echo FRONT_ROOT ?>JobOffer/ShowPostulatedStudentsView">
+                                        Ver postulados
+                                        </a></td>
+                                   <?php } ?>
                               </tr>
+                         <?php } ?>
+                         </tr>
                     </tbody>
