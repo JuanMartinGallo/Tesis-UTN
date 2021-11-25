@@ -69,7 +69,7 @@ $today = date("Y-m-d");
                          <th>Fecha de publicacion</th>
                          <th>Fecha de expiracion</th>
                     </thead>
-                    <tbody>
+                    <tbody> //TODO: falta hacer que acepte o decline las postulaciones
                          <?php foreach ($jobOfferList as $jobOffer) {
                               //if($_SESSION['userLogged']->getRole() == 'student' || $_SESSION['userLogged']->getRole() == 'admin' || $_SESSION['userLogged']->getRole() == 'company'){ 
                               //if($_SESSION['userLogged']->getCompanyId() == $jobOffer->getCompanyId()){ 
@@ -123,7 +123,7 @@ $today = date("Y-m-d");
                                         </td>
                                         <td>
                                              <form action="<?php echo FRONT_ROOT ?>JobOffer/generatePDF" method="POST">
-                                                  <button type="submit" name='' value="OK" class="btn btn-dark ml-auto d-block" onclick="this.form.action='<?php echo FRONT_ROOT ?>JobOffer/generatePDF'" formtarget="_blank">GENERAR PDF</button>
+                                                  <button type="submit" name='' value="OK" class="btn btn-dark ml-auto d-block" onclick="this.form.action='<?php echo FRONT_ROOT ?>JobOffer/generatePDF'" formtarget="_blank">PDF</button>
                                              </form>
                                         </td>
                                    <?php } else if ($_SESSION['userLogged']->getRole() == "student") { ?>
@@ -136,7 +136,7 @@ $today = date("Y-m-d");
                                    <?php } ?>
                                    <?php if ($_SESSION['userLogged']->getRole() == 'admin') { ?>
                                         <td><a class="btn btn-dark ml-auto d-block" href="<?php echo FRONT_ROOT ?>JobOffer/ShowPostulatedStudentsView">
-                                                  Ver postulados //TODO: falta hacer que acepte o decline las postulaciones
+                                                  Ver postulados
                                              </a></td>
                                    <?php } ?>
                               </tr>
