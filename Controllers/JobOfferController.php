@@ -7,6 +7,7 @@
     use Exception;
     use FPDF\FPDF as FPDF;
     use DAO\UserDAO as UserDAO;
+    use DAO\CareerDAO as CareerDAO; 
 
 
     class JobOfferController
@@ -44,6 +45,14 @@
         {
             $jobOffer = $this->jobOfferDAO->searchByJobOfferId($jobOfferId);
             require_once (VIEWS_PATH."jobOffer-data.php");
+        }
+
+        public function ShowPostulatedStudentsView()
+        {
+            $careerDAO = new CareerDAO();
+            $careerList = $careerDAO->getAll();
+            $studentList= $this->jobOfferDAO->GetPostulatedStudents();
+            require_once(VIEWS_PATH."student-list.php");
         }
 
         public function addPostulant($studentId, $jobOfferId)
