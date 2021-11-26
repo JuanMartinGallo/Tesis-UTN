@@ -15,11 +15,13 @@ class JobOfferController
 {
     private $jobOfferDAO;
     private $userDAO;
+    private $careerDAO;
 
     public function __construct()
     {
         $this->jobOfferDAO = new JobOfferDAO();
         $this->userDAO = new UserDAO();
+        $this->careerDAO = new CareerDAO();
     }
 
     public function ShowAddView($alert = NULL)
@@ -49,10 +51,21 @@ class JobOfferController
 
     public function ShowPostulatedStudentsView($jobOfferId)
     {
-        $careerDAO = new CareerDAO();
-        $careerList = $careerDAO->getAll();
-        $studentList = $this->jobOfferDAO->GetPostulatedStudents($jobOfferId);
-        require_once(VIEWS_PATH . "student-list.php");
+        try {
+            $alert = new Alert();
+            $careerList = $this->careerDAO->getAll();
+            $studentList = $this->jobOfferDAO->GetPostulatedStudents($jobOfferId);
+
+            if ($studentList == NULL) {
+                $alert->setType("warning");
+                $alert->setMessage("No hay estudiantes postulados a esta oferta de trabajo");
+                $this->showListView(NULL, $alert);
+            } else {
+                require_once(VIEWS_PATH . "student-list.php");
+            }
+        } catch (Exception $e) {
+            throw $e;
+        }
     }
 
     public function addPostulant($studentId, $jobOfferId)
@@ -183,22 +196,20 @@ class JobOfferController
         $pdf->Cell(0, 20, ('Listado de Postulantes'), 0, 0, 'C', 0);
         $pdf->Ln(30);
         if ($studentList != NULL) {
-        $pdf->Cell(90, 10, utf8_decode('Nombre'), 1, 0, 'C', 0);
-        $pdf->Cell(90, 10, utf8_decode('Apellido'), 1, 0, 'C', 0);
-        $pdf->Cell(90, 10, utf8_decode('Telefono'), 1, 0, 'C', 0);
-        $pdf->Cell(90, 10, utf8_decode('Email'), 1, 1, 'C', 0);
-        }
-        else
-        {
+            $pdf->Cell(90, 10, utf8_decode('Nombre'), 1, 0, 'C', 0);
+            $pdf->Cell(90, 10, utf8_decode('Apellido'), 1, 0, 'C', 0);
+            $pdf->Cell(90, 10, utf8_decode('Telefono'), 1, 0, 'C', 0);
+            $pdf->Cell(90, 10, utf8_decode('Email'), 1, 1, 'C', 0);
+        } else {
             $pdf->Cell(0, 10, utf8_decode('No hay postulantes'), 1, 1, 'C', 0);
         }
 
 
-        foreach ($studentList as $student) {    
-                $pdf->Cell(90, 10, $student->getFirstName(), 1, 0, 'C', 0);
-                $pdf->Cell(90, 10, $student->getLastName(), 1, 0, 'C', 0);
-                $pdf->Cell(90, 10, $student->getPhoneNumber(), 1, 0, 'C', 0);
-                $pdf->Cell(90, 10, $student->getEmail(), 1, 1, 'C', 0);
+        foreach ($studentList as $student) {
+            $pdf->Cell(90, 10, $student->getFirstName(), 1, 0, 'C', 0);
+            $pdf->Cell(90, 10, $student->getLastName(), 1, 0, 'C', 0);
+            $pdf->Cell(90, 10, $student->getPhoneNumber(), 1, 0, 'C', 0);
+            $pdf->Cell(90, 10, $student->getEmail(), 1, 1, 'C', 0);
         }
         $pdf->Output();
     }
