@@ -5,6 +5,8 @@
     use \Exception as Exception;
     use Models\JobOffer as JobOffer;
     use DAO\Connection as Connection;
+    use Models\Student as Student;
+    use DAO\StudentDAO as StudentDAO;
 
     class JobOfferDAO implements IJobOfferDAO
     {
@@ -175,7 +177,7 @@
             {
                 $listId = array();
                 $jobOffersList = array();
-                $search = "SELECT * FROM students_x_jobOffers jobOfferId  WHERE studentId = '$studentId'";
+                $search = "SELECT * FROM students_x_jobOffers jobOfferId  WHERE studentId = '$studentId'"; //TODO: REVISAR ESTA LINEA
                 $this->connection = Connection::GetInstance();
                 $resultSet = $this->connection->Execute($search);
 
@@ -198,6 +200,31 @@
                 throw $ex;
             }
 
+        }
+
+        public function getPostulatedStudents($jobOfferId)
+        {
+            try
+            {
+                $newStudents = new Student();
+                $studentDAO= new StudentDAO();
+                $studentList = array();
+                $search = "SELECT studentId FROM students_x_jobOffers WHERE jobOfferId = '$jobOfferId'";
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($search);
+
+
+                foreach($resultSet as $row)
+                {
+                    $newStudents = $studentDAO->searchStudentById($row["studentId"]);
+                    array_push($studentList, $newStudents);
+                }         
+                return $studentList;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
         }
 
         public function companyOffers($companyId){
