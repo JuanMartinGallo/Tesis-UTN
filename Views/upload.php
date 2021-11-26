@@ -35,14 +35,14 @@
 
   // Check if $uploadOk is set to 0 by an error
   if ($uploadOk == 0) {
-    echo "Lo sentimos, tu archivo no pudo ser subido.";
+    echo " Tu archivo no pudo ser subido.";
   // if everything is ok, try to upload file
   } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-      echo "El archivo ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " ha sido subido correctamente.";
-      require_once ('jobOffer-list.php');
+      echo "El archivo ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " ha sido subido correctamente.";      
     } else {
       echo "Lo sentimos, hubo un error mientras se subia tu archivo.";
-    }
+    } 
   }
 ?>
+
