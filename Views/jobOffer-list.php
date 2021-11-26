@@ -129,19 +129,12 @@ $today = date("Y-m-d");
                                         </td>
                                    <?php } else if ($_SESSION['userLogged']->getRole() == "student") { ?>
                                         <td>
-                                             <form action="<?php echo FRONT_ROOT ?>JobOffer/AddPostulant" method="POST">
-                                                  <input type="hidden" name="jobOfferId" value=<?php echo $jobOffer->getJobOfferId() ?>>
-                                                  <button type="submit" name='studentId' value=<?php echo $_SESSION['userLogged']->getStudentId() ?> class="btn btn-dark ml-auto d-block">Postularse</button>
-                                             </form>
-                                        </td>
-                                        <td>
                                         <form action="<?php echo FRONT_ROOT.VIEWS_PATH ?>upload.php" method="post" enctype="multipart/form-data">
-                                             Seleccione un archivo de tipo DOC o DOCX:
+                                             Seleccione un archivo de tipo DOC<br> o DOCX para adjuntar su CV:
                                              <input type="file" name="fileToUpload" id="fileToUpload">
                                              <input type="submit" value="Subir archivo" name="submit">
                                         </form>
                                         </td>
-
                                    <?php } ?>
                                    <?php if ($_SESSION['userLogged']->getRole() == 'admin') { ?>
                                         <td>
