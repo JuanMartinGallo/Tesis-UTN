@@ -202,14 +202,14 @@
 
         }
 
-        public function getPostulatedStudents()
+        public function getPostulatedStudents($jobOfferId)
         {
             try
             {
                 $newStudents = new Student();
                 $studentDAO= new StudentDAO();
                 $studentList = array();
-                $search = "SELECT studentId FROM students_x_jobOffers";
+                $search = "SELECT studentId FROM students_x_jobOffers WHERE jobOfferId = '$jobOfferId'";
                 $this->connection = Connection::GetInstance();
                 $resultSet = $this->connection->Execute($search);
 

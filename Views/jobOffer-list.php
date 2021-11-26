@@ -123,7 +123,8 @@ $today = date("Y-m-d");
                                         </td>
                                         <td>
                                              <form action="<?php echo FRONT_ROOT ?>JobOffer/generatePDF" method="POST">
-                                                  <button type="submit" name='' value="OK" class="btn btn-dark ml-auto d-block" onclick="this.form.action='<?php echo FRONT_ROOT ?>JobOffer/generatePDF'" formtarget="_blank">PDF</button>
+                                                  <input type="hidden" name="jobOfferId" value=<?php echo $jobOffer->getJobOfferId() ?>>
+                                                  <button type="submit" name='jobOfferId' value=<?php echo $jobOffer->getJobOfferId() ?> class="btn btn-dark ml-auto d-block" onclick="this.form.action='<?php echo FRONT_ROOT ?>JobOffer/generatePDF'" formtarget="_blank">PDF</button>
                                              </form>
                                         </td>
                                    <?php } else if ($_SESSION['userLogged']->getRole() == "student") { ?>
@@ -143,9 +144,11 @@ $today = date("Y-m-d");
 
                                    <?php } ?>
                                    <?php if ($_SESSION['userLogged']->getRole() == 'admin') { ?>
-                                        <td><a class="btn btn-dark ml-auto d-block" href="<?php echo FRONT_ROOT ?>JobOffer/ShowPostulatedStudentsView">
-                                                  Ver postulados
-                                             </a></td>
+                                        <td>
+                                             <form action="<?php echo FRONT_ROOT ?>JobOffer/ShowPostulatedStudentsView" method="POST">
+                                                  <button type="submit" name='jobOfferId' value=<?php echo $jobOffer->getJobOfferId() ?> class="btn btn-dark ml-auto d-block">Ver postulados</button>
+                                             </form>
+                                        </td>
                                    <?php } ?>
                               </tr>
                          <?php } ?>
