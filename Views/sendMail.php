@@ -52,5 +52,5 @@ try {
     $mail->send();
     
 } catch (Exception $e) {
-    echo "Nose que mierda hiciste pero le erraste: {$mail->ErrorInfo}";
+    echo "El mensaje no se pudo enviar correctamente: {$mail->ErrorInfo}";
 }
