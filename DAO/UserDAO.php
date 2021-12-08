@@ -56,6 +56,7 @@ class UserDAO implements IUserDAO
                     }
                 }
                 else{
+                    //TODO: Implementar un alert para que no se pueda registrar un usuario con un email ya existente
                     $this->connection->ExecuteNonQuery($query, $parameters);
                     $alert= null;
                     require_once (VIEWS_PATH."company-add.php");

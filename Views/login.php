@@ -8,9 +8,9 @@ require_once('header.php');
                <h2>Bienvenido al sistema!</h2>
           </header>
           <?php
-               if ($alert) { ?>
-                    <div class="alert alert-<?php echo $alert->getType() ?> text-center fwbold" role="alert"><?php echo $alert->getMessage() ?></div>
-               <?php } ?>
+          if ($alert) { ?>
+               <div class="alert alert-<?php echo $alert->getType() ?> text-center fwbold" role="alert"><?php echo $alert->getMessage() ?></div>
+          <?php } ?>
           <form action="<?php echo FRONT_ROOT ?>User/Login" method="POST" class="login-form bg-light-alpha p-5 text-dark font-weight-bold">
                <div class="form-group">
                     <label for="">EMAIL</label>
@@ -24,6 +24,9 @@ require_once('header.php');
           </form>
           <a class="btn btn-primary btn-block btn-lg mt-4" style="text-decoration:none; color:white; background-color:gray;" href="<?php echo FRONT_ROOT ?>User/showRegisterView">
                Registrarse
+          </a>
+          <a class="btn btn-primary btn-block btn-lg mt-4" style="text-decoration:none; color:white; background-color:green;" href="<?php echo FRONT_ROOT ?>User/showRegisterViewCompany">
+               Registrar Empresa
           </a>
      </div>
 </main>

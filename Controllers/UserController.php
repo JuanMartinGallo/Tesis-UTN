@@ -17,6 +17,19 @@
 
         public function showRegisterView($alert = NULL)
         {
+            $value = 0;
+            require_once(VIEWS_PATH . "register.php");
+        }
+
+        public function showRegisterViewAdmin($alert = NULL)
+        {
+            $value = 2;
+            require_once(VIEWS_PATH . "register.php");
+        }
+
+        public function showRegisterViewCompany($alert = NULL)
+        {
+            $value = 1;
             require_once(VIEWS_PATH . "register.php");
         }
 

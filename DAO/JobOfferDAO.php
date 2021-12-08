@@ -177,7 +177,7 @@
             {
                 $listId = array();
                 $jobOffersList = array();
-                $search = "SELECT * FROM students_x_jobOffers jobOfferId  WHERE studentId = '$studentId'"; //TODO: REVISAR ESTA LINEA
+                $search = "SELECT * FROM students_x_jobOffers jobOfferId  WHERE studentId = '$studentId'";
                 $this->connection = Connection::GetInstance();
                 $resultSet = $this->connection->Execute($search);
 

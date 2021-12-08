@@ -27,7 +27,7 @@ require_once('verify-session.php');
                     <a class="nav-link" href="<?php echo FRONT_ROOT ?>Student/ShowListView">Listar alumnos</a>
                </li>
                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo FRONT_ROOT ?>User/showRegisterView">Agregar usuario</a>
+                    <a class="nav-link" href="<?php echo FRONT_ROOT ?>User/showRegisterViewAdmin">Agregar usuario</a>
                </li>
                <li class="nav-item">
                     <a class="nav-link" href="<?php echo FRONT_ROOT ?>Admin/ShowAddView">Agregar administrador</a>

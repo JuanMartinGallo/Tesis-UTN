@@ -1,6 +1,10 @@
 <?php
 session_start();
-require_once('nav.php');
+require_once('header.php');
+
+if (isset($_SESSION['userLogged'])) {
+    require_once('nav.php');
+}
 
 use DAO\CitiesDAO as CitiesDAO;
 
@@ -49,7 +53,11 @@ $citiesList = $citiesDAO->getAll();
                         </div>
                     </div>
                 </div>
+                <?php if($alert == NULL){ ?>
                 <button type="submit" name="" class="btn btn-dark ml-auto d-block">Agregar</button>
+                <?php }else{ ?>
+                <a href="<?php echo FRONT_ROOT ?>Home" class="btn btn-dark ml-auto d-block">Volver al inicio de sesion</a>
+                <?php } ?>
         </div>
         </form>
         </div>
