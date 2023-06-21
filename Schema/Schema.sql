@@ -2,8 +2,6 @@ CREATE DATABASE TPFinalLab4;
 
 USE TPFinalLab4;
 
-#DROP DATABASE tpfinallab4;
-
 CREATE TABLE cities
 (
     zipCode INT NOT NULL,
@@ -33,8 +31,6 @@ CREATE TABLE users
 );
 
 INSERT INTO users (userId, role, password, email) VALUES ('1', 'user', 'coca', 'cocacola@gmail.com'), ('2', 'user', 'globo', 'globant@gmail.com');
-
-#truncate table users;
 
 CREATE TABLE admins
 (
@@ -72,11 +68,7 @@ CREATE TABLE companies
 
 INSERT INTO companies (userId, zipCode, name, role, cuit, location, phoneNumber) VALUES 
 (1, 2000, 'Coca Cola', 'company', '20-12345678-9', 'Rosario', '15-12345678'),
-(2, 4000, 'Globant', 'company', '20-54677657-9', 'San Miguel de Tucuman', '15-2138675');
-#(3, 7650, 'Pepsico', 'company', '20-879879789-9', 'Mar del Plata', '15-4682245'),
-#(4, 1878, 'Google', 'company', '20-12546457-9', 'Quilmes', '15-583236745'),
-#(5, 1629, 'Mac Donald', 'company', '20-2784425-9', 'Pilar', '15-7186786'),
-#(6, 1708, 'Pepsi', 'company', '20-4789203445-9', 'Moron', '15-26767876'); 
+(2, 4000, 'Globant', 'company', '20-54677657-9', 'San Miguel de Tucuman', '15-2138675'); 
 
 CREATE TABLE students
 (
@@ -100,8 +92,6 @@ CREATE TABLE students
     CONSTRAINT pk_student_id PRIMARY KEY (studentId),
     CONSTRAINT fk_user_id FOREIGN KEY (userId) REFERENCES users(userId) ON DELETE CASCADE
 );
-
-#truncate table students;
 
 CREATE TABLE careers
 (

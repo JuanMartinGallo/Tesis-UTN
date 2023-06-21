@@ -22,22 +22,18 @@ $hoy = date("F j, Y, g:i a");
 
 
 try {
-    //TODO ACCEDER AL USUARIO DONDE SE ENVIARA EL MENSAJE
     $mail->SMTPDebug = 0;                      //Enable verbose debug output
     $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'smtp.gmail.com';                     //TODO CAMBIADO A GMAIL
+    $mail->Host       = 'smtp.gmail.com';                     
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
     $mail->Username   = 'utnmailer@gmail.com';                     //SMTP username
     $mail->Password   = 'laboratorio4';                               //SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
     $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
-    //TODO USUARIO QUE RECIBIRA EL CORREO
-    $mail->setFrom('utnmailer@gmail.com', 'UTN Mailer');  //TODO DESDE
-    $mail->addAddress($email,$name); //TODO HACIA
+    $mail->setFrom('utnmailer@gmail.com', 'UTN Mailer'); 
+    $mail->addAddress($email,$name);
     
-
-    //TODO PARA ENVIAR ARCHIVOS
     // $mail->addAttachment('/var/tmp/file.tar.gz');         
     // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');   
 
@@ -52,5 +48,5 @@ try {
     $mail->send();
     
 } catch (Exception $e) {
-    echo "Nose que mierda hiciste pero le erraste: {$mail->ErrorInfo}";
+    echo "Ha habido un error: {$mail->ErrorInfo}";
 }
